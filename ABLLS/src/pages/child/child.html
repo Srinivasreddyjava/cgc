@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>{{ child?.first_name }} {{ child?.last_name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list>
+          <ion-item>
+            Name : {{ child?.first_name }} {{ child?.last_name }}
+          </ion-item>
+          <ion-item>
+            Age: {{ child?.age }}
+          </ion-item>
+          <ion-item>
+            Parent / Guardian :  {{ child?.parent_name }}
+          </ion-item>
+          <ion-item>
+            Parent's contact : {{ child?.parent_mobile }}
+          </ion-item>
+          <ion-item>
+            Time : {{ child?.time_slot }}
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button block ion-button (click)="openModel()">UPDATE {{ child?.first_name }} DETAILS</button>
+        <button block ion-button outline (click)="assign_areas()">ASSIGN TASKS</button>
+        <button block ion-button clear color="secondary" (click)="deregisterChild()" *ngIf="auth.mode == 'admin'">DE-REGSITER {{ child?.first_name }}</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button block ion-button outline color="danger" (click)="print()"> <ion-icon name="print" item-left></ion-icon> &nbsp; PRINT</button>
+
+  <ion-list id="printable">
+
+    <ion-list-header color="light" text-center class="goals">
+      <h5>GOALS</h5>  
+    </ion-list-header>
+    <ion-grid padding>
+      <div *ngFor="let c of goal_areas">
+        <ion-item-divider color="light" class="area goal-area">
+          {{ c }}
+        </ion-item-divider>
+        <span *ngFor="let d of goals">
+          <ion-item *ngIf="c == d.area_name" text-wrap (click)='editTaskname(d.task_id, d.task_name, d.status)'>
+            {{ d.task_number.number }} - {{ d.task_name }} 
+          </ion-item>
+        </span>
+      </div>
+    </ion-grid>
+    <ion-list-header color="light" text-center class="acheived">
+      <h5> ACHIEVED </h5>  
+    </ion-list-header>
+    <ion-grid padding>
+      <div *ngFor="let c of done_areas">
+          <ion-item-divider color="light" class="area acheived-area">
+            {{ c }}
+          </ion-item-divider>
+          <span *ngFor="let d of done">
+              <ion-item *ngIf="c == d.area_name" text-wrap (click)='editTaskname(d.task_id, d.task_name, d.status)'>
+                 {{ d.task_number.number }}  - {{ d.task_name }}
+              </ion-item>
+          </span>
+      </div>
+    </ion-grid>
+  </ion-list>
+</ion-content>

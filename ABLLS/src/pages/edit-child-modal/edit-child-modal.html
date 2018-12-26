@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button clear ion-button icon-only (click)="closeModal()">
+          <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Edit {{ child?.name }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form #f="ngForm" (ngSubmit)="editChild(f)">
+          <ion-list>
+            <ion-item>
+             <ion-label floating>
+                First Name
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="first_name" name="first_name"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
+                Last Name
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="last_name" name="last_name"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
+                Age
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="age" name="age"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
+                Parent's Name
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="parent_name" name="parent_name"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
+                Parent's Mobile
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="parent_mobile" name="parent_mobile"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
+                Time Slot
+              </ion-label>
+              <ion-input type="text" [(ngModel)]="time_slot" name="time_slot"></ion-input>
+            </ion-item>
+          </ion-list>
+          <button type="submit" ion-button block [disabled]="!f.valid">SAVE CHANGES</button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

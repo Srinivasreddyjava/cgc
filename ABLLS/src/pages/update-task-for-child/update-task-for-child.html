@@ -1,0 +1,88 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ child?.first_name | titlecase}}'s tasks</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-list-header text-center class="goals">
+      GOALS
+    </ion-list-header>
+    <ion-grid padding>
+        <div *ngFor="let c of goal_areas">
+          <ion-item-divider class="goals">
+            {{ c }}
+          </ion-item-divider>
+          <span *ngFor="let d of goals">
+            <ion-item *ngIf="c == d.area_name" text-wrap>
+                <ion-label fixed>
+                    <p text-wrap>
+                      {{ d.task_number.number }} - {{ d.task_name }}
+                    </p>
+                  </ion-label>
+                  <br>
+                  <ion-select [(ngModel)]="d.status" (ionChange)="taskUpdated($event, d)" item-right>
+                    <ion-option value="goal">
+                      Goal
+                    </ion-option>
+                    <ion-option value="achieved">
+                      Achieved
+                    </ion-option>
+                  </ion-select>
+
+            </ion-item>
+          </span>
+        </div>
+      </ion-grid>
+      
+    <!-- <ion-item *ngFor="let task of tasks">
+          <ion-label fixed>
+            <p text-wrap>
+              {{ task.name }}
+            </p>
+          </ion-label>
+          <ion-select [(ngModel)]="task.status" (ionChange)="taskUpdated($event, task)" item-right>
+            <ion-option value="goal">
+              Goal
+            </ion-option>
+            <ion-option value="achieved">
+              Achieved
+            </ion-option>
+          </ion-select>
+
+    </ion-item> -->
+
+    <ion-list-header text-center class="acheived">
+      ACHIEVED
+    </ion-list-header>
+    <ion-grid padding>
+        <div *ngFor="let c of done_areas">
+          <ion-item-divider class="acheived">
+            {{ c }}
+          </ion-item-divider>
+          <span *ngFor="let d of done">
+            <ion-item *ngIf="c == d.area_name" text-wrap>
+                <ion-label fixed>
+                    <p text-wrap>
+                      {{ d.number }} - {{ d.task_name }}
+                    </p>
+                  </ion-label>
+                  <ion-select [(ngModel)]="d.status" (ionChange)="taskUpdated($event, d)" item-right>
+                    <ion-option value="goal">
+                      Goal
+                    </ion-option>
+                    <ion-option value="achieved">
+                      Achieved
+                    </ion-option>
+                  </ion-select>
+
+            </ion-item>
+          </span>
+        </div>
+      </ion-grid>
+  </ion-list>
+  
+</ion-content>

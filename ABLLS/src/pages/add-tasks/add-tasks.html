@@ -1,0 +1,33 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Tasks to {{ area_name | titlecase }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+<form #f="ngForm" (ngSubmit)="taskSubmit(f)">
+    <ion-list>
+        <ion-item>
+          <ion-label floating>Task Name</ion-label>
+          <ion-input type="text" required ngModel name="task_name" color="light"></ion-input>
+        </ion-item>
+      </ion-list>
+      <button type="submit" ion-button [disabled]="!f.valid" block>ADD TASK</button>
+</form>
+
+<ion-grid>
+  <ion-row>
+    <ion-col col-12>
+      <ion-list>
+        <button ion-item (click)="editTask(t._id, t.name)" *ngFor="let t of tasks; let i = index">
+          <p text-wrap> {{ t.name }} </p> <ion-icon item-end name="cog" small></ion-icon> </button>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

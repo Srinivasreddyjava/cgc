@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Add Areas</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onAddArea(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Area Name</ion-label>
+        <ion-input type="text" required ngModel name="area_name" color="light"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button type="submit" ion-button [disabled]="!f.valid" block>ADD AREA</button>
+  </form>
+  <h2 text-center>Existing Areas</h2>
+  <ion-list>
+    <ion-item *ngFor="let a of areas" (click)="openModel(a, a._id)">
+      {{ a.name }}
+    </ion-item>
+  </ion-list>
+</ion-content>
