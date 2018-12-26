@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear icon-only (click)="closeModal()">
+        <ion-icon name="close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Edit  {{ area?.name | titlecase }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <ion-list>
+          <ion-item>
+            <ion-label floating> Rename </ion-label>
+            <ion-input type="text" [(ngModel)]="inp_area_name"></ion-input>
+          </ion-item>
+        </ion-list>
+        <button ion-button block (click)="edit_area()">SAVE CHANGES</button>
+        <button ion-button block color="secondary" (click)="add_tasks()">ADD TASKS TO {{ area?.name }} </button>
+        <button ion-button outline block (click)="delete_area()" *ngIf="auth.mode == 'admin'">DELETE AREA</button>
+        <button ion-button clear color="danger" block (click)="closeModal()"> CLOSE </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

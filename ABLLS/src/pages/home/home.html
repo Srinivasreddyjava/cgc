@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Admin Login
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center>
+  <!-- Select role -->
+
+  <ion-list radio-group [(ngModel)]="mode">
+    <ion-item>
+      <ion-label>Admin</ion-label>
+      <ion-radio value="admin" (ionSelect) ='changed()'></ion-radio>
+    </ion-item>
+    <ion-item>
+      <ion-label>Employee</ion-label>
+      <ion-radio value="emp" (ionSelect) ='changed()'></ion-radio>
+    </ion-item>
+  </ion-list>
+
+  <!-- <ion-list>
+    <ion-item>
+      <ion-label>
+        Role
+      </ion-label>
+      <ion-select [(ngModel)]="mode" (ionChange)="modeChanged($event)">
+        <ion-option value="emp">Employee</ion-option>
+        <ion-option value="admin">Admin</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list> -->
+  <!-- Admin login -->
+  <div *ngIf="admin_mode">
+    <h2>Admin Login</h2>
+    <form #form="ngForm" (ngSubmit)="onAdminSignin(form)">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" ngModel name="email" email required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" ngModel name="password" required></ion-input>
+        </ion-item>
+      </ion-list>
+      <button type="submit" ion-button block [disabled]="!form.valid">LOGIN</button>
+    </form>
+  </div>
+
+  <div *ngIf="emp_mode">
+    <h2>Staff Login</h2>
+    <form #f="ngForm" (ngSubmit)="onEmpSignin(f)">
+      <ion-list>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input type="email" ngModel name="email" email required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Password</ion-label>
+          <ion-input type="password" ngModel name="password" required></ion-input>
+        </ion-item>
+      </ion-list>
+      <button type="submit" ion-button block [disabled]="!f.valid">LOGIN</button>
+    </form>
+  </div>
+</ion-content>

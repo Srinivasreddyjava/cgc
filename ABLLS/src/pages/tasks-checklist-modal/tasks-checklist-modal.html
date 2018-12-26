@@ -1,0 +1,25 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Tasks in {{ area?.name | titlecase }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let t of tasks" text-wrap [ngClass]="{ unassigned : t.check }">
+      <ion-label>{{ t.number }} -  {{ t.name }}</ion-label>
+      <ion-checkbox (ionChange)="taskChecked($event, t._id, t)" [checked]="t.check"></ion-checkbox>
+      <!-- <ion-icon name></ion-icon> -->
+      <!-- <p>
+        {{t?.number}} - {{ t.name }}
+      </p>  -->
+    </ion-item>
+  </ion-list>
+</ion-content>

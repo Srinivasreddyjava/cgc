@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+      <ion-buttons start>
+        <button clear ion-button icon-only (click)="closeModal()">
+            <ion-icon name="close-circle"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Edit {{ child?.name }} task</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+
+
+<ion-content padding>
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+            <form #f="ngForm" (ngSubmit)="editTask(f)">
+              <ion-list>
+                <ion-item>
+                 <ion-label floating>
+                    Task name
+                  </ion-label>
+                  <ion-input type="text" [(ngModel)]="task_name" name="task_name"></ion-input>
+                </ion-item>
+              </ion-list>
+              <button type="submit" ion-button block [disabled]="!f.valid">SAVE CHANGES</button>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

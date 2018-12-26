@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Register a Child</ion-title>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12>
+        <form #f="ngForm" (ngSubmit)="onAddChild(f)">
+          <ion-list>
+            <ion-item>
+              <ion-label floating>Number</ion-label>
+              <ion-input type="text" ngModel name="number" required [minlength]="1"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>First Name</ion-label>
+              <ion-input type="text" ngModel name="first_name" required [minlength]="2"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Last Name</ion-label>
+              <ion-input type="text" ngModel name="last_name" required [minlength]="2"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Age</ion-label>
+              <ion-input type="number" ngModel name="age" required [min]="0" [max]="100"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Parent/Guardian name</ion-label>
+              <ion-input type="text" ngModel name="parent_name" required [minlength]="2"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Parent/Guardian's mobile</ion-label>
+              <ion-input type="mobile" ngModel name="parent_mobile" required [minlength]="9"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Time Slot(From)</ion-label>
+              <ion-datetime displayFormat="hh:mm A"  ngModel name="from_slot" required ></ion-datetime>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Time Slot(To)</ion-label>
+              <ion-datetime displayFormat="hh:mm A"  ngModel name="to_slot" required ></ion-datetime>
+            </ion-item>
+          </ion-list>
+          <button ion-button block outline color="primary" type="submit" [disabled]="!f.valid">REGISTER</button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

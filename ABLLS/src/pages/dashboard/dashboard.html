@@ -1,0 +1,120 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title *ngIf="auth.mode == 'admin'">Admin Dashboard</ion-title>
+    <ion-title *ngIf="auth.mode == 'emp'">{{ auth.emp_dets[0]?.name | titlecase }} Dashboard</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-grid *ngIf="auth.mode == 'admin'">
+  <ion-row>
+    <ion-col col-12 text-center>
+      <ion-list>
+        <ion-item color="dark" (click)='gotoPage("add_child")'>
+          <ion-icon name="person-add" item-start color="primary"></ion-icon>
+          <h2>
+            Register Child
+          </h2>
+        </ion-item>
+
+        <ion-item color="grey" (click)='gotoPage("view_children")'>
+          <ion-icon name="people" item-start color="primary"></ion-icon>
+          <h2>
+            View Children
+          </h2>
+        </ion-item>
+
+        <ion-item (click)='gotoPage("update_tasks")'>
+          <ion-icon name="checkmark-circle" item-start color="primary"></ion-icon>
+          <h2>
+            Update Task Status
+          </h2>
+        </ion-item>
+
+        <ion-item (click)='gotoPage("add_emp")'>
+          <ion-icon name="person-add" item-start color="primary"></ion-icon>
+          <h2>
+            Add Employee
+          </h2>
+        </ion-item>
+
+        <ion-item (click)='gotoPage("view_emp")'>
+          <ion-icon name="eye" item-start color="primary"></ion-icon>
+          <h2>
+            View Employees
+          </h2>
+        </ion-item>
+        <ion-item (click)='gotoPage("add_area")'>
+          <ion-icon name="add-circle" item-start color="primary"></ion-icon>
+          <h2>
+            Add Areas
+          </h2>
+        </ion-item>
+        <ion-item (click)='gotoPage("edit_areas")'>
+          <ion-icon name="cog" item-start color="primary"></ion-icon>
+          <h2>
+            Edit Areas
+          </h2>
+        </ion-item>
+        <ion-item (click)='gotoPage("change_password")'>
+          <ion-icon name="cog" item-start color="primary"></ion-icon>
+          <h2>
+            Change admin password
+          </h2>
+        </ion-item>
+        <ion-item (click)='logout()'>
+          <ion-icon name="log-out" item-start color="primary"></ion-icon>
+          <h2>
+            Logout
+          </h2>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<ion-grid *ngIf="auth.mode == 'emp'">
+  <ion-row>
+    <ion-col col-12 text-center>
+      <ion-list>
+
+        <ion-item (click)='gotoPage("view_emp_children")'>
+          <ion-icon name="people" item-start color="primary"></ion-icon>
+          <h2>
+            View Children
+          </h2>
+        </ion-item>
+
+        <ion-item (click)='gotoPage("update_tasks_emp")'>
+          <ion-icon name="checkmark-circle" item-start color="primary"></ion-icon>
+          <h2>
+            Update Task Status
+          </h2>
+        </ion-item>
+        <ion-item (click)='gotoPage("add_area")'>
+          <ion-icon name="add-circle" item-start color="primary"></ion-icon>
+          <h2>
+            Add Areas
+          </h2>
+        </ion-item>
+        <ion-item (click)='gotoPage("edit_areas")'>
+          <ion-icon name="cog" item-start color="primary"></ion-icon>
+          <h2>
+            Edit Areas
+          </h2>
+        </ion-item>
+
+        <ion-item (click)='logout()'>
+          <ion-icon name="log-out" item-start color="primary"></ion-icon>
+          <h2>
+            Logout
+          </h2>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>

@@ -1,0 +1,17 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>View Employees</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let e of staff" (click)="gotoEmp(e)">
+      <h2><span>{{ e.number }}</span> - {{ e.name | titlecase }} </h2>
+      <p> {{ e.mobile }} </p>
+    </ion-item>
+  </ion-list>
+</ion-content>
