@@ -35,7 +35,8 @@ export class EditChildModalPage {
     const loader = this.load.create({
       content: 'Updating..'
     });
-    loader.present();
+    loader.present();    
+
     const child_obj= {
       id: this.child._id,
       first_name: this.first_name,

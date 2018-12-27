@@ -11,7 +11,7 @@ import { ChildPage } from '../child/child';
 })
 export class EmployeePage implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private loadCtrl: LoadingController, private toast: ToastController) {}
+  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private loadCtrl: LoadingController, private toast: ToastController, private alertCtrl: AlertController) {}
 
   emp;
   name;
@@ -82,6 +82,41 @@ export class EmployeePage implements OnInit{
   }
   gotoChild(child){
     this.navCtrl.push(ChildPage, {child: child});
+  }
+
+  deregisterEmployee() {
+    
+    const alert = this.alertCtrl.create({
+      message: 'This action is not reversible',
+      buttons: [
+        {
+          text: 'I\'m sure',
+          handler: () => {
+            this.auth.deRegisterEmployee(this.emp._id).subscribe(res => {
+              if (res.success) {
+                const toast = this.toast.create({
+                  message: 'Deregistered successfully',
+                  duration: 1200
+                });
+                toast.present();
+                this.navCtrl.popToRoot();
+              } else {
+                console.log(res);
+                const toast = this.toast.create({
+                  message: 'Something went wrong !',
+                  duration: 1200
+                });
+                toast.present();
+              }
+            });
+          }
+        },
+        {
+          text: 'Cancel',
+        }
+      ]
+    });
+    alert.present();
   }
 
 }

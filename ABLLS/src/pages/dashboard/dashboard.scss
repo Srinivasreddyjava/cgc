@@ -1,6 +1,41 @@
 page-dashboard {
-   ion-item{
-       background-color: #e9e969;
-       color: #000;
+   ion-item {       
+       color: #ffffff;
+
+       &:first-child {
+           background-color: #ffe4e1;
+       }
+
+       &:nth-child(2) {
+            background-color: #ffdab9;
+       }
+       
+       &:nth-child(3) {
+            background-color: #d8bfd8;
+        }
+               
+       &:nth-child(4) {
+            background-color: #add8e6;
+        }
+        
+       &:nth-child(5) {
+            background-color: #fffacd;
+        }
+        
+        &:nth-child(6) {
+            background-color: #b0c4de;
+        }
+                
+        &:nth-child(7) {
+            background-color: #B1E5A3;
+        }
+                        
+        &:nth-child(8) {
+            background-color: #deb887;
+        }
+                        
+        &:nth-child(9) {
+            background-color: #D0F2D5;
+        }
    }
 }

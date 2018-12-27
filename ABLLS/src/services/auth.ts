@@ -5,8 +5,8 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-    // host = "http://localhost:3000";
     host = "http://localhost:3000";
+    // host = "http://13.233.133.189:3000";
     constructor(private http: Http, private storage: Storage) { }
     mode: string;
     emp_dets;
@@ -158,6 +158,11 @@ export class AuthService {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
         return this.http.post(this.host + '/users/edit-emp', emp, { headers: header }).pipe(map(res => res.json()));
+    }
+
+    // de-register child
+    deRegisterEmployee(id) {
+        return this.http.get(this.host + '/users/deregister-emp/' + id).pipe(map(res => res.json()));
     }
 
     // Get employee less children

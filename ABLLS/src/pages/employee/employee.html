@@ -33,6 +33,7 @@
     </ion-list>
     <button ion-button block color="primary" (click)="updateEmployee()">Update Employee</button>
     <button ion-button block outline color="danger" (click)="assignEmployee()">Assign Child to Employee</button>
+    <button block ion-button clear color="secondary" (click)="deregisterEmployee()" *ngIf="auth.mode == 'admin'">DE-REGSITER {{ name }}</button>
 
     <ion-list padding>
       <ion-item text-center>

@@ -21,7 +21,7 @@
             Parent's contact : {{ child?.parent_mobile }}
           </ion-item>
           <ion-item>
-            Time : {{ child?.time_slot }}
+            Time : {{ child?.time_slot |  date:'dd/MM/yyyy hh:mm a': 'UTC'}}
           </ion-item>
         </ion-list>
       </ion-col>
@@ -48,8 +48,10 @@
           {{ c }}
         </ion-item-divider>
         <span *ngFor="let d of goals">
-          <ion-item *ngIf="c == d.area_name" text-wrap (click)='editTaskname(d.task_id, d.task_name, d.status)'>
+          <ion-item *ngIf="c == d.area_name" text-wrap>
             {{ d.task_number.number }} - {{ d.task_name }} 
+            <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
+            <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Achieved</button>
           </ion-item>
         </span>
       </div>
@@ -63,8 +65,10 @@
             {{ c }}
           </ion-item-divider>
           <span *ngFor="let d of done">
-              <ion-item *ngIf="c == d.area_name" text-wrap (click)='editTaskname(d.task_id, d.task_name, d.status)'>
+              <ion-item *ngIf="c == d.area_name" text-wrap>
                  {{ d.task_number.number }}  - {{ d.task_name }}
+                 <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
+                 <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Goal</button>
               </ion-item>
           </span>
       </div>

@@ -36,12 +36,8 @@
               <ion-input type="mobile" ngModel name="parent_mobile" required [minlength]="9"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label floating>Time Slot(From)</ion-label>
-              <ion-datetime displayFormat="hh:mm A"  ngModel name="from_slot" required ></ion-datetime>
-            </ion-item>
-            <ion-item>
-              <ion-label floating>Time Slot(To)</ion-label>
-              <ion-datetime displayFormat="hh:mm A"  ngModel name="to_slot" required ></ion-datetime>
+              <ion-label floating>Time Slot</ion-label>
+              <ion-datetime ngModel name="time_slot" id="time_slot" displayFormat="DD/MM/YYYY hh:mm a" required></ion-datetime>
             </ion-item>
           </ion-list>
           <button ion-button block outline color="primary" type="submit" [disabled]="!f.valid">REGISTER</button>

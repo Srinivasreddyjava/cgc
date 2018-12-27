@@ -18,9 +18,8 @@ export class ChildPage implements OnInit {
   child;
   goals;
   done;
-  goal_areas = [];
-  done_areas = [];
-
+  goal_areas;
+  done_areas;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private load: LoadingController, private modalCtrl: ModalController, private auth: AuthService, private toast: ToastController, private alertCtrl: AlertController, private printer: Printer, private plt: Platform, private file: File, private fileOpener: FileOpener) { }
 
@@ -33,6 +32,8 @@ export class ChildPage implements OnInit {
   }
 
   getChildtasks() {
+    this.goal_areas = [];
+    this.done_areas = [];
     this.auth.getChildTasks(this.child._id).subscribe(res => {
       if (res.success) {
         this.goals = res.msg[0];
@@ -145,6 +146,26 @@ export class ChildPage implements OnInit {
 
   downloadPdf() {
 
+  }
+
+  taskUpdated(event, task){
+    task.status = task.status === 'goal'? 'achieved' : 'goal';
+    // save task
+    this.auth.updateChildTask({ task_id: task.task_id, status: task.status, child_id: this.child._id, area_id: task.area_id,  task_name: task.task_name }).subscribe(res => {
+      if(res.success){
+        // Task updated
+        const toast = this.toast.create({
+          message: 'Task updated successfully !',
+          duration: 1200
+        });
+        this.getChildtasks();
+        toast.present();
+      }else {
+        console.log(res);
+      }
+    }, err => {
+      console.log(err);
+    });
   }
 
 }

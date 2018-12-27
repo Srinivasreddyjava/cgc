@@ -17,15 +17,15 @@ export class AddChildPage {
       content: 'Registering '+ form.value.first_name +' with organization..'
     });
     load.present();
-
+    
     const child_obj = {
       number: form.value.number,
-      first_name: form.value.first_name.trim(),
-      last_name: form.value.last_name.trim(),
+      first_name: form.value.first_name,
+      last_name: form.value.last_name,
       age: form.value.age,
-      parent_name: form.value.parent_name.trim(),
+      parent_name: form.value.parent_name,
       parent_mobile: form.value.parent_mobile,
-      time_slot: form.value.from_slot +" - "+form.value.to_slot
+      time_slot: form.value.time_slot
     };
     this.auth.addChild(child_obj).subscribe(res => {
       if(res.success){
@@ -46,7 +46,7 @@ export class AddChildPage {
         alrt.present();
       }
     }, err => console.error(err)
-  )
+    )
   }
 
 }

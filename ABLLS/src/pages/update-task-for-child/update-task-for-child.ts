@@ -25,6 +25,10 @@ export class UpdateTaskForChildPage implements OnInit{
 
   ngOnInit(){
     this.child = this.navParams.get('child');
+    this.updateChildTasks();
+  }
+
+  updateChildTasks(){
     this.auth.getChildTasks(this.child._id).subscribe(res => {
       if(res.success){
         this.goals = res.msg[0];
@@ -60,6 +64,7 @@ export class UpdateTaskForChildPage implements OnInit{
           message: 'Task updated successfully !',
           duration: 1200
         });
+        this.updateChildTasks();
         toast.present();
       }else {
         console.log(res);
