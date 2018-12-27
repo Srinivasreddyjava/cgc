@@ -8,8 +8,12 @@ const Child = require('../models/child');
 const ChildTasks = require('../models/child_tasks');
 const moment = require('moment');
 const deChild = require('../models/de-child');
+const DeStaff = require('../models/de-staff')
 const Dummy = require('../models/dummy');
 var async = require("async");
+
+
+
 
 // Task.aggregate(
 //     // [
@@ -3980,6 +3984,58 @@ router.get('/get-emps', (req, res, next) => {
             }
         )
 });
+
+
+// deregister staff
+router.get('/deregister-emp/:id', (req, res, next) => {
+    Staff.findById({
+        _id: req.params.id
+    }, (er, found) => {
+        if (found) {
+            const c = new DeStaff({
+                name: found.name,
+                mobile: found.mobile,
+                email: found.email,
+                password: found.password,
+                number: found.number,                
+                de_time: moment.now()
+            });
+            found.remove();
+            c.save((err, saved) => {
+                if (saved) {
+                    Child.updateMany({
+                        staff: req.params.id
+                    }, {
+                        staff: null
+                    }, (err, saved) => {
+                        if (saved) {
+                            res.json({
+                                success: true,
+                                msg: saved
+                            });
+                        } else {
+                            res.json({
+                                success: false,
+                                msg: er
+                            });
+                        }
+                    });                    
+                } else {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                }
+            })
+        } else {
+            res.json({
+                success: false,
+                msg: er
+            });
+        }
+    })
+});
+
 
 router.get('/get-un-emp-children', (req, res, next) => {
 

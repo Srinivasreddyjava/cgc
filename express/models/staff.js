@@ -21,6 +21,10 @@ const staff_schema = schema({
     },
     number:{
         type: Number
+    },
+    registered:{
+        type: Boolean,
+        default: true
     }
 });
 
