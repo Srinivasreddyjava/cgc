@@ -7,4 +7,126 @@ page-child {
         background-color: green;
         color: #fff;
     }
+    .grid {
+        & > div:first-child {
+            & > .area {
+                background-color: color($colors, lightnavy, base);
+            }
+        }        
+        & > div:nth-child(2) {
+            & > .area {
+                background-color: color($colors, lightestblue, base);
+            }
+        }
+        & > div:nth-child(3) {
+            & > .area {
+                background-color: color($colors, lightaqua, base);
+            }
+        }
+        & > div:nth-child(4) {
+            & > .area {
+                background-color: color($colors, lightteal, base);
+            }
+        }
+        & > div:nth-child(5) {
+            & > .area {
+                background-color: color($colors, lightolive, base);
+            }
+        }
+        & > div:nth-child(6) {
+            & > .area {
+                background-color: color($colors, lightergreen, base);
+            }
+        }
+        & > div:nth-child(7) {
+            & > .area {
+                background-color: color($colors, lightlime, base);
+            }
+        }
+        & > div:nth-child(8) {
+            & > .area {
+                background-color: color($colors, lighteryellow, base);
+            }
+        }
+        & > div:nth-child(9) {
+            & > .area {
+                background-color: color($colors, lightorange, base);
+            }
+        }
+        & > div:nth-child(10) {
+            & > .area {
+                background-color: color($colors, lightmaroon, base);
+            }
+        }
+        & > div:nth-child(11) {
+            & > .area {
+                background-color: color($colors, lightfuchsia, base);
+            }
+        }
+        & > div:nth-child(12) {
+            & > .area {
+                background-color: color($colors, lightpurple, base);
+            }
+        }
+        & > div:nth-child(13) {
+            & > .area {
+                background-color: color($colors, lightsilver, base);
+            }
+        }
+        & > div:nth-child(14) {
+            & > .area {
+                background-color: color($colors, lightergray, base);
+            }
+        }
+        & > div:nth-child(15) {
+            & > .area {
+                background-color: color($colors, fiesta, base);
+            }
+        }
+        & > div:nth-child(16) {
+            & > .area {
+                background-color: color($colors, jesterred, base);
+            }
+        }
+        & > div:nth-child(17) {
+            & > .area {
+                background-color: color($colors, turmeric, base);
+            }
+        }
+        & > div:nth-child(18) {
+            & > .area {
+                background-color: color($colors, lightercoral, base);
+            }
+        }
+        & > div:nth-child(19) {
+            & > .area {
+                background-color: color($colors, pinkpeacock, base);
+            }
+        }
+        & > div:nth-child(20) {
+            & > .area {
+                background-color: color($colors, pepperstem, base);
+            }
+        }
+        & > div:nth-child(21) {
+            & > .area {
+                background-color: color($colors, princessblue, base);
+            }
+        }
+        & > div:nth-child(22) {
+            & > .area {
+                background-color: color($colors, mangomojito, base);
+            }
+        }
+        & > div:nth-child(23) {
+            & > .area {
+                background-color: color($colors, terrariummoss, base);
+            }
+        }
+        & > div:nth-child(24) {
+            & > .area {
+                background-color: color($colors, sweetlilac, base);
+            }
+        }
+    }
 }
