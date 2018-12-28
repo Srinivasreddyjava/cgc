@@ -3965,11 +3965,7 @@ router.post('/edit-emp', (req, res, next) => {
 
 router.get('/get-emps', (req, res, next) => {
 
-        Staff.aggregate(
-            [
-                { $match: {} },
-                { $sort: { name: 1 } }
-            ], (err , staff) => {
+        Staff.find({},null,{sort:{name:1}}, (err , staff) => {
                 if (staff) {
                     res.json({
                         success: true,
@@ -3997,7 +3993,7 @@ router.get('/deregister-emp/:id', (req, res, next) => {
                 mobile: found.mobile,
                 email: found.email,
                 password: found.password,
-                number: found.number,                
+                number: found.number,
                 de_time: moment.now()
             });
             found.remove();
@@ -4019,7 +4015,7 @@ router.get('/deregister-emp/:id', (req, res, next) => {
                                 msg: er
                             });
                         }
-                    });                    
+                    });
                 } else {
                     res.json({
                         success: false,
@@ -4041,7 +4037,7 @@ router.get('/get-un-emp-children', (req, res, next) => {
 
     Child.find({
         staff: null
-    }, (er, children) => {
+    },{},{sort:{first_name:1,last_name:1}}, (er, children) => {
         if (children) {
             res.json({
                 success: true,
@@ -4083,7 +4079,7 @@ router.get('/get-emp-children/:emp_id', (req, res, next) => {
     id = req.params.emp_id;
     Child.find({
         staff: id
-    }, (err, child) => {
+    },{},{sort:{first_name:1,last_name:1}}, (err, child) => {
         if (child) {
             res.json({
                 success: true,
