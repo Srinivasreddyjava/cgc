@@ -3969,7 +3969,9 @@ router.get('/get-emps', (req, res, next) => {
                 if (staff) {
                     res.json({
                         success: true,
-                        msg: staff
+                        msg: staff.sort(function(a,b){
+                          return a.name.trim().toUpperCase().localeCompare(b.name.trim().toUpperCase())
+                        })
                     });
                 } else {
                     res.json({
@@ -4371,7 +4373,9 @@ router.get('/get-children', (req, res, next) => {
         if (children) {
             res.json({
                 success: true,
-                msg: children
+                msg: children.sort(function(a,b){
+                   return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
+                })
             });
         } else {
             res.json({
