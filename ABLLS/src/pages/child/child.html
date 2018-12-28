@@ -21,7 +21,7 @@
             Parent's contact : {{ child?.parent_mobile }}
           </ion-item>
           <ion-item>
-            Time : {{ child?.time_slot |  date:'dd/MM/yyyy hh:mm a': 'UTC'}}
+            Time : {{ formattedTimeSlot }}
           </ion-item>
         </ion-list>
       </ion-col>

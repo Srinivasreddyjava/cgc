@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController, AlertController, Platform } from 'ionic-angular';
 import { EditChildModalPage } from '../edit-child-modal/edit-child-modal';
 import { AuthService } from '../../services/auth';
@@ -7,6 +7,7 @@ import { Printer } from '@ionic-native/printer';
 import { EditChildTaskPage } from '../edit-child-task/edit-child-task';
 import { File } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -20,11 +21,13 @@ export class ChildPage implements OnInit {
   done;
   goal_areas;
   done_areas;
+  formattedTimeSlot;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private load: LoadingController, private modalCtrl: ModalController, private auth: AuthService, private toast: ToastController, private alertCtrl: AlertController, private printer: Printer, private plt: Platform, private file: File, private fileOpener: FileOpener) { }
+  constructor(public navCtrl: NavController, public navParams: NavParams, private load: LoadingController, private modalCtrl: ModalController, private auth: AuthService, private toast: ToastController, private alertCtrl: AlertController, private printer: Printer, private plt: Platform, private file: File, private fileOpener: FileOpener, private zone: NgZone) { }
 
   ionViewWillEnter() {
     this.child = this.navParams.get('child');
+    this.formatTime();
     this.getChildtasks();
   }
   ngOnInit() {
@@ -62,14 +65,20 @@ export class ChildPage implements OnInit {
     });
   }
   openModel() {
-    const obj = { child: this.child };
-    const modal = this.modalCtrl.create(EditChildModalPage, obj);
-    modal.present();
+    let child = Object.assign({}, this.child);
+    this.child = {};
+    const modal = this.modalCtrl.create(EditChildModalPage, { child: child });
     modal.onDidDismiss((refresh: string, child_obj) => {
       if (refresh === "refresh") {
-        this.child = child_obj;
+        this.updateChildDetails(child_obj);
       }
-    })
+    });
+    modal.present();
+  }
+
+  updateChildDetails(child) {
+    this.child = child;
+    this.formatTime();
   }
 
   editTaskname(task_id, task_name, status) {
@@ -166,6 +175,12 @@ export class ChildPage implements OnInit {
     }, err => {
       console.log(err);
     });
+  }
+
+  formatTime() {
+    if(this.child && this.child.time_slot) {
+      this.formattedTimeSlot = moment.utc(this.child.time_slot, 'hh:mm a').format("hh:mm a");
+    }
   }
 
 }
