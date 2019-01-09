@@ -44,11 +44,11 @@
     </ion-list-header>
     <ion-grid padding>
       <div *ngFor="let c of goal_areas">
-        <ion-item-divider class="area goal-area">
-          {{ c }}
+        <ion-item-divider class="area goal-area {{area_colors[c.code]}}">
+          {{ c.name }}
         </ion-item-divider>
         <span *ngFor="let d of goals">
-          <ion-item *ngIf="c == d.area_name" text-wrap>
+          <ion-item *ngIf="c.name == d.area_name" text-wrap>
             {{ d.task_number.number }} - {{ d.task_name }} 
             <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
             <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Achieved</button>
@@ -61,11 +61,11 @@
     </ion-list-header>
     <ion-grid padding>
       <div *ngFor="let c of done_areas">
-          <ion-item-divider color="light" class="area acheived-area">
-            {{ c }}
+          <ion-item-divider color="light" class="area acheived-area {{area_colors[c.code]}}">
+            {{ c.name }}
           </ion-item-divider>
           <span *ngFor="let d of done">
-              <ion-item *ngIf="c == d.area_name" text-wrap>
+              <ion-item *ngIf="c.name == d.area_name" text-wrap>
                  {{ d.task_number.number }}  - {{ d.task_name }}
                  <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
                  <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Goal</button>

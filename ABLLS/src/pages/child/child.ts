@@ -22,6 +22,31 @@ export class ChildPage implements OnInit {
   goal_areas;
   done_areas;
   formattedTimeSlot;
+  area_colors = [
+    "visual-performance",
+    "receptive-language",
+    "imitation",
+    "vocal-imitation",
+    "requests",
+    "labelling",
+    "interverbal",
+    "spontaneous-vocalizations",
+    "syntax-grammer",
+    "play-leasure",
+    "social-interaction",
+    "group-instruction",
+    "follow-classroom-routines",
+    "generalized-responding",
+    "reading",
+    "math",
+    "writing",
+    "spelling",
+    "dressing",
+    "eating",
+    "toileting",
+    "gross-motor",
+    "fine-motor"
+  ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private load: LoadingController, private modalCtrl: ModalController, private auth: AuthService, private toast: ToastController, private alertCtrl: AlertController, private printer: Printer, private plt: Platform, private file: File, private fileOpener: FileOpener, private zone: NgZone) { }
 
@@ -41,17 +66,25 @@ export class ChildPage implements OnInit {
       if (res.success) {
         this.goals = res.msg[0];
         res.msg[0].forEach(element => {
-          if (this.goal_areas.indexOf(element.area_name) < 0) {
+          if (!this.hasAreaName(this.goal_areas, element.area_name)) {
+            let area = {
+              name: element.area_name,
+              code: element.area_number
+            }
             // Push
-            this.goal_areas.push(element.area_name);
+            this.goal_areas.push(area);
           }
         });
         this.done = res.msg[1];
         res.msg[1].forEach(elt => {
           console.log(elt);
-          if (this.done_areas.indexOf(elt.area_name) < 0) {
+          if (!this.hasAreaName(this.done_areas, elt.area_name)) {
+            let area = {
+              name: elt.area_name,
+              code: elt.area_number
+            }
             // Push
-            this.done_areas.push(elt.area_name);
+            this.done_areas.push(area);
           }
         });
       } else {
@@ -181,6 +214,18 @@ export class ChildPage implements OnInit {
     if(this.child && this.child.time_slot) {
       this.formattedTimeSlot = moment.utc(this.child.time_slot, 'hh:mm a').format("hh:mm a");
     }
+  }
+
+  hasAreaName(areas, name) {
+    var found = false;
+    for(var i = 0; i < areas.length; i++) {
+        if (areas[i].name == name) {
+            found = true;
+            break;
+        }
+    }
+
+    return found;
   }
 
 }
