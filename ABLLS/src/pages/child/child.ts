@@ -73,6 +73,9 @@ export class ChildPage implements OnInit {
             }
             // Push
             this.goal_areas.push(area);
+            this.goal_areas=this.goal_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
           }
         });
         this.done = res.msg[1];
@@ -85,6 +88,9 @@ export class ChildPage implements OnInit {
             }
             // Push
             this.done_areas.push(area);
+            this.done_areas=this.done_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
           }
         });
       } else {
