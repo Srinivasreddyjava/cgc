@@ -7,13 +7,13 @@
 </ion-header>
 
 
-<ion-content padding>
-  <ion-grid>
+<ion-content >
+  <ion-grid padding>
     <ion-row>
       <ion-col col-12>
         <ion-list>
-          <ion-item *ngFor="let a of area; let i = index" (click)="openModel(a, a._id)">
-            {{ a.name }}
+          <ion-item *ngFor="let a of area; let i = index"  class="grid {{area_colors[a.number]}}" (click)="openModel(a, a._id)">
+          {{a.number}} - {{ a.name }}
           </ion-item>
         </ion-list>
       </ion-col>
