@@ -18,9 +18,15 @@
     <button type="submit" ion-button [disabled]="!f.valid" block>ADD AREA</button>
   </form>
   <h2 text-center>Existing Areas</h2>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col col-12>
   <ion-list>
-    <ion-item *ngFor="let a of areas" (click)="openModel(a, a._id)">
-      {{ a.name }}
+    <ion-item *ngFor="let a of areas" class="grid {{area_colors[a.number]}}" (click)="openModel(a, a._id)">
+    {{a.number}} - {{ a.name }}
     </ion-item>
   </ion-list>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>

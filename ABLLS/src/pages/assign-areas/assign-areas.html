@@ -6,10 +6,16 @@
 
 </ion-header>
 
-<ion-content padding>
-  <ion-list>
-    <ion-item *ngFor="let a of areas; let i = index" (click)="areaClicked(a)">
+<ion-content >
+  <ion-grid padding>
+    <ion-row>
+      <ion-col col-12>
+  <ion-list >
+    <ion-item *ngFor="let a of areas; let i = index" class="grid {{area_colors[a.number]}}" (click)="areaClicked(a)">
       {{ a.number }} - {{ a.name }}
     </ion-item>
   </ion-list>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>

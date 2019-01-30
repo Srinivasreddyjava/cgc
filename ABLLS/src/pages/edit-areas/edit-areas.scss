@@ -1,3 +1,77 @@
 page-edit-areas {
-
+  .grid {
+      color: #fff;
+      & .visual-performance {
+          background-color: color($colors, lightnavy, base);
+      }
+      & .receptive-language {
+          background-color: color($colors, lightestblue, base);
+      }
+      & .imitation {
+          background-color: color($colors, lightaqua, base);
+      }
+      & .vocal-imitation {
+          background-color: color($colors, lightteal, base);
+      }
+      & .requests {
+          background-color: color($colors, lightolive, base);
+      }
+      & .labelling {
+          background-color: color($colors, lightergreen, base);
+      }
+      & .interverbal {
+          background-color: color($colors, lightlime, base);
+      }
+      & .spontaneous-vocalizations {
+          background-color: color($colors, lighteryellow, base);
+      }
+      & .syntax-grammer {
+          background-color: color($colors, lightorange, base);
+      }
+      & .play-leasure {
+          background-color: color($colors, lightmaroon, base);
+      }
+      & .social-interaction {
+          background-color: color($colors, lightfuchsia, base);
+      }
+      & .group-instruction {
+          background-color: color($colors, lightpurple, base);
+      }
+      & .follow-classroom-routines {
+          background-color: color($colors, lightsilver, base);
+      }
+      & .generalized-responding {
+          background-color: color($colors, lightergray, base);
+      }
+      & .reading {
+          background-color: color($colors, fiesta, base);
+      }
+      & .math {
+          background-color: color($colors, jesterred, base);
+      }
+      & .writing {
+          background-color: color($colors, turmeric, base);
+      }
+      & .spelling {
+          background-color: color($colors, lightercoral, base);
+      }
+      & .dressing {
+          background-color: color($colors, pinkpeacock, base);
+      }
+      & .eating {
+          background-color: color($colors, pepperstem, base);
+      }
+      & .grooming  {
+         background-color: color($colors, princessblue, base);
+     }
+      & .toileting{
+          background-color: color($colors, mangomojito, base);
+      }
+      & .gross-motor  {
+          background-color: color($colors, terrariummoss, base);
+      }
+      & .fine-motor  {
+              background-color: color($colors, sweetlilac, base);
+      }
+}
 }

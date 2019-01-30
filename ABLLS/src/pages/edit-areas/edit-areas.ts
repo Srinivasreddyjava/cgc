@@ -10,10 +10,37 @@ import { EditAreaModalPage } from '../edit-area-modal/edit-area-modal';
 })
 export class EditAreasPage implements OnInit{
 
+  area_colors = [
+    "",
+    "visual-performance",
+    "receptive-language",
+    "imitation",
+    "vocal-imitation",
+    "requests",
+    "labelling",
+    "interverbal",
+    "spontaneous-vocalizations",
+    "syntax-grammer",
+    "play-leasure",
+    "social-interaction",
+    "group-instruction",
+    "follow-classroom-routines",
+    "generalized-responding",
+    "reading",
+    "math",
+    "writing",
+    "spelling",
+    "dressing",
+    "eating",
+    "grooming",
+    "toileting",
+    "gross-motor",
+    "fine-motor"
+  ]
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private modal: ModalController) {}
 
   area: any;
-  
+
   ngOnInit(){
     // get all areas
     this.loadCats();

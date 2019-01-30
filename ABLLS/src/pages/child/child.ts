@@ -23,6 +23,7 @@ export class ChildPage implements OnInit {
   done_areas;
   formattedTimeSlot;
   area_colors = [
+    "",
     "visual-performance",
     "receptive-language",
     "imitation",
@@ -43,6 +44,7 @@ export class ChildPage implements OnInit {
     "spelling",
     "dressing",
     "eating",
+    "grooming",
     "toileting",
     "gross-motor",
     "fine-motor"
@@ -73,7 +75,11 @@ export class ChildPage implements OnInit {
             }
             // Push
             this.goal_areas.push(area);
+            this.goal_areas=this.goal_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
           }
+          console.log(this.goal_areas);
         });
         this.done = res.msg[1];
         res.msg[1].forEach(elt => {
@@ -85,8 +91,12 @@ export class ChildPage implements OnInit {
             }
             // Push
             this.done_areas.push(area);
+            this.done_areas=this.done_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
           }
         });
+        console.log(this.done_areas);
       } else {
       }
     }, err => {
@@ -96,6 +106,7 @@ export class ChildPage implements OnInit {
       });
       toast.present();
     });
+
   }
   openModel() {
     let child = Object.assign({}, this.child);

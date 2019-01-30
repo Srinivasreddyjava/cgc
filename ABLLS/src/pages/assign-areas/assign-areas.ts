@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { AuthService } from '../../services/auth';
 import { TasksChecklistModalPage } from '../tasks-checklist-modal/tasks-checklist-modal';
@@ -8,16 +8,46 @@ import { TasksChecklistModalPage } from '../tasks-checklist-modal/tasks-checklis
   selector: 'page-assign-areas',
   templateUrl: 'assign-areas.html',
 })
-export class AssignAreasPage {
+export class AssignAreasPage implements OnInit {
 
   child;
   areas;
+  area_colors = [
+    "",
+    "visual-performance",
+    "receptive-language",
+    "imitation",
+    "vocal-imitation",
+    "requests",
+    "labelling",
+    "interverbal",
+    "spontaneous-vocalizations",
+    "syntax-grammer",
+    "play-leasure",
+    "social-interaction",
+    "group-instruction",
+    "follow-classroom-routines",
+    "generalized-responding",
+    "reading",
+    "math",
+    "writing",
+    "spelling",
+    "dressing",
+    "eating",
+    "grooming",
+    "toileting",
+    "gross-motor",
+    "fine-motor"
+  ]
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private modalCtrl: ModalController) {}
 
   ionViewDidEnter(){
     this.child = this.navParams.get('child');
     this.getTasks();
+  }
+  ngOnInit() {
+    // this.child = this.navParams.get('child');
   }
   getTasks(){
     this.auth.getAreas().subscribe(res => {

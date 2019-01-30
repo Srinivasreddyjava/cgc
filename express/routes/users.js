@@ -4622,10 +4622,10 @@ router.get('/get-child-tasks/:id', (req, res, next) => {
             res.json({
                 success: true,
                 msg: [ goals.sort(function(a,b) {
-                    return parseInt(a.area_number, b.area_number);
+                    return a.task_number.number - b.task_number.number;
                 }),
                 done.sort(function(a,b) {
-                    return parseInt(a.area_number, b.area_number);
+                    return a.task_number.number - b.task_number.number;
                 })]
             });
         }

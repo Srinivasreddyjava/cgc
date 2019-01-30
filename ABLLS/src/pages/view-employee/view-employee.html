@@ -10,7 +10,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let e of staff" (click)="gotoEmp(e)">
-      <h2><span>{{ e.number }}</span> - {{ e.name | titlecase }} </h2>
+      <h2>{{ e.name | titlecase }} </h2>
       <p> {{ e.mobile }} </p>
     </ion-item>
   </ion-list>
