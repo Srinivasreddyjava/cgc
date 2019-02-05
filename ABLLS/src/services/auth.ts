@@ -5,8 +5,9 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-    host = "http://54.188.202.254:3000";
+    // host = "http://54.188.202.254:3000";
     // host = "http://13.233.133.189:3000";
+    host = "http://localhost:3000";
     constructor(private http: Http, private storage: Storage) { }
     mode: string;
     emp_dets;

@@ -1,13 +1,14 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ModalController, ToastController, AlertController, Platform } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, AlertController } from 'ionic-angular';
 import { EditChildModalPage } from '../edit-child-modal/edit-child-modal';
 import { AuthService } from '../../services/auth';
 import { AssignAreasPage } from '../assign-areas/assign-areas';
 import { Printer } from '@ionic-native/printer';
 import { EditChildTaskPage } from '../edit-child-task/edit-child-task';
-import { File } from '@ionic-native/file';
-import { FileOpener } from '@ionic-native/file-opener';
 import * as moment from 'moment';
+import * as jspdf from 'jspdf';  
+  
+import html2canvas from 'html2canvas'; 
 
 @IonicPage()
 @Component({
@@ -50,7 +51,15 @@ export class ChildPage implements OnInit {
     "fine-motor"
   ]
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private load: LoadingController, private modalCtrl: ModalController, private auth: AuthService, private toast: ToastController, private alertCtrl: AlertController, private printer: Printer, private plt: Platform, private file: File, private fileOpener: FileOpener, private zone: NgZone) { }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    private modalCtrl: ModalController, 
+    private auth: AuthService, 
+    private toast: ToastController, 
+    private alertCtrl: AlertController, 
+    private printer: Printer
+  ) { }
 
   ionViewWillEnter() {
     this.child = this.navParams.get('child');
@@ -194,7 +203,17 @@ export class ChildPage implements OnInit {
   }
 
   pdf(){
-    // alert('hole');
+    var data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {  
+      // Few necessary setting options  
+      var imgWidth = 208;   
+      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      const contentDataURL = canvas.toDataURL('image/png')  
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
+      var position = 0;  
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight); 
+      pdf.save(`${this.child.first_name}_${this.child.last_name}.pdf`); // Generated PDF
+    }); 
   }
 
   downloadPdf() {

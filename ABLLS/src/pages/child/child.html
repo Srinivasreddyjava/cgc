@@ -35,9 +35,10 @@
     </ion-row>
   </ion-grid>
 
-  <button block ion-button outline color="danger" (click)="print()"> <ion-icon name="print" item-left></ion-icon> &nbsp; PRINT</button>
+  <!-- <button block ion-button outline color="danger" (click)="print()"> <ion-icon name="print" item-left></ion-icon> &nbsp; PRINT</button> -->
+  <button block ion-button outline color="danger" (click)="pdf()"> <ion-icon name="print" item-left></ion-icon> &nbsp; PDF</button>
 
-  <ion-list id="printable">
+  <ion-list id="contentToConvert">
 
     <ion-list-header color="light" text-center class="goals">
       <h5>GOALS</h5>
@@ -50,7 +51,7 @@
         <span *ngFor="let d of goals">
           <ion-item *ngIf="c.name == d.area_name" text-wrap>
             {{ d.task_number.number }} - {{ d.task_name }}
-            <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
+            <ion-icon item-end class="editIcon" name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
             <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Achieved</button>
           </ion-item>
         </span>
