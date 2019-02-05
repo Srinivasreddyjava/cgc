@@ -203,16 +203,24 @@ export class ChildPage implements OnInit {
   }
 
   pdf(){
-    var data = document.getElementById('contentToConvert');
+    const data = document.getElementById('contentToConvert');
+    const elements = data.getElementsByClassName('editIcon');
+    for(let i=0; i<elements.length; i++) {
+      elements[i].style.display = 'none';
+    }
+
     html2canvas(data).then(canvas => {  
       // Few necessary setting options  
-      var imgWidth = 208;   
-      var imgHeight = canvas.height * imgWidth / canvas.width;  
+      const imgWidth = 208;   
+      const imgHeight = canvas.height * imgWidth / canvas.width;  
       const contentDataURL = canvas.toDataURL('image/png')  
       let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
       var position = 0;  
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight); 
       pdf.save(`${this.child.first_name}_${this.child.last_name}.pdf`); // Generated PDF
+      for(let i=0; i<elements.length; i++) {
+        elements[i].removeAttribute('style');
+      }
     }); 
   }
 
