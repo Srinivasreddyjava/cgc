@@ -5,9 +5,9 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-    // host = "http://54.188.202.254:3000";
+     host = "http://54.188.202.254:3000";
     // host = "http://13.233.133.189:3000";
-    host = "http://localhost:3000";
+    //host = "http://localhost:3000";
     constructor(private http: Http, private storage: Storage) { }
     mode: string;
     emp_dets;
@@ -98,7 +98,7 @@ export class AuthService {
     }
     // Get child by id
     getChild(id) {
-        return this.http.get(this.host + '/users/get-child/+' + id).pipe(map(res => res.json()));
+        return this.http.get(this.host + '/users/get-child/' + id).pipe(map(res => res.json()));
     }
     // Get child by id
     updateChild(child_obj) {
@@ -198,5 +198,10 @@ export class AuthService {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
         return this.http.post(this.host + '/users/change-admin-pwd', obj, { headers: header }).pipe(map(res => res.json()));
+    }
+    deRegisterStaffForChild(id){
+      const header = new Headers();
+      header.append('Content-Type', 'application/json');
+      return this.http.post(this.host + '/users/deassgin-staff-for-child', {c_id:id}, { headers: header }).pipe(map(res => res.json()));
     }
 }

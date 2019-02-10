@@ -65,7 +65,8 @@
       "cordova-plugin-printer": {},
       "cordova-sqlite-storage": {},
       "cordova-plugin-file-opener2": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-pdf-generator": {}
     },
     "platforms": [
       "android",

@@ -4076,6 +4076,27 @@ router.post('/assign-staff-to-child', (req, res, next) => {
     });
 });
 
+router.post('/deassgin-staff-for-child',(req,res,next) =>{
+  child_id=req.body.c_id;
+  Child.findByIdAndUpdate({
+      _id: child_id
+  }, {
+      staff: null
+  }, (err, saved) => {
+      if (saved) {
+          res.json({
+              success: true,
+              msg: saved
+          });
+      } else {
+          res.json({
+              success: false,
+              msg: er
+          });
+      }
+  });
+})
+
 // Get children of employee
 router.get('/get-emp-children/:emp_id', (req, res, next) => {
     id = req.params.emp_id;
@@ -4393,10 +4414,36 @@ router.get('/get-child/:id', (req, res, next) => {
         _id: child_id
     }, (er, child) => {
         if (child) {
+          if(child.staff!=null){
+            Staff.findById({_id:child.staff},(err,staff)=>{
+              if(staff){
+                const obj={
+                  _id:child._id,
+                  first_name:child.first_name,
+                  last_name:child.last_name,
+                  age:child.age,
+                  parent_name:child.parent_name,
+                  parent_mobile:child.parent_mobile,
+                  time_slot:child.time_slot,
+                  staff:staff
+                }
+                res.json({
+                    success: true,
+                    msg: obj
+                });
+              }else{
+                res.json({
+                    success: false,
+                    msg: 'Something went wrong'
+                });
+              }
+            })
+          }else{
             res.json({
                 success: true,
                 msg: child
             });
+          }
         } else {
             res.json({
                 success: false,

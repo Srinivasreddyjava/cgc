@@ -23,6 +23,9 @@
           <ion-item>
             Time : {{ formattedTimeSlot }}
           </ion-item>
+          <ion-item *ngIf="auth.mode == 'admin' && childHasStaff">
+            Staff Assigned : {{ child?.staff?.name }}
+          </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
@@ -31,6 +34,8 @@
         <button block ion-button (click)="openModel()">UPDATE {{ child?.first_name }} DETAILS</button>
         <button block ion-button outline (click)="assign_areas()">ASSIGN TASKS</button>
         <button block ion-button clear color="secondary" (click)="deregisterChild()" *ngIf="auth.mode == 'admin'">DE-REGSITER {{ child?.first_name }}</button>
+
+        <button block ion-button clear color="secondary" (click)="deregisterStaffForChild()" *ngIf="auth.mode == 'admin' && childHasStaff">DE-REGSITER Staff for {{ child?.first_name }}</button>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -52,7 +57,7 @@
           <ion-item *ngIf="c.name == d.area_name" text-wrap>
             {{ d.task_number.number }} - {{ d.task_name }}
             <ion-icon item-end class="editIcon" name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
-            <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Achieved</button>
+            <button item-end class="acheivedbtn" ion-button color="primary" (click)='taskUpdated($event, d)'>Achieved</button>
           </ion-item>
         </span>
       </div>
@@ -68,8 +73,8 @@
           <span *ngFor="let d of done">
               <ion-item *ngIf="c.name == d.area_name" text-wrap>
                  {{ d.task_number.number }}  - {{ d.task_name }}
-                 <ion-icon item-end name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
-                 <button item-end ion-button color="primary" (click)='taskUpdated($event, d)'>Goal</button>
+                 <ion-icon item-end class="editIcon" name="create" small (click)='editTaskname(d.task_id, d.task_name, d.status)'></ion-icon>
+                 <button item-end class="acheivedbtn" ion-button color="primary" (click)='taskUpdated($event, d)'>Goal</button>
               </ion-item>
           </span>
       </div>

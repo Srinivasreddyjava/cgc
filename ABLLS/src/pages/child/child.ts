@@ -6,10 +6,10 @@ import { AssignAreasPage } from '../assign-areas/assign-areas';
 import { Printer } from '@ionic-native/printer';
 import { EditChildTaskPage } from '../edit-child-task/edit-child-task';
 import * as moment from 'moment';
-import * as jspdf from 'jspdf';  
-  
-import html2canvas from 'html2canvas'; 
+import * as jspdf from 'jspdf';
 
+import html2canvas from 'html2canvas';
+declare var cordova:any;
 @IonicPage()
 @Component({
   selector: 'page-child',
@@ -20,9 +20,11 @@ export class ChildPage implements OnInit {
   child;
   goals;
   done;
+  mode;
   goal_areas;
   done_areas;
   formattedTimeSlot;
+  childHasStaff;
   area_colors = [
     "",
     "visual-performance",
@@ -52,17 +54,19 @@ export class ChildPage implements OnInit {
   ]
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
-    private modalCtrl: ModalController, 
-    private auth: AuthService, 
-    private toast: ToastController, 
-    private alertCtrl: AlertController, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private modalCtrl: ModalController,
+    private auth: AuthService,
+    private toast: ToastController,
+    private alertCtrl: AlertController,
     private printer: Printer
   ) { }
 
   ionViewWillEnter() {
     this.child = this.navParams.get('child');
+    this.mode=this.auth.mode;
+    this.loadChild();
     this.formatTime();
     this.getChildtasks();
   }
@@ -88,11 +92,9 @@ export class ChildPage implements OnInit {
                 return a.code - b.code;
             });
           }
-          console.log(this.goal_areas);
         });
         this.done = res.msg[1];
         res.msg[1].forEach(elt => {
-          console.log(elt);
           if (!this.hasAreaName(this.done_areas, elt.area_name)) {
             let area = {
               name: elt.area_name,
@@ -105,7 +107,6 @@ export class ChildPage implements OnInit {
             });
           }
         });
-        console.log(this.done_areas);
       } else {
       }
     }, err => {
@@ -146,11 +147,16 @@ export class ChildPage implements OnInit {
   }
 
   loadChild() {
-    this.auth.getChild(this.child._id).subscribe(res => {
-      if (res.success) {
-        this.child = res.msg;
-      }
-    }, error => console.log(error));
+    this.auth.getChild(this.navParams.get('child')._id).subscribe(res =>{
+      if(res.success){
+        this.child=res.msg;
+        if(this.child.staff!=null){
+          this.childHasStaff=true;
+        }else{
+          this.childHasStaff=false;
+        }
+      }else{}
+    })
   }
   assign_areas() {
     this.navCtrl.push(AssignAreasPage, { child: this.child });
@@ -206,22 +212,30 @@ export class ChildPage implements OnInit {
     const data = document.getElementById('contentToConvert');
     const elements = data.getElementsByClassName('editIcon');
     for(let i=0; i<elements.length; i++) {
-      elements[i].style.display = 'none';
+      elements[i].setAttribute("style","display:none;");
+    }
+    var acheviedbtns = data.getElementsByClassName('acheivedbtn');
+    for(let i=0; i<acheviedbtns.length; i++) {
+      acheviedbtns[i].setAttribute("style","display:none;");
     }
 
-    html2canvas(data).then(canvas => {  
-      // Few necessary setting options  
-      const imgWidth = 208;   
-      const imgHeight = canvas.height * imgWidth / canvas.width;  
-      const contentDataURL = canvas.toDataURL('image/png')  
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF  
-      var position = 0;  
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight); 
-      pdf.save(`${this.child.first_name}_${this.child.last_name}.pdf`); // Generated PDF
-      for(let i=0; i<elements.length; i++) {
-        elements[i].removeAttribute('style');
-      }
-    }); 
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      const imgWidth = 208;
+      const imgHeight = canvas.height * imgWidth / canvas.width;
+      const contentDataURL = canvas.toDataURL('image/png')
+      console.log(contentDataURL);
+      var template="<html><head></head><body><img src="+contentDataURL+" /></body></html>"
+   let options = {
+               documentSize: 'A4',
+               type: 'share',
+               fileName:this.child.first_name+'_'+this.child.last_name+'.pdf',
+               landscape: "portrait"
+             }
+   cordova.plugins.pdf.fromData( template, options)
+       .then((stats)=> console.log('status', stats) )   // ok..., ok if it was able to handle the file to the OS.
+       .catch((err)=>console.log(err))
+    });
   }
 
   downloadPdf() {
@@ -264,6 +278,21 @@ export class ChildPage implements OnInit {
     }
 
     return found;
+  }
+
+  deregisterStaffForChild(){
+    this.auth.deRegisterStaffForChild(this.child._id).subscribe(res =>{
+      if(res.success){
+        const toast = this.toast.create({
+          message: 'Child updated successfully !',
+          duration: 1200
+        });
+        toast.present();
+        this.loadChild()
+      }else{
+
+      }
+    })
   }
 
 }
