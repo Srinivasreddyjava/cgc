@@ -210,7 +210,7 @@ export class ChildPage implements OnInit {
 
   pdf(){
     const data = document.getElementById('contentToConvert');
-    const elements = data.getElementsByClassName('editIcon');
+    const elements = data.getElementsByClassName('editIcon') as HTMLCollectionOf<HTMLElement> || [];
     for(let i=0; i<elements.length; i++) {
       elements[i].setAttribute("style","display:none;");
     }
