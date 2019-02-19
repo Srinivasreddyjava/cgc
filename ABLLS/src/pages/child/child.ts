@@ -209,33 +209,60 @@ export class ChildPage implements OnInit {
   }
 
   pdf(){
-    const data = document.getElementById('contentToConvert');
-    const elements = data.getElementsByClassName('editIcon') as HTMLCollectionOf<HTMLElement> || [];
-    for(let i=0; i<elements.length; i++) {
-      elements[i].setAttribute("style","display:none;");
+    var period="";
+    var month=new Date().getMonth()+1;
+    if(month <= 4 && month >= 1){
+      period = "Jan - Apr"
+    }else if(month <= 8 && month >= 5){
+      period="May - Aug"
+    }else{
+      period ="Sep - Dec"
     }
-    var acheviedbtns = data.getElementsByClassName('acheivedbtn');
-    for(let i=0; i<acheviedbtns.length; i++) {
-      acheviedbtns[i].setAttribute("style","display:none;");
-    }
+    var htmlcontent= "<html><body>"
+    htmlcontent+="<table><tr><td style='width:100px'>Child Name: </td> <td style='width:250px' >"+this.child.first_name+" "+this.child.last_name+"</td> <td style='width:100px'>Program:</td><td style='width:100px'>ABA</td></tr>"
+      +"<tr><td style='width:100px'>Age: </td> <td style='width:250px'>"+this.child.age+"</td> <td style='width:105px'>Peroid:</td><td style='width:100px'>"+period+"</td></tr>"
+      +"<tr><td style='width:100px'></td> <td style='width:250px'></td> <td style='width:100px'>Therapist:</td><td style='width:100px'>"+this.child.staff.name+"</td></tr>"
+      +"</table>"
+    htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Selected GOALS</strong></div>"
+    this.goal_areas.forEach(el=>{
+        htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
+        this.goals.forEach(task =>{
+          if(task.area_name == el.name)
+          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
+        })
+    })
+    htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Achieved GOALS</strong></div>"
+    this.done_areas.forEach(el=>{
+        htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
+        this.done.forEach(task =>{
+          if(task.area_name == el.name)
+          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
+        })
+    })
+    htmlcontent+="</body></html>"
+    let options = {
+                documentSize: 'A4',
+                type: 'share',
+                fileName:this.child.first_name+'_'+this.child.last_name+'.pdf',
+                landscape: "portrait"
+              }
 
-    html2canvas(data).then(canvas => {
+    cordova.plugins.pdf.fromData( htmlcontent, options)
+        .then((stats)=> console.log('status', stats) )   // ok..., ok if it was able to handle the file to the OS.
+        .catch((err)=>console.log(err))
+
+    /*html2canvas(data,{width:800,windowWidth:1024}).then(canvas => {
       // Few necessary setting options
-      const imgWidth = 208;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
+
       const contentDataURL = canvas.toDataURL('image/png')
       console.log(contentDataURL);
-      var template="<html><head></head><body><img src="+contentDataURL+" /></body></html>"
-   let options = {
-               documentSize: 'A4',
-               type: 'share',
-               fileName:this.child.first_name+'_'+this.child.last_name+'.pdf',
-               landscape: "portrait"
-             }
+      var template="<html><head></head><body><img width='750px' src="+contentDataURL+" /></body></html>"
+
    cordova.plugins.pdf.fromData( template, options)
        .then((stats)=> console.log('status', stats) )   // ok..., ok if it was able to handle the file to the OS.
        .catch((err)=>console.log(err))
-    });
+    }); */
+
   }
 
   downloadPdf() {
