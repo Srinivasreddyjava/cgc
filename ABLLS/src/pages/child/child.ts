@@ -219,26 +219,26 @@ export class ChildPage implements OnInit {
       period ="Sep - Dec"
     }
     var htmlcontent= "<html><body>"
-    htmlcontent+="<table><tr><td style='width:100px'>Child Name: </td> <td style='width:250px' >"+this.child.first_name+" "+this.child.last_name+"</td> <td style='width:100px'>Program:</td><td style='width:100px'>ABA</td></tr>"
-      +"<tr><td style='width:100px'>Age: </td> <td style='width:250px'>"+this.child.age+"</td> <td style='width:105px'>Peroid:</td><td style='width:100px'>"+period+"</td></tr>"
-      +"<tr><td style='width:100px'></td> <td style='width:250px'></td> <td style='width:100px'>Therapist:</td><td style='width:100px'>"+this.child.staff.name+"</td></tr>"
+    htmlcontent+="<table><tr><td style='width:125px'>Child Name: </td> <td style='width:200px' >"+this.child.first_name+" "+this.child.last_name+"</td> <td style='width:100px'>Program:</td><td style='width:100px'>ABA</td></tr>"
+      +"<tr><td style='width:125px'>Age: </td> <td style='width:200px'>"+this.child.age+"</td> <td style='width:105px'>Peroid:</td><td style='width:100px'>"+period+"</td></tr>"
+      +"<tr><td style='width:125px'></td> <td style='width:200px'></td> <td style='width:100px'>Therapist:</td><td style='width:100px'>"+this.child.staff.name+"</td></tr>"
       +"</table>"
-    htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Selected GOALS</strong></div>"
+    htmlcontent+="<hr/> <div style='padding:10px; font-weight:14px;'><strong>Selected GOALS</strong></div>"
     this.goal_areas.forEach(el=>{
-        htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
+        htmlcontent+="<div style='padding:10px; font-weight:123px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
         this.goals.forEach(task =>{
           if(task.area_name == el.name)
-          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
+          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:10px'>"+task.task_number.number+". "+task.task_name+"</div>"
         })
     })
-    htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Achieved GOALS</strong></div>"
+    /*htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Achieved GOALS</strong></div>"
     this.done_areas.forEach(el=>{
         htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
         this.done.forEach(task =>{
           if(task.area_name == el.name)
           htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
         })
-    })
+    })*/
     htmlcontent+="</body></html>"
     let options = {
                 documentSize: 'A4',
