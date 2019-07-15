@@ -18,7 +18,7 @@ import { ChangePasswordPage } from '../change-password/change-password';
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit{
 
   addAreaPage: AddAreasPage;
   editAreasPage: EditAreasPage;
@@ -26,7 +26,29 @@ export class DashboardPage {
   viewChildrenPage: ViewChildrenPage;
   updateTaskPage: UpdateTaskPage;
 
+  totalEmployees: string;
+  totalChildren: string;
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private storage: Storage) {}
+
+  ngOnInit(){
+    this.auth.getEmployees().subscribe(res => {
+
+      if(res.success) {
+        console.log(res.msg);
+      this.totalEmployees= res.msg.length;
+      }else {
+        console.log(res);
+      }
+
+    }, err => { console.error(err) });
+    this.auth.getChildren().subscribe(res => {
+      if (res.success) {
+        this.totalChildren = res.msg.length;
+      }else {
+        console.log(res.msg);
+      }
+    }, err => console.error(err));
+  }
 
   gotoPage(page: any){
     switch (page) {

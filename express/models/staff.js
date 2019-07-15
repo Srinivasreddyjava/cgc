@@ -25,6 +25,10 @@ const staff_schema = schema({
     registered:{
         type: Boolean,
         default: true
+    },
+    branchCode:{
+      type:String,
+      required:true
     }
 });
 

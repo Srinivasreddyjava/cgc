@@ -26,6 +26,9 @@ const ChildSchema = schema({
     },
     de_time:{
       type: String
+    },
+    branchCode:{
+      type:String
     }
 });
 

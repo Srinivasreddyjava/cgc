@@ -5,9 +5,10 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-     host = "http://54.188.202.254:3000";
+     //host = "http://54.188.202.254:3000";
+     branchCode="MDPR"
     // host = "http://13.233.133.189:3000";
-    //host = "http://localhost:3000";
+    host = "http://localhost:3000";
     constructor(private http: Http, private storage: Storage) { }
     mode: string;
     emp_dets;
@@ -34,12 +35,14 @@ export class AuthService {
     authenticateAdmin(obj) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/auth_admin', obj, { headers: header }).pipe(map(res => res.json()));
     }
 
     authenticateStaff(obj) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/auth_staff', obj, { headers: header }).pipe(map(res => res.json()));
     }
 
@@ -47,6 +50,7 @@ export class AuthService {
     addArea(area) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/add-area', area, { headers: header }).pipe(map(res => res.json()));
     }
     // Get all areas
@@ -90,40 +94,56 @@ export class AuthService {
     addChild(child_obj) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/add-child', child_obj, { headers: header }).pipe(map(res => res.json()));
     }
     // Get children
     getChildren() {
-        return this.http.get(this.host + '/users/get-children').pipe(map(res => res.json()));
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-children',{headers:header}).pipe(map(res => res.json()));
     }
     // Get child by id
     getChild(id) {
-        return this.http.get(this.host + '/users/get-child/' + id).pipe(map(res => res.json()));
+        const header = new Headers();
+        header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-child/' + id,{headers:header}).pipe(map(res => res.json()));
     }
     // Get child by id
     updateChild(child_obj) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/update-child', child_obj, { headers: header }).pipe(map(res => res.json()));
     }
     // Add task to child
     addTaskToChild(obj) {
         const header = new Headers();
         header.append('Content-Type', 'application/json');
+        header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/add-task-to-child', obj, { headers: header }).pipe(map(res => res.json()));
     }
     removeTaskToChild(obj) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+      const header = new Headers();
+      header.append('Content-Type', 'application/json');
+      header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/remove-task-to-child', obj, { headers: header }).pipe(map(res => res.json()));
     }
     // Get child's tasks
     getChildTasks(child_id) {
-        return this.http.get(this.host + '/users/get-child-tasks/' + child_id).pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-child-tasks/' + child_id,{headers:header}).pipe(map(res => res.json()));
     }
     // Get child's tasks
     getRawChildTasks(child_id) {
-        return this.http.get(this.host + '/users/get-raw-child-tasks/' + child_id).pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-raw-child-tasks/' + child_id,{headers:header}).pipe(map(res => res.json()));
     }
 
     // Get tasks from id
@@ -133,8 +153,9 @@ export class AuthService {
 
     // Update child task
     updateChildTask(obj) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/update-child-task', obj, { headers: header }).pipe(map(res => res.json()));
     }
 
@@ -145,63 +166,84 @@ export class AuthService {
 
     // Add employee
     addEmployee(emp) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/add-emp', emp, { headers: header }).pipe(map(res => res.json()));
     }
     // Get employees
     getEmployees() {
-        return this.http.get(this.host + '/users/get-emps/').pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-emps/',{headers:header}).pipe(map(res => res.json()));
     }
 
     // Edit employee
     updateEmployee(emp) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/edit-emp', emp, { headers: header }).pipe(map(res => res.json()));
     }
 
     // de-register child
     deRegisterEmployee(id) {
-        return this.http.get(this.host + '/users/deregister-emp/' + id).pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/deregister-emp/' + id,{headers:header}).pipe(map(res => res.json()));
     }
 
     // Get employee less children
     getUnEmpChildren() {
-        return this.http.get(this.host + '/users/get-un-emp-children/').pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-un-emp-children/',{headers:header}).pipe(map(res => res.json()));
     }
 
     // Add staff to child
     addStaffToChild(obj) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/assign-staff-to-child', obj, { headers: header }).pipe(map(res => res.json()));
     }
     // get emp children
     getEmpChildren(emp_id) {
-        return this.http.get(this.host + '/users/get-emp-children/' + emp_id).pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-emp-children/' + emp_id,{headers:header}).pipe(map(res => res.json()));
     }
 
     // de-register child
     deRegisterChild(id) {
-        return this.http.get(this.host + '/users/deregister-child/' + id).pipe(map(res => res.json()));
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/deregister-child/' + id,{headers:header}).pipe(map(res => res.json()));
     }
 
     // Edit Child task
     editChildTask(obj) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+    const header = new Headers();
+    header.append('Content-Type', 'application/json');
+    header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/edit-child-task', obj, { headers: header }).pipe(map(res => res.json()));
     }
 
     checkAdminPwd(obj) {
-        const header = new Headers();
-        header.append('Content-Type', 'application/json');
+      const header = new Headers();
+      header.append('Content-Type', 'application/json');
+      header.append('branchCode', this.branchCode);
         return this.http.post(this.host + '/users/change-admin-pwd', obj, { headers: header }).pipe(map(res => res.json()));
     }
     deRegisterStaffForChild(id){
       const header = new Headers();
       header.append('Content-Type', 'application/json');
+      header.append('branchCode', this.branchCode);
       return this.http.post(this.host + '/users/deassgin-staff-for-child', {c_id:id}, { headers: header }).pipe(map(res => res.json()));
     }
 }

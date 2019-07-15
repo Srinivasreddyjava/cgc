@@ -22,9 +22,10 @@
 
         <ion-item (click)='gotoPage("view_children")'>
           <ion-icon name="custom-children" item-start color="primary"></ion-icon>
-          <h2>
+          <ion-label style="text-align:left"><h2>
             View Children
-          </h2>
+          </h2></ion-label>
+          <ion-label style="text-align:right">{{totalChildren}}</ion-label>
         </ion-item>
 
         <!-- <ion-item (click)='gotoPage("update_tasks")'>
@@ -43,9 +44,10 @@
 
         <ion-item (click)='gotoPage("view_emp")'>
           <ion-icon name="custom-viewemployees" item-start color="primary"></ion-icon>
-          <h2>
+          <ion-label style="text-align:left"><h2>
             View Employees
-          </h2>
+          </h2></ion-label>
+          <ion-label style="text-align:right">{{totalEmployees}}</ion-label>
         </ion-item>
         <ion-item (click)='gotoPage("add_area")'>
           <ion-icon name="custom-addarea" item-start color="primary"></ion-icon>

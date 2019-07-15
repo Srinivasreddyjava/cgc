@@ -29,6 +29,9 @@ const ChildSchema = schema({
     },
     staff:{
         type: String
+    },
+    branchCode:{
+      type: String
     }
 });
 

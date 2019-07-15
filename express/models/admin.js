@@ -11,6 +11,10 @@ const admin_schema = schema({
         type:String,
         required:true
     },
+    branchCode:{
+      type:String,
+      required:true
+    }
 });
 
 const admin = module.exports = mongoose.model('admin',admin_schema);

@@ -3841,7 +3841,8 @@ admin.countDocuments((err, count) => {
     if (!err && count === 0) {
         const ad = new admin({
             email: 'admin@cgc.com',
-            password: 'cgc_admin'
+            password: 'cgc_admin',
+            branchCode: 'ALL'
         });
         ad.save((err, saved) => {
             if (!err && saved) {}
@@ -3857,10 +3858,23 @@ admin.countDocuments((err, count) => {
 router.post("/auth_admin", (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
-    admin.find({
+    let branchCode=req.headers.branchcode;
+    let query={
+      email: email,
+      password: password
+    }
+    if(branchCode == "undeined"){
+      res.json({
+        success: false,
+        msg: 'No Branch Code found'
+      });
+    }else if(branchCode != 'All'){
+      query={
         email: email,
-        password: password
-    }, (err, found) => {
+        password: password,
+        branchCode:branchCode}
+    }
+    admin.find(query, (err, found) => {
         if (found.length > 0) {
             res.json({
                 success: true,
@@ -3880,10 +3894,23 @@ router.post("/auth_admin", (req, res, next) => {
 router.post("/auth_staff", (req, res, next) => {
     let email = req.body.email;
     let password = req.body.password;
-    Staff.find({
+    let branchCode=req.headers.branchcode;
+    let query={
+      email: email,
+      password: password
+    }
+    if(branchCode == "undeined"){
+      res.json({
+        success: false,
+        msg: 'No Branch Code found'
+      });
+    }else{
+      query={
         email: email,
-        password: password
-    }, (err, found) => {
+        password: password,
+        branchCode:branchCode}
+    }
+    Staff.find(query, (err, found) => {
         if (found.length > 0) {
             res.json({
                 success: true,
@@ -3906,13 +3933,14 @@ router.post('/add-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
-
+    branchCode= req.headers.branchcode;
     const emp = new Staff({
         email: email,
         mobile: mobile,
         password: password,
         name: name,
-        number: number
+        number: number,
+        branchCode:branchCode
     });
     emp.save((err, saved) => {
         if (saved) {
@@ -3938,14 +3966,17 @@ router.post('/edit-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
+    branchCode = req.headers.branchcode;
     Staff.findByIdAndUpdate({
-        _id: id
+        _id: id,
+        branchcode:branchCode
     }, {
         name: name,
         mobile: mobile,
         email: email,
         password: password,
-        number: number
+        number: number,
+        branchCode:branchCode
     }, (err, saved) => {
         if (saved) {
             res.json({
@@ -3965,7 +3996,7 @@ router.post('/edit-emp', (req, res, next) => {
 
 router.get('/get-emps', (req, res, next) => {
 
-        Staff.find({},null,{sort:{name:1}}, (err , staff) => {
+        Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
                 if (staff) {
                     res.json({
                         success: true,
