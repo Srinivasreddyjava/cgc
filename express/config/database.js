@@ -6,6 +6,6 @@ module.exports = {
     // Second main
     // database: 'mongodb://sample:sample_1@ds015849.mlab.com:15849/sample',
     //database: 'mongodb://sample:sample_1@ds015849.mlab.com:15849/sample',
-    database: 'mongodb://localhost:27017/cgc_db',
+    database: 'mongodb://localhost:27017/cgc',
     secret: 'cgc@raja'
 }

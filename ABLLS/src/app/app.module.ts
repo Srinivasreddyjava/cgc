@@ -36,6 +36,9 @@ import { ChangePasswordPage } from '../pages/change-password/change-password';
 
 import { File } from '@ionic-native/file';
 import { FileOpener } from '@ionic-native/file-opener';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { FilePath } from '@ionic-native/file-path';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -100,11 +103,14 @@ import { FileOpener } from '@ionic-native/file-opener';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthService,
     Printer,
     File,
-    FileOpener
+    FileOpener,
+    FileTransfer,
+    FilePath,
+    Camera,
+    {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

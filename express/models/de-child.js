@@ -29,6 +29,9 @@ const ChildSchema = schema({
     },
     branchCode:{
       type:String
+    },
+    image:{
+      type: String
     }
 });
 

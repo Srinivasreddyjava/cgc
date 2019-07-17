@@ -14,6 +14,10 @@ const admin_schema = schema({
     branchCode:{
       type:String,
       required:true
+    },
+    image:{
+      type:String,
+      required:false
     }
 });
 

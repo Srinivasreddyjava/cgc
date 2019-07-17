@@ -31,6 +31,22 @@
               <ion-label floating>Set Password :</ion-label>
               <ion-input type="password" ngModel name="password" required [minlength]="5"></ion-input>
             </ion-item>
+            <ion-item>
+                <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
+                <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
+            </ion-item>
+            <ion-item>
+              <ion-toolbar color="primary">
+                <ion-buttons>
+                  <button ion-button icon-left (click)="presentAccessControl()">
+                    <ion-icon name="camera"></ion-icon>Select Image
+                  </button>
+                  <button ion-button icon-left (click)="uploadImage()" [disabled]="lastImage === null">
+                    <ion-icon name="cloud-upload"></ion-icon>Upload
+                  </button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-item>
           </ion-list>
           <button ion-button block color="primary" type="submit" [disabled]="!f.valid">REGISTER</button>
         </form>
