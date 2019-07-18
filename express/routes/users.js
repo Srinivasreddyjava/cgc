@@ -4452,7 +4452,7 @@ router.get('/get-children', (req, res, next) => {
               success: true,
               msg: children.sort(function(a,b){
                  return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
-              });
+              })
             });
         } else {
             res.json({
