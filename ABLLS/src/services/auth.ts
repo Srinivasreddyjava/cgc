@@ -8,7 +8,7 @@ export class AuthService {
      //host = "http://54.188.202.254:3000";
      branchCode="MDPR"
     // host = "http://13.233.133.189:3000";
-    host = "http://192.168.15.136:3000";
+    host = "http://54.188.202.254:3030";
     constructor(private http: Http, private storage: Storage) { }
     mode: string;
     emp_dets;

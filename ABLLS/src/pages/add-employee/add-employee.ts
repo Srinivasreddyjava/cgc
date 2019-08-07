@@ -42,7 +42,9 @@ export class AddEmployeePage {
         });
         toast.present();
         f.reset();
+        load.dismiss();
       }else {
+        load.dismiss();
         console.log(res);
       }
     }, err => { console.error(err); });
@@ -90,11 +92,15 @@ export class AddEmployeePage {
         .then(filePath => {
           let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
           let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
+          console.log(correctPath);
+          console.log(currentName);
           this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
         });
     } else {
       var currentName = imagePath.substr(imagePath.lastIndexOf('/') + 1);
       var correctPath = imagePath.substr(0, imagePath.lastIndexOf('/') + 1);
+      console.log(correctPath);
+      console.log(currentName);
       this.copyFileToLocalDir(correctPath, currentName, this.createFileName());
     }
   }, (err) => {
@@ -128,10 +134,19 @@ pathForImage(img) {
  if (img === null) {
    return '';
  } else {
+   window.resolveLocalFileSystemURL( cordova.file.dataDirectory +img, function (fileEntry) {
+    fileEntry.file(function (file) {
+			var reader = new FileReader();
+			reader.onloadend = function (event) {
+				console.log(event)
+			};
+			reader.readAsDataURL(file);
+		});
+	});
    return cordova.file.dataDirectory + img;
  }
 }
 uploadImage() {
-    this.presentToast("Uploading Image");
+
 }
 }

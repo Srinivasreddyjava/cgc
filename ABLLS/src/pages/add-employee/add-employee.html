@@ -9,7 +9,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <form #f="ngForm" (ngSubmit)="onAddEmp(f)">
+        <form #f="ngForm" >
           <ion-list>
             <ion-item>
               <ion-label floating>Employee Name</ion-label>
@@ -35,7 +35,7 @@
                 <img src="{{pathForImage(lastImage)}}" style="width: 100%" [hidden]="lastImage === null">
                 <h3 [hidden]="lastImage !== null">Please Select Image!</h3>
             </ion-item>
-            <ion-item>
+            <!--<ion-item>
               <ion-toolbar color="primary">
                 <ion-buttons>
                   <button ion-button icon-left (click)="presentAccessControl()">
@@ -46,9 +46,9 @@
                   </button>
                 </ion-buttons>
               </ion-toolbar>
-            </ion-item>
+            </ion-item> -->
           </ion-list>
-          <button ion-button block color="primary" type="submit" [disabled]="!f.valid">REGISTER</button>
+          <button ion-button block color="primary" (click)="onAddEmp(f)"  [disabled]="!f.valid">REGISTER</button>
         </form>
       </ion-col>
     </ion-row>
