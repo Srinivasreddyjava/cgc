@@ -3843,6 +3843,7 @@ admin.countDocuments((err, count) => {
             email: 'admin@cgc.com',
             password: 'cgc_admin',
             branchCode: 'ALL'
+					
         });
         ad.save((err, saved) => {
             if (!err && saved) {}
@@ -3933,6 +3934,7 @@ router.post('/add-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
+						   
     branchCode= req.headers.branchcode;
     const emp = new Staff({
         email: email,
@@ -3940,6 +3942,7 @@ router.post('/add-emp', (req, res, next) => {
         password: password,
         name: name,
         number: number,
+					
         branchCode:branchCode
     });
     emp.save((err, saved) => {
@@ -3966,6 +3969,7 @@ router.post('/edit-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
+						  
     branchCode = req.headers.branchcode;
     Staff.findByIdAndUpdate({
         _id: id,
@@ -3976,6 +3980,7 @@ router.post('/edit-emp', (req, res, next) => {
         email: email,
         password: password,
         number: number,
+					
         branchCode:branchCode
     }, (err, saved) => {
         if (saved) {
@@ -4018,7 +4023,8 @@ router.get('/get-emps', (req, res, next) => {
 // deregister staff
 router.get('/deregister-emp/:id', (req, res, next) => {
     Staff.findById({
-        _id: req.params.id
+        _id: req.params.id,
+		branchCode: req.headers.branchcode							  
     }, (er, found) => {
         if (found) {
             const c = new DeStaff({
@@ -4027,7 +4033,9 @@ router.get('/deregister-emp/:id', (req, res, next) => {
                 email: found.email,
                 password: found.password,
                 number: found.number,
-                de_time: moment.now()
+                de_time: moment.now(),
+				branchCode:found.branchCode				  
+										   
             });
             found.remove();
             c.save((err, saved) => {
@@ -4069,7 +4077,8 @@ router.get('/deregister-emp/:id', (req, res, next) => {
 router.get('/get-un-emp-children', (req, res, next) => {
 
     Child.find({
-        staff: null
+        staff: null,
+		branchCode:req.headers.branchcode								 
     },{},{sort:{first_name:1,last_name:1}}, (er, children) => {
         if (children) {
             res.json({
@@ -4089,7 +4098,8 @@ router.post('/assign-staff-to-child', (req, res, next) => {
     child_id = req.body.c_id;
     emp_id = req.body.e_id;
     Child.findByIdAndUpdate({
-        _id: child_id
+        _id: child_id,
+		branchCode:req.headers.branchcode								  
     }, {
         staff: emp_id
     }, (err, saved) => {
@@ -4110,7 +4120,8 @@ router.post('/assign-staff-to-child', (req, res, next) => {
 router.post('/deassgin-staff-for-child',(req,res,next) =>{
   child_id=req.body.c_id;
   Child.findByIdAndUpdate({
-      _id: child_id
+      _id: child_id,
+	branchCode:req.headers.branchcode							   
   }, {
       staff: null
   }, (err, saved) => {
@@ -4132,7 +4143,8 @@ router.post('/deassgin-staff-for-child',(req,res,next) =>{
 router.get('/get-emp-children/:emp_id', (req, res, next) => {
     id = req.params.emp_id;
     Child.find({
-        staff: id
+        staff: id,
+		branchCode:req.headers.branchcode								 
     },{},{sort:{first_name:1,last_name:1}}, (err, child) => {
         if (child) {
             res.json({
@@ -4151,7 +4163,8 @@ router.get('/get-emp-children/:emp_id', (req, res, next) => {
 // deregister child
 router.get('/deregister-child/:id', (req, res, next) => {
     Child.findById({
-        _id: req.params.id
+        _id: req.params.id,
+		branchCode:req.headers.branchcode								 
     }, (er, found) => {
         if (found) {
             const c = new deChild({
@@ -4162,6 +4175,7 @@ router.get('/deregister-child/:id', (req, res, next) => {
                 parent_mobile: found.parent_mobile,
                 added_time: found.added_time,
                 staff: found.staff,
+				branchCode:req.headers.branchcode,				  
                 de_time: moment.now()
             });
             found.remove();
@@ -4394,6 +4408,7 @@ router.post('/add-child', (req, res, next) => {
     const parent_mobile = req.body.parent_mobile;
     const age = req.body.age;
     const number = req.body.number;
+								 
     const time_slot = req.body.time_slot;
     const child = new Child({
         number: number,
@@ -4402,7 +4417,9 @@ router.post('/add-child', (req, res, next) => {
         age: age,
         parent_name: parent_name,
         parent_mobile: parent_mobile,
-        time_slot: time_slot
+        time_slot: time_slot,
+		branchCode:req.headers.branchcode								  
+				   
     });
     child.save((err, saved) => {
         if (saved) {
@@ -4421,14 +4438,23 @@ router.post('/add-child', (req, res, next) => {
 
 // Get all children
 router.get('/get-children', (req, res, next) => {
-    Child.find({},null,{sort:{first_name:1,last_name:1}},(err, children) => {
+     Child.find({branchCode:req.headers.branchcode},null,{sort:{first_name:1,last_name:1}},(err, children) => {
         if (children) {
             res.json({
                 success: true,
                 msg: children.sort(function(a,b){
                    return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
                 })
+											  
+			   
             });
+		   
+					
+							
+											   
+																																															
+				
+			   
         } else {
             res.json({
                 success: false,
@@ -4442,7 +4468,8 @@ router.get('/get-children', (req, res, next) => {
 router.get('/get-child/:id', (req, res, next) => {
     child_id = req.params.id;
     Child.findById({
-        _id: child_id
+        _id: child_id,
+		branchCode:req.headers.branchcode								 
     }, (er, child) => {
         if (child) {
           if(child.staff!=null){
@@ -4456,7 +4483,8 @@ router.get('/get-child/:id', (req, res, next) => {
                   parent_name:child.parent_name,
                   parent_mobile:child.parent_mobile,
                   time_slot:child.time_slot,
-                  staff:staff
+                  staff:staff,
+				  branchCode:req.headers.branchcode						 
                 }
                 res.json({
                     success: true,
@@ -4494,15 +4522,19 @@ router.post('/update-child', (req, res, next) => {
     const parent_mobile = req.body.parent_mobile;
     const time_slot = req.body.time_slot;
 
+											 
     Child.findByIdAndUpdate({
-        _id: id
+        _id: id,
+		branchCode:req.headers.branchcode					 
     }, {
         first_name: first_name,
         last_name: last_name,
         age: age,
         parent_name: parent_name,
         parent_mobile: parent_mobile,
-        time_slot: time_slot
+        time_slot: time_slot,
+		branchCode:req.headers.branchcode					  
+				   
     }, {
         new: true
     }, (err, child) => {
