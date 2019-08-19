@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AddAreasPage } from '../add-areas/add-areas';
 import { EditAreasPage } from '../edit-areas/edit-areas';

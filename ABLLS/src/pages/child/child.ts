@@ -209,47 +209,87 @@ export class ChildPage implements OnInit {
   }
 
   pdf(){
-    var period="";
-    var month=new Date().getMonth()+1;
-    if(month <= 4 && month >= 1){
-      period = "Jan - Apr"
-    }else if(month <= 8 && month >= 5){
-      period="May - Aug"
-    }else{
-      period ="Sep - Dec"
-    }
-    var htmlcontent= "<html><body>"
-    htmlcontent+="<table><tr><td style='width:125px'>Child Name: </td> <td style='width:200px' >"+this.child.first_name+" "+this.child.last_name+"</td> <td style='width:100px'>Peroid:</td><td style='width:100px'>"+period+"</td></tr>"
-      +"<tr><td style='width:125px'>Age: </td> <td style='width:200px'>"+this.child.age+"</td> <td style='width:105px'>Therapist:</td><td style='width:100px'>"+this.child.staff.name+"</td></tr>"
-      +"<tr><td style='width:125px'>Program: </td> <td style='width:200px'>ABA</td> <td style='width:100px'></td><td style='width:100px'></td></tr>"
-      +"</table>"
-    htmlcontent+="<hr/> <div style='padding:10px; font-weight:14px;'><strong>Selected GOALS</strong></div>"
-    this.goal_areas.forEach(el=>{
-        htmlcontent+="<div style='padding:10px; font-weight:13px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
-        this.goals.forEach(task =>{
-          if(task.area_name == el.name)
-          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
+    this.auth.getChildTasks(this.child._id).subscribe(res => {
+      if (res.success) {
+        this.goals = res.msg[0];
+        res.msg[0].forEach(element => {
+          if (!this.hasAreaName(this.goal_areas, element.area_name)) {
+            let area = {
+              name: element.area_name,
+              code: element.area_number
+            }
+            // Push
+            this.goal_areas.push(area);
+            this.goal_areas=this.goal_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
+          }
+        });
+        this.done = res.msg[1];
+        res.msg[1].forEach(elt => {
+          if (!this.hasAreaName(this.done_areas, elt.area_name)) {
+            let area = {
+              name: elt.area_name,
+              code: elt.area_number
+            }
+            // Push
+            this.done_areas.push(area);
+            this.done_areas=this.done_areas.sort(function(a,b){
+                return a.code - b.code;
+            });
+          }
+        });
+        var period="";
+        var month=new Date().getMonth()+1;
+        if(month <= 4 && month >= 1){
+          period = "Jan - Apr"
+        }else if(month <= 8 && month >= 5){
+          period="May - Aug"
+        }else{
+          period ="Sep - Dec"
+        }
+        var htmlcontent= "<html><body>"
+        htmlcontent+="<table><tr><td style='width:125px'>Child Name: </td> <td style='width:200px' >"+this.child.first_name+" "+this.child.last_name+"</td> <td style='width:100px'>Peroid:</td><td style='width:100px'>"+period+"</td></tr>"
+          +"<tr><td style='width:125px'>Age: </td> <td style='width:200px'>"+this.child.age+"</td> <td style='width:105px'>Therapist:</td><td style='width:100px'>"+this.child.staff.name+"</td></tr>"
+          +"<tr><td style='width:125px'>Program: </td> <td style='width:200px'>ABA</td> <td style='width:100px'></td><td style='width:100px'></td></tr>"
+          +"</table>"
+        htmlcontent+="<hr/> <div style='padding:10px; font-weight:12px;'><strong>Selected GOALS</strong></div>"
+        this.goal_areas.forEach(el=>{
+            htmlcontent+="<div style='padding:10px; font-weight:11px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
+            this.goals.forEach(task =>{
+              if(task.area_name == el.name)
+              htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:10px'><span style='padding:5px;'>&#8226;</span> "+task.task_name+"</div>"
+            })
         })
-    })
-    /*htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Achieved GOALS</strong></div>"
-    this.done_areas.forEach(el=>{
-        htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
-        this.done.forEach(task =>{
-          if(task.area_name == el.name)
-          htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
-        })
-    })*/
-    htmlcontent+="</body></html>"
-    let options = {
-                documentSize: 'A4',
-                type: 'share',
-                fileName:this.child.first_name+'_'+this.child.last_name+'.pdf',
-                landscape: "portrait"
-              }
+        /*htmlcontent+="<div style='padding:10px; font-weight:16px;'><strong>Achieved GOALS</strong></div>"
+        this.done_areas.forEach(el=>{
+            htmlcontent+="<div style='padding:10px; font-weight:14px;' ><span style='padding:5px;'>&#9673;</span><strong><u>"+el.name+"</u></strong></div>"
+            this.done.forEach(task =>{
+              if(task.area_name == el.name)
+              htmlcontent+="<div style='padding:10px; margin-left:20px; font-weight:12px'>"+task.task_number.number+". "+task.task_name+"</div>"
+            })
+        })*/
+        htmlcontent+="</body></html>"
+        let options = {
+                    documentSize: 'A4',
+                    type: 'share',
+                    fileName:this.child.first_name+'_'+this.child.last_name+'.pdf',
+                    landscape: "portrait"
+                  }
 
-    cordova.plugins.pdf.fromData( htmlcontent, options)
-        .then((stats)=> console.log('status', stats) )   // ok..., ok if it was able to handle the file to the OS.
-        .catch((err)=>console.log(err))
+        cordova.plugins.pdf.fromData( htmlcontent, options)
+            .then((stats)=> console.log('status', stats) )   // ok..., ok if it was able to handle the file to the OS.
+            .catch((err)=>console.log(err))
+      } else {
+      }
+    }, err => {
+      const toast = this.toast.create({
+        message: 'Something went wrong while fetching the child tasks',
+        duration: 1200
+      });
+      toast.present();
+    });
+
 
     /*html2canvas(data,{width:800,windowWidth:1024}).then(canvas => {
       // Few necessary setting options
