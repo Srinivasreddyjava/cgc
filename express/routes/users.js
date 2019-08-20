@@ -13,19 +13,6 @@ const Dummy = require('../models/dummy');
 var async = require("async");
 
 
-
-
-// Task.aggregate(
-//     // [
-//     //     { $match: {} },
-//     //     { $sort : {number : 1} },
-//     //     // { $sort: { number: -1 } }
-//     // ], (err, done) => {
-//     //     console.log(err);
-//     //     console.log(done);
-//     // }
-// )
-
 router.post('/update-child-task', (req, res, next) => {
     task_id = req.body.task_id;
     status = req.body.status;
@@ -3934,15 +3921,15 @@ router.post('/add-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
-
     branchCode= req.headers.branchcode;
+    imageData= req.body.imageData;
     const emp = new Staff({
         email: email,
         mobile: mobile,
         password: password,
         name: name,
         number: number,
-
+        image:imageData,
         branchCode:branchCode
     });
     emp.save((err, saved) => {

@@ -9,12 +9,12 @@ const config = require('./config/database');
 const app = express();
 
 // port
-const port = 3000;
+const port = 3030;
 
 // cors
 app.use(cors());
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '5mb'}));
 // Passport
 app.use(passport.initialize());
 app.use(passport.session());
