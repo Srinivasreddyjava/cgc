@@ -3956,18 +3956,16 @@ router.post('/edit-emp', (req, res, next) => {
     email = req.body.email;
     password = req.body.password;
     number = req.body.number;
-
     branchCode = req.headers.branchcode;
     Staff.findByIdAndUpdate({
         _id: id,
-        branchcode:branchCode
+        branchCode:branchCode
     }, {
         name: name,
         mobile: mobile,
         email: email,
         password: password,
         number: number,
-
         branchCode:branchCode
     }, (err, saved) => {
         if (saved) {
@@ -3990,6 +3988,10 @@ router.get('/get-emps', (req, res, next) => {
 
         Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
                 if (staff) {
+                  var staffs;
+                  staff.forEach(st =>{
+                    st.image="";
+                  })
                     res.json({
                         success: true,
                         msg: staff.sort(function(a,b){
@@ -4005,6 +4007,70 @@ router.get('/get-emps', (req, res, next) => {
             }
         )
 });
+
+//get childrena and staff count
+router.get('/get-counts', (req, res, next) => {
+        Staff.countDocuments({branchCode:req.headers.branchcode}, (err , staff) => {
+                if (staff!= undefined) {
+                  Child.countDocuments({branchCode:req.headers.branchcode},(error,child)=>{
+                    if(child!=undefined){
+                      res.json({
+                        success:true,
+                        staffcount:staff,
+                        childcount:child
+                      });
+                    }else{
+                      res.json({
+                        success: false,
+                        msg: error
+                      });
+                    }
+                  });
+                } else {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                }
+      });
+});
+
+
+//get childrena and staff count
+router.post('/update-emp-image/:id', (req, res, next) => {
+  id = req.params.id;
+  branchCode = req.headers.branchcode;
+  Staff.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) => {
+      if(found){
+          found.image=req.body.image;
+          Staff.findOneAndUpdate({
+              _id: id,
+              branchCode:branchCode
+          },found,(err,result)=>{
+            if(result){
+              result.image="";
+              res.json({
+                success:true,
+                msg:result
+              })
+            }else{
+              res.json({
+                success:false,
+                msg:err
+              })
+            }
+          })
+      }else{
+        res.json({
+          success:false,
+          msg: er
+        })
+      }
+    })
+})
 
 
 // deregister staff
