@@ -110,7 +110,8 @@ import { Camera } from '@ionic-native/camera';
     FileTransfer,
     FilePath,
     Camera,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    { provide: 'Window', useValue: window }
   ]
 })
 export class AppModule {}

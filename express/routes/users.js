@@ -11,6 +11,7 @@ const deChild = require('../models/de-child');
 const DeStaff = require('../models/de-staff')
 const Dummy = require('../models/dummy');
 var async = require("async");
+const ImageThumbnail = require('image-thumbnail');
 
 
 router.post('/update-child-task', (req, res, next) => {
@@ -3982,8 +3983,7 @@ router.post('/edit-emp', (req, res, next) => {
     });
 });
 
-// Get employees
-
+// Get employee
 router.get('/get-emps', (req, res, next) => {
 
         Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
@@ -4035,6 +4035,77 @@ router.get('/get-counts', (req, res, next) => {
       });
 });
 
+//get employee Thumbnail Images
+router.get('/get-emp-thumbnail/:id', (req, res, next) => {
+  Staff.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) =>{
+      if(found){
+        if(found.image){
+        let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
+        found.image=found.image.replace("data:image/jpeg;base64,", "");
+         ImageThumbnail(found.image, options)
+          .then(thumbnail => { res.json({
+            success:true,
+            msg:'data:image/jpeg;base64,'+thumbnail
+          }) })
+          .catch(err => {
+            res.json({
+              success:false,
+              msg:err
+            })
+          });
+        }else{
+          res.json({
+            success:true,
+            msg:''
+          })
+        }
+      }else{
+        res.json({
+          success:false,
+          msg:er
+        })
+      }
+    })
+});
+
+//get child Thumbnail Images
+router.get('/get-child-thumbnail/:id', (req, res, next) => {
+  Child.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) =>{
+      if(found){
+        if(found.image){
+        let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
+        found.image=found.image.replace("data:image/jpeg;base64,", "");
+         ImageThumbnail(found.image, options)
+          .then(thumbnail => { res.json({
+            success:true,
+            msg:'data:image/jpeg;base64,'+thumbnail
+          }) })
+          .catch(err => {
+            res.json({
+              success:false,
+              msg:err
+            })
+          });
+        }else{
+          res.json({
+            success:true,
+            msg:''
+          })
+        }
+      }else{
+        res.json({
+          success:false,
+          msg:er
+        })
+      }
+    })
+});
 
 //get childrena and staff count
 router.post('/update-emp-image/:id', (req, res, next) => {
