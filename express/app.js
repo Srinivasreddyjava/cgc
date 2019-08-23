@@ -7,7 +7,9 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const app = express();
-
+require('./config/passport')(passport);
+const users = require('./routes/users');
+const masterData= require('./routes/masterData');
 // port
 const port = 3030;
 
@@ -19,9 +21,6 @@ app.use(bodyParser.json({limit: '5mb'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./config/passport')(passport);
-
-const users = require('./routes/users');
 app.use('/users', users);
 
 // Static folder
