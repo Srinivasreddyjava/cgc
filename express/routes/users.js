@@ -214,21 +214,40 @@ router.post('/edit-emp', (req, res, next) => {
       });
 });
 
+async function convertImage(image){
+  try {
+    let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
+    const thumbnail = await ImageThumbnail(image,options);
+    return thumbnail;
+} catch (err) {
+    console.error(err);
+}
+}
+async function processArrayforImages(array,res) {
+  for (const st of array) {
+    let result="";
+      if(st.image!= undefined && st.image != ""){
+        st.image=st.image.replace("data:image/jpeg;base64,", "");
+        result = await convertImage(st.image);
+     }else{
+       result = await convertImage(defaultImage.replace("data:image/jpeg;base64,", ""))
+     }
+     st.image = "data:image/jpeg;base64," + result;
+  }
+  res.json({
+      success: true,
+      msg: array.sort(function(a,b){
+        return a.name.trim().toUpperCase().localeCompare(b.name.trim().toUpperCase())
+      })
+  });
+
+}
+
 // Get employee
 router.get('/get-emps', (req, res, next) => {
-
         Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
                 if (staff) {
-                  var staffs;
-                  staff.forEach(st =>{
-                    st.image="";
-                  })
-                    res.json({
-                        success: true,
-                        msg: staff.sort(function(a,b){
-                          return a.name.trim().toUpperCase().localeCompare(b.name.trim().toUpperCase())
-                        })
-                    });
+                     processArrayforImages(staff,res)
                 } else {
                     res.json({
                         success: false,
@@ -342,7 +361,7 @@ router.get('/get-child-thumbnail/:id', (req, res, next) => {
     })
 });
 
-//get actual image 
+//get actual image
 
 //get childrena and staff count
 router.post('/update-emp-image/:id', (req, res, next) => {
