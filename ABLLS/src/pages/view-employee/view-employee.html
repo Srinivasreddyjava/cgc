@@ -10,9 +10,9 @@
 <ion-content padding>
   <ion-list>
     <ion-item *ngFor="let e of staff" (click)="gotoEmp(e)">
-      <ion-thumbnail slot="start">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAAAAACH5BAAAAAAALAAAAAABAAEAAAICTAEAOw==">
-      </ion-thumbnail>
+      <ion-avatar item-start slot="end">
+        <img src="{{e.image}}" />
+      </ion-avatar>
       <ion-label>
       <h2>{{ e.name | titlecase }} </h2>
       <p> {{ e.mobile }} </p>

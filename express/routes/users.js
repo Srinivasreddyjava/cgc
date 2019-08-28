@@ -286,33 +286,22 @@ router.get('/get-counts', (req, res, next) => {
 });
 
 //get employee Thumbnail Images
-router.get('/get-emp-thumbnail/:id', (req, res, next) => {
+router.get('/get-emp-image/:id', (req, res, next) => {
   Staff.findById({
       _id: req.params.id,
       branchCode: req.headers.branchcode
     }, (er, found) =>{
       if(found){
         if(found.image!= undefined && found.image!= ''){
-        let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
-        found.image=found.image.replace("data:image/jpeg;base64,", "");
-         ImageThumbnail(found.image, options)
-          .then(thumbnail => { res.send('data:image/jpeg;base64,'+thumbnail) })
-          .catch(err => {
-            res.json({
-              success:false,
-              msg:err
-            })
-          });
+          res.json({
+            success:true,
+            msg:found.image
+          })
         }else{
-          let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
-          ImageThumbnail(defaultImage.replace("data:image/jpeg;base64,", ""), options)
-           .then(thumbnail => { res.send('data:image/jpeg;base64,'+thumbnail) })
-           .catch(err => {
-             res.json({
-               success:false,
-               msg:err
-             })
-           });
+          res.json({
+            success:true,
+            msg:defaultImage
+          })
         }
       }else if(er){
         res.json({
@@ -324,33 +313,22 @@ router.get('/get-emp-thumbnail/:id', (req, res, next) => {
 });
 
 //get child Thumbnail Images
-router.get('/get-child-thumbnail/:id', (req, res, next) => {
+router.get('/get-child-image/:id', (req, res, next) => {
   Child.findById({
       _id: req.params.id,
       branchCode: req.headers.branchcode
     }, (er, found) =>{
       if(found){
         if(found.image!= undefined && found.image!= ''){
-        let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
-        found.image=found.image.replace("data:image/jpeg;base64,", "");
-         ImageThumbnail(found.image, options)
-          .then(thumbnail => { res.send('data:image/jpeg;base64,'+thumbnail) })
-          .catch(err => {
-            res.json({
-              success:false,
-              msg:err
-            })
-          });
+          res.json({
+            success:true,
+            msg:found.image
+          })
         }else{
-          let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
-          ImageThumbnail(defaultImage.replace("data:image/jpeg;base64,", ""), options)
-           .then(thumbnail => { res.send('data:image/jpeg;base64,'+thumbnail) })
-           .catch(err => {
-             res.json({
-               success:false,
-               msg:err
-             })
-           });
+          res.json({
+            success:true,
+            msg:defaultImage
+          })
         }
       }else if(er){
         res.json({
@@ -360,8 +338,6 @@ router.get('/get-child-thumbnail/:id', (req, res, next) => {
       }
     })
 });
-
-//get actual image
 
 //get childrena and staff count
 router.post('/update-emp-image/:id', (req, res, next) => {
@@ -819,25 +795,31 @@ router.post('/add-child', (req, res, next) => {
     });
 });
 
+async function processChildrenArrayforImages(array,res) {
+  for (const st of array) {
+    let result="";
+      if(st.image!= undefined && st.image != ""){
+        st.image=st.image.replace("data:image/jpeg;base64,", "");
+        result = await convertImage(st.image);
+     }else{
+       result = await convertImage(defaultImage.replace("data:image/jpeg;base64,", ""))
+     }
+     st.image = "data:image/jpeg;base64," + result;
+  }
+  res.json({
+      success: true,
+      msg: array.sort(function(a,b){
+        return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
+      })
+  });
+
+}
+
 // Get all children
 router.get('/get-children', (req, res, next) => {
      Child.find({branchCode:req.headers.branchcode},null,{sort:{first_name:1,last_name:1}},(err, children) => {
         if (children) {
-            res.json({
-                success: true,
-                msg: children.sort(function(a,b){
-                   return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
-                })
-
-
-            });
-
-
-
-
-
-
-
+          processChildrenArrayforImages(children,res);
         } else {
             res.json({
                 success: false,
@@ -867,7 +849,8 @@ router.get('/get-child/:id', (req, res, next) => {
                   parent_mobile:child.parent_mobile,
                   time_slot:child.time_slot,
                   staff:staff,
-				  branchCode:req.headers.branchcode
+                  image:child.image,
+				          branchCode:req.headers.branchcode
                 }
                 res.json({
                     success: true,
@@ -904,8 +887,6 @@ router.post('/update-child', (req, res, next) => {
     const parent_name = req.body.parent_name;
     const parent_mobile = req.body.parent_mobile;
     const time_slot = req.body.time_slot;
-
-
     Child.findByIdAndUpdate({
         _id: id,
 		branchCode:req.headers.branchcode

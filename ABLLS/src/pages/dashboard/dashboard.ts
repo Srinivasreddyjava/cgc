@@ -31,23 +31,16 @@ export class DashboardPage implements OnInit{
   constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthService, private storage: Storage) {}
 
   ngOnInit(){
-    this.auth.getEmployees().subscribe(res => {
+    this.auth.getTotalCounts().subscribe(res => {
 
       if(res.success) {
-        console.log(res.msg);
-      this.totalEmployees= res.msg.length;
+        this.totalEmployees = res.staffcount;
+        this.totalChildren = res.childcount;
       }else {
         console.log(res);
       }
 
     }, err => { console.error(err) });
-    this.auth.getChildren().subscribe(res => {
-      if (res.success) {
-        this.totalChildren = res.msg.length;
-      }else {
-        console.log(res.msg);
-      }
-    }, err => console.error(err));
   }
 
   gotoPage(page: any){

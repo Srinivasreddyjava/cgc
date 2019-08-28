@@ -246,4 +246,18 @@ export class AuthService {
       header.append('branchCode', this.branchCode);
       return this.http.post(this.host + '/users/deassgin-staff-for-child', {c_id:id}, { headers: header }).pipe(map(res => res.json()));
     }
+
+    // Get counts
+    getTotalCounts() {
+      const header = new Headers();
+      header.append('Content-Type', 'application/json');
+      header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-counts',{headers:header}).pipe(map(res => res.json()));
+    }
+    getThumbnailImage(employeId){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      console.log(this.http.get(this.host + '/users/get-emp-thumbnail/'+employeId,{headers:header}))
+      return this.http.get(this.host + '/users/get-emp-thumbnail/'+employeId,{headers:header})
+    }
 }
