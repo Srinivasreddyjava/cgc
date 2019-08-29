@@ -805,7 +805,7 @@ async function processChildrenArrayforImages(array,res) {
         {
           if(staff){
             staff.image="";
-            st.staff=staff;
+            st.staff=JSON.stringify(staff);
           }else{
             st.staff="";
           }
