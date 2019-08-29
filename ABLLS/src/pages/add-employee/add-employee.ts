@@ -30,7 +30,6 @@ export class AddEmployeePage {
       mobile: f.value.mobile,
       email: f.value.email,
       password: f.value.password,
-      number: f.value.number,
       image:this.lastImage
     };
     console.log(f.value.number);

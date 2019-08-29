@@ -28,7 +28,7 @@
       </ion-item>
       <ion-item>
         <ion-label floating>Number :</ion-label>
-        <ion-input type="number" [(ngModel)]="number" name="number" required [minlength]="1"></ion-input>
+        <ion-input type="number" [(ngModel)]="number" name="number" [disabled]="true"></ion-input>
       </ion-item>
     </ion-list>
     <button ion-button block color="primary" (click)="updateEmployee()">Update Employee</button>
@@ -40,9 +40,14 @@
         <h1>Assigned Children</h1>
       </ion-item>
       <ion-item *ngFor="let ec of emp_children" (click)="gotoChild(ec)">
-        {{ ec.first_name }} {{ ec.last_name }}
+        <ion-avatar item-start slot="end">
+          <img src="{{ec.image}}" />
+        </ion-avatar>
+        <ion-label>
+          <p>{{ ec.first_name }} {{ ec.last_name }}</p>
+        </ion-label>
       </ion-item>
     </ion-list>
 
-    
+
 </ion-content>

@@ -12,10 +12,6 @@
         <form #f="ngForm" (ngSubmit)="onAddChild(f)">
           <ion-list>
             <ion-item>
-              <ion-label floating>Number</ion-label>
-              <ion-input type="text" ngModel name="number" required [minlength]="1"></ion-input>
-            </ion-item>
-            <ion-item>
               <ion-label floating>First Name</ion-label>
               <ion-input type="text" ngModel name="first_name" required [minlength]="2"></ion-input>
             </ion-item>
@@ -34,6 +30,10 @@
             <ion-item>
               <ion-label floating>Parent/Guardian's mobile</ion-label>
               <ion-input type="mobile" ngModel name="parent_mobile" required [minlength]="9"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label floating>Parent/Guardian's Email</ion-label>
+              <ion-input type="email" ngModel name="email" required></ion-input>
             </ion-item>
             <ion-item>
               <ion-label floating>Time Slot</ion-label>

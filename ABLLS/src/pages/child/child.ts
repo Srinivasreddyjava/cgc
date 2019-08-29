@@ -65,6 +65,7 @@ export class ChildPage implements OnInit {
 
   ionViewWillEnter() {
     this.child = this.navParams.get('child');
+    console.log(this.child)
     this.mode=this.auth.mode;
     this.loadChild();
     this.formatTime();
@@ -147,16 +148,12 @@ export class ChildPage implements OnInit {
   }
 
   loadChild() {
-    this.auth.getChild(this.navParams.get('child')._id).subscribe(res =>{
-      if(res.success){
-        this.child=res.msg;
-        if(this.child.staff!=null){
-          this.childHasStaff=true;
-        }else{
-          this.childHasStaff=false;
-        }
-      }else{}
-    })
+      this.child=this.navParams.get('child');
+      if(this.child.staff!=null){
+        this.childHasStaff=true;
+      }else{
+        this.childHasStaff=false;
+      }
   }
   assign_areas() {
     this.navCtrl.push(AssignAreasPage, { child: this.child });
