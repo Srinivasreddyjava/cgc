@@ -265,4 +265,14 @@ export class AuthService {
       header.append('branchCode', this.branchCode);
       return this.http.get(this.host + '/users/get-child-image/'+childId,{headers:header}).pipe(map(res => res.json()));
     }
+    uploadChildImage(id,obj){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.post(this.host+'/users/update-child-image/'+id,obj,{headers:header}).pipe(map(res => res.json()))
+    }
+    uploadStaffImage(id,obj){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.post(this.host+'/users/update-emp-image/'+id,obj,{headers:header}).pipe(map(res => res.json()))
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ToastController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ToastController, AlertController,ActionSheetController, Platform } from 'ionic-angular';
 import { EditChildModalPage } from '../edit-child-modal/edit-child-modal';
 import { AuthService } from '../../services/auth';
 import { AssignAreasPage } from '../assign-areas/assign-areas';
@@ -7,6 +7,7 @@ import { Printer } from '@ionic-native/printer';
 import { EditChildTaskPage } from '../edit-child-task/edit-child-task';
 import * as moment from 'moment';
 import * as jspdf from 'jspdf';
+import { Camera } from '@ionic-native/camera';
 
 import html2canvas from 'html2canvas';
 declare var cordova:any;
@@ -61,7 +62,10 @@ export class ChildPage implements OnInit {
     private auth: AuthService,
     private toast: ToastController,
     private alertCtrl: AlertController,
-    private printer: Printer
+    private printer: Printer,
+    public actionSheetCtrl: ActionSheetController,
+    public platform: Platform,
+    private camera: Camera
   ) { }
 
   ionViewWillEnter() {
@@ -365,6 +369,118 @@ export class ChildPage implements OnInit {
 
       }
     })
+  }
+
+  presentAccessControl(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Select Image Source',
+      buttons: [
+        {
+          text: 'Load from Library',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+          }
+        },
+        {
+          text: 'Use Camera',
+          handler: () => {
+            this.takePicture(this.camera.PictureSourceType.CAMERA);
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  takePicture(sourceType) {
+  // Create options for the Camera Dialog
+  var options = {
+    quality: 25,
+    destinationType:this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    sourceType: sourceType,
+    saveToPhotoAlbum: false,
+    correctOrientation: true,
+    allowEdit:true
+  };
+
+  // Get the data of an image
+  this.camera.getPicture(options).then((imagePath) => {
+    // Special handling for Android library
+    console.log("imagePath:"+imagePath);
+    this.childImage="data:image/jpg;base64,"
+    if (this.platform.is('android') && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
+      this.childImage+=imagePath;
+      this.uploadImage()
+    } else {
+      this.childImage+=imagePath;
+      this.uploadImage()
+    }
+  }, (err) => {
+    this.presentToast('Error while selecting image.');
+  });
+}
+
+uploadImage(){
+  this.generateFromImage(this.childImage,200,200,0.5,data=>{
+    this.childImage=data;
+    var obj={
+      image:this.childImage
+    }
+    this.auth.uploadChildImage(this.child._id,obj).subscribe(res =>{
+      if(res.success){
+        this.presentToast("Image Updated SuccessFully")
+      }else{
+        this.presentToast(res.msg)
+      }
+    })
+  })
+}
+
+presentToast(text) {
+  let toast = this.toast.create({
+    message: text,
+    duration: 3000,
+    position: 'top'
+  });
+  toast.present();
+}
+
+generateFromImage(img, MAX_WIDTH: number = 700, MAX_HEIGHT: number = 700, quality: number = 1, callback) {
+    var canvas: any = document.createElement("canvas");
+    var image = new Image();
+
+    image.onload = () => {
+      var width = image.width;
+      var height = image.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+      canvas.width = width;
+      canvas.height = height;
+      var ctx = canvas.getContext("2d");
+
+      ctx.drawImage(image, 0, 0, width, height);
+
+      // IMPORTANT: 'jpeg' NOT 'jpg'
+      var dataUrl = canvas.toDataURL('image/jpeg', quality);
+
+      callback(dataUrl)
+    }
+    image.src = img;
   }
 
 }

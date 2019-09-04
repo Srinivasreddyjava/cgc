@@ -5,14 +5,14 @@
 </ion-header>
 <ion-content padding>
   <ion-grid>
-    <ion-row>
-      <ion-col col-3></ion-col>
-      <ion-col col-3>
-          <ion-avatar>
-              <img src={{childImage}} />
+  <ion-row>
+      <ion-col>
+        <ion-avatar center>
+          <ion-img text-center src={{childImage}} width="150" height="150" (click)="presentAccessControl()" > </ion-img>
           </ion-avatar>
       </ion-col>
-      <ion-col col-3></ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col col-12>
         <ion-list>
           <ion-item>

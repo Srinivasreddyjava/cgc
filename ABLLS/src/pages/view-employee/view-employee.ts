@@ -33,12 +33,5 @@ export class ViewEmployeePage implements OnInit{
     this.navCtrl.push(EmployeePage, { employee: e });
   }
 
-  getThumbnailImage(employeeId){
-    return this.auth.getThumbnailImage(employeeId).subscribe(res =>{
-      return res;
-    },err=>{
-      console.error(err)
-    });
-  }
 
 }
