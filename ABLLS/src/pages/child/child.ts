@@ -18,6 +18,7 @@ declare var cordova:any;
 export class ChildPage implements OnInit {
 
   child;
+  childImage;
   goals;
   done;
   mode;
@@ -149,6 +150,13 @@ export class ChildPage implements OnInit {
 
   loadChild() {
       this.child=this.navParams.get('child');
+      this.auth.getChildImage(this.child._id).subscribe(res => {
+        if(res.success){
+          this.childImage=res.msg;
+        }else{
+
+        }
+      },err=>{})
       if(this.child.staff!=null){
         this.childHasStaff=true;
       }else{

@@ -16,6 +16,7 @@ export class EditChildModalPage {
   parent_name;
   parent_mobile;
   time_slot;
+  email;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private auth: AuthService, private load: LoadingController, private toast: ToastController, private alertCtrl: AlertController) {}
 

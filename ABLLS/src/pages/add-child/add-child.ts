@@ -25,7 +25,7 @@ export class AddChildPage {
       parent_name: form.value.parent_name,
       parent_mobile: form.value.parent_mobile,
       time_slot: form.value.time_slot,
-      email:from.value.email
+      email:form.value.email
     };
     this.auth.addChild(child_obj).subscribe(res => {
       if(res.success){

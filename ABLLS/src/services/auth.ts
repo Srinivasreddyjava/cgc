@@ -254,10 +254,15 @@ export class AuthService {
       header.append('branchCode', this.branchCode);
         return this.http.get(this.host + '/users/get-counts',{headers:header}).pipe(map(res => res.json()));
     }
-    getThumbnailImage(employeId){
+    //get Images
+    getStaffImage(employeId){
       const header = new Headers();
       header.append('branchCode', this.branchCode);
-      console.log(this.http.get(this.host + '/users/get-emp-thumbnail/'+employeId,{headers:header}))
-      return this.http.get(this.host + '/users/get-emp-thumbnail/'+employeId,{headers:header})
+      return this.http.get(this.host + '/users/get-emp-image/'+employeId,{headers:header}).pipe(map(res => res.json()));
+    }
+    getChildImage(childId){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.get(this.host + '/users/get-child-image/'+childId,{headers:header}).pipe(map(res => res.json()));
     }
 }
