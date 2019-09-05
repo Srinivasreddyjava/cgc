@@ -17,9 +17,17 @@ export class ViewEmployeePage implements OnInit{
 
   ngOnInit(){
     this.auth.getEmployees().subscribe(res => {
-
       if(res.success) {
         console.log(res.msg);
+        if(res.msg.length>0){
+          res.msg.forEach(emp =>{
+            this.auth.getEmpChildren(emp._id).subscribe(result =>{
+              if(result.success){
+                emp.childCount=result.msg.length;
+              }
+            })
+          })
+        }
         this.staff = res.msg;
       }else {
         console.log(res);

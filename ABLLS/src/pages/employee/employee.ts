@@ -29,6 +29,7 @@ export class EmployeePage implements OnInit{
   mobile;
   password;
   emp_children;
+  empImage;
   number;
 
 
