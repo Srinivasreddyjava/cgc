@@ -32,6 +32,9 @@ const staffSchema = schema({
     },
     branchCode:{
       type:String
+    },
+    image:{
+      type: String
     }
 });
 

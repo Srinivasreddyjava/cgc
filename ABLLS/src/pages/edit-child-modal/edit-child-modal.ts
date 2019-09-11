@@ -16,6 +16,7 @@ export class EditChildModalPage {
   parent_name;
   parent_mobile;
   time_slot;
+  email;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private viewCtrl: ViewController, private auth: AuthService, private load: LoadingController, private toast: ToastController, private alertCtrl: AlertController) {}
 
@@ -27,6 +28,7 @@ export class EditChildModalPage {
     this.parent_name = c.parent_name;
     this.parent_mobile = c.parent_mobile;
     this.time_slot = c.time_slot;
+    this.email=c.email;
   }
   closeModal(){
     this.viewCtrl.dismiss();
@@ -35,7 +37,7 @@ export class EditChildModalPage {
     const loader = this.load.create({
       content: 'Updating..'
     });
-    loader.present();    
+    loader.present();
 
     const child_obj= {
       id: this.child._id,
@@ -44,7 +46,8 @@ export class EditChildModalPage {
       age: this.age,
       parent_name: this.parent_name,
       parent_mobile: this.parent_mobile,
-      time_slot: this.time_slot
+      time_slot: this.time_slot,
+      email:this.email
     };
     this.auth.updateChild(child_obj).subscribe(res => {
       if (res.success){

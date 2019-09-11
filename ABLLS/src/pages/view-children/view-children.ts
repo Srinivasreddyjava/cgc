@@ -21,6 +21,14 @@ export class ViewChildrenPage implements OnInit{
   getChildren(){
     this.auth.getChildren().subscribe(res => {
       if (res.success) {
+        console.log(res.msg.length)
+        if(res.msg.length>0){
+          res.msg.forEach(child =>{
+            var staff=child.staff;
+            console.log(JSON.parse(staff))
+            child.staff=JSON.parse(staff);
+          })
+        }
         this.children = res.msg;
       }else {
         console.log(res.msg);

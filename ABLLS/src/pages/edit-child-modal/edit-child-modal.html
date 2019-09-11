@@ -49,6 +49,12 @@
             </ion-item>
             <ion-item>
              <ion-label floating>
+                Parent's Email
+              </ion-label>
+              <ion-input type="email" [(ngModel)]="email" name="email"></ion-input>
+            </ion-item>
+            <ion-item>
+             <ion-label floating>
                 Time Slot
               </ion-label>
               <ion-datetime [(ngModel)]="time_slot" name="time_slot" displayFormat="hh:mm a"></ion-datetime>

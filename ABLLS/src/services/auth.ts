@@ -5,7 +5,7 @@ import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class AuthService {
-     host = "http://54.188.202.254:3000";
+     host = "http://54.188.202.254:3030";
      branchCode="GABL"
     // host = "http://13.233.133.189:3000";
     //host = "http://54.188.202.254:3030";
@@ -245,5 +245,34 @@ export class AuthService {
       header.append('Content-Type', 'application/json');
       header.append('branchCode', this.branchCode);
       return this.http.post(this.host + '/users/deassgin-staff-for-child', {c_id:id}, { headers: header }).pipe(map(res => res.json()));
+    }
+
+    // Get counts
+    getTotalCounts() {
+      const header = new Headers();
+      header.append('Content-Type', 'application/json');
+      header.append('branchCode', this.branchCode);
+        return this.http.get(this.host + '/users/get-counts',{headers:header}).pipe(map(res => res.json()));
+    }
+    //get Images
+    getStaffImage(employeId){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.get(this.host + '/users/get-emp-image/'+employeId,{headers:header}).pipe(map(res => res.json()));
+    }
+    getChildImage(childId){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.get(this.host + '/users/get-child-image/'+childId,{headers:header}).pipe(map(res => res.json()));
+    }
+    uploadChildImage(id,obj){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.post(this.host+'/users/update-child-image/'+id,obj,{headers:header}).pipe(map(res => res.json()))
+    }
+    uploadStaffImage(id,obj){
+      const header = new Headers();
+      header.append('branchCode', this.branchCode);
+      return this.http.post(this.host+'/users/update-emp-image/'+id,obj,{headers:header}).pipe(map(res => res.json()))
     }
 }

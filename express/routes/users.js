@@ -11,20 +11,10 @@ const deChild = require('../models/de-child');
 const DeStaff = require('../models/de-staff')
 const Dummy = require('../models/dummy');
 var async = require("async");
+const ImageThumbnail = require('image-thumbnail');
+const Counter = require('../models/counter');
+const MasterData= require('./masterData');
 
-
-
-
-// Task.aggregate(
-//     // [
-//     //     { $match: {} },
-//     //     { $sort : {number : 1} },
-//     //     // { $sort: { number: -1 } }
-//     // ], (err, done) => {
-//     //     console.log(err);
-//     //     console.log(done);
-//     // }
-// )
 
 router.post('/update-child-task', (req, res, next) => {
     task_id = req.body.task_id;
@@ -75,3785 +65,6 @@ router.post('/update-child-task', (req, res, next) => {
         }
     })
 });
-
-
-const areas_array = [
-    {
-        number: 1,
-        name: 'Visual Performance',
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Receptive Language',
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Imitation',
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Vocal Imitation',
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Requests',
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Labeling',
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Interverbal',
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Spontaneous Vocalizations',
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Syntax and Grammer',
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Play and Leisure Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Social Interaction Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Group Instruction',
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Fellow Classroom Routines',
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Generalized Responding',
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Reading Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Math Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Writing Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Spelling',
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Dressing Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Eating Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Grooming Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Toileting Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Gross Motor Skills',
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Fine Motor Skills',
-        added_time: moment.now()
-    },
-];
-
-// Tasks of each areas
-const vp_tasks = [
-  {
-        number: 1,
-        name: 'Puzzle with single-piece type of inset',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Form box',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Match identical objects to sample',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Match objects to pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Match identical pictures to sample',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Match pictures to objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Fluent matching',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Sort non-identical items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Block designs on picture card',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Puzzles with multiple connecting pieces in an inset type frame',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Puzzles with a square-edged border frame',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Block designs from picture',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Sequence pattern to match a visual model',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Puzzles with multiple pieces which must be juxtaposed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Jigsaw puzzles',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Match associated pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Sort by function',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Sort by feature',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Sort by class',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Delayed replication of a sequence',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Delayed finding a sample',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Extend a sequence pattern',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Replicate simple 3-dimensional objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Dependent matching sequence',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Seriation',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Picture sequences',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Mazes',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const rl_tasks = [
-  {
-        number: 1,
-        name: 'Responds to own name',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Follow instructions to do an enjoyable action in context',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Follow instructions to look at a reinforcing item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Follow instructions to touch a reinforcing item in various positions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Follow instructions to touch a common item in various positions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Follow instructions to do an enjoyable action out of context',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Follow instructions in routine situations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Follow instructions to give a named, non-reinforcing object',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Follow instructions to do a simple motor action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Follow instructions to touch item vs. a distracter',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Follow instructions to select one reinforcing item from an array of two objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Follow instructions to select one of two reinforcing items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Follow instructions to select one of two common objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Select one of two pictures of common items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Touch two body parts',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Select one of six or more objects on a table',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Select one of six or more pictures on a table',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Acquires new selection skills without intensive training',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Fluent receptive discriminations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Varied instructions to select using any response',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Point to body parts on others or pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Touch own pieces of clothing',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Touches parts of items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Select adjectives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Select items by following another\'s gaze',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Follows hand signals',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Follow an instruction to go to a person',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Follow an instruction to give an item to a person or place item on an object',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: 'Follow an instruction to walk to someone and get a named item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Follow an instruction to go to a person and do an action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 31,
-        name: 'Specific motor response in receptive tasks',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 32,
-        name: 'Demonstrates a specified action with an object when given different objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 33,
-        name: 'Multiple actions with an object',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 34,
-        name: 'Demonstrates a specified pretend action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 35,
-        name: 'Select one of the three pictures representing actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 36,
-        name: 'Select associated pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 37,
-        name: 'Select by function',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 38,
-        name: 'Select by feature',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 39,
-        name: 'Select by class',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 40,
-        name: 'Select two items from a larger set',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 41,
-        name: 'Select two items in sequence from a larger set',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 42,
-        name: 'Select community helpers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 43,
-        name: 'Locate objects in larger, complex picture',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 44,
-        name: 'Locate objects from parts of objects in larger, complex picture',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 45,
-        name: 'Select common environmental sounds',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 46,
-        name: 'Selects all examples of an item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 47,
-        name: 'Select single items with two specified characteristics',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 48,
-        name: 'Select set of items with a specified characteristic',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 49,
-        name: 'Select set of items with two specified characteristics',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 50,
-        name: 'Follows a multiple component sequence instruction',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 51,
-        name: 'Receptive prepositions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 52,
-        name: 'Receptive pronouns',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 53,
-        name: 'Select pictures representing a location or an activity presented in a scene',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 54,
-        name: 'Selects pictures representing emotions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 55,
-        name: 'Selects "same" and "different"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 56,
-        name: 'Select non-examples',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 57,
-        name: 'Selects pictures of social interactions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 58,
-        name: 'Follow instructions to look at a common item',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const imitation_tasks = [
-    {
-        number: 1,
-        name: 'Motor imitation usng objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Motor imitation using objects in a discrimination',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Motor imitation of gross motor movement with verbal prompts',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Imitation of leg and foot movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Imitation of arm and hand movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Imitation discriminating static and kinetic motor movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Varied imitation instructions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Imitation of gross motor actions modeled in a mirror',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Imitaion of head movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Imitation of mouth and tounge movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Imitation of facial/oral motor movements modeled in a mirror',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Motor imitation of fine motor movement',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Imitation of touching objects in sequence',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Imitation of blowing',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Imitate speed of an ongoing action with objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Imitate speed of a recently modeled action with objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Imitate speed of an action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Imitate touchng objects in sequence following a model',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Imitation of a sequence of actions switching with model',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Imitation of a sequence of actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Imitation of intensity of action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Imitation of the number of repetitions of a motor movement',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Simultaneous imitation of motor movement and vocalization',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Motor imitation sequence using multiple objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Imitates motor movement without a direct verbal prompt',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Spontaneously imitates the actions of others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Delayed imitation',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const vocal_imitation_tasks = [
-  {
-        number: 1,
-        name: 'Imitaties sounds on request',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Imitates sequence of single sounds switching with a model',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Imitates initial sounds of words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Imitation of multiple separate sound combinations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Imitation of short & fast vs elongated/slow sounds',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Imitation of a held sound to a second sound',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Consonant-vowel/vowel-consonant combinations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Consonant-vowel-consonent-vowel',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Consonant-vowel-consonent combinations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Imitates consonant blends',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Imitation of words on request',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Imitation of phrases on request',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Imitation oof number sequences on request',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Imitation of short & fast vs elongated/slow words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Imitation of loud vs. soft sounds and words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'epear short message to another person',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Spontaneous imitation of words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Spontaneous imitation of phrases',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Prosody',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const request_tasks = [
-  {
-        number: 1,
-        name: 'Requests by indicating',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Multiply controlled requests',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Requestingwith the reinforcer preset and when asked "What do you want ?"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Spontaneous requests with items present (No prompts)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Spontaneous requests items not present',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Requests with eye contact',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Requests others to perform an action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Requests missing items needed for a task',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Requests with head movements by sying yes/no',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Requests using sentences',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Requests help',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Acquires novel requests without intensive training',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Requests attention',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Requests others to remove an item or stop an activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Requests using adjectives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Requests using propositions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Requests future items or events',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Requests information using "What"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Requests information using "Where"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Requests information using "Who/Whose"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Requests using adverbs',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Requests using pronouns',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Requests information using "Which"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Requests information using "When"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Requests information using "How"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Requests information using "Can", "Do", "Does" or "Will"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Requests information using "Why"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Spontaneous requests',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const labeling_tasks = [
-  {
-        number: 1,
-        name: 'Labels reinforcers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Labels common objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Labels commn people(actual individuals, not professionals)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Labels pictures of common items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Labels body parts',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Labels pieces of clothing',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Labels common ongoing actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Labels pictures of common actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Fluent labeling',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Acquires novel labels without intensive training',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Labels items using carrier phrase',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Labels parts or features of objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Labels adjectives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Label associated pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Labels item when told one of its features',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Labels item when told its class',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Two-component labels (nouns) with objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Two-component labels (nouns) with picutres',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Labels two-component with carrier phrase',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Two-componnt labels (noun verb)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Two-component labels (noun adjective)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Labels by indicating Yes/No',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Labels fucntion of an item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Labels class of an object',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Discrimination of question to label aspects of items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Labels the class of a set of items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Labels features of items which are missing or incorrect',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Labels exclusion form category(negation)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: 'Identifies obvious problems',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Labels community helpers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 31,
-        name: 'Labels items at a distance when others point to it',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 32,
-        name: 'Labels common environmental sounds',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 33,
-        name: 'Uses carrier phrase when labeling nouns with verbs or adjectives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 34,
-        name: 'Labels prepositions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 35,
-        name: 'Uses carrier phrass when using prepositions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 36,
-        name: 'Labels pronouns',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 37,
-        name: 'Uses carrier phrases when using pronouns',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 38,
-        name: 'Labels and describes events or items presented in a scene',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 39,
-        name: 'Naming specified parts of scenes',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 40,
-        name: 'Labels adverbs',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 41,
-        name: 'Labels emotions of others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 42,
-        name: 'Internal events and emotions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 43,
-        name: 'Multiple component naming (three component labels)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 44,
-        name: 'Labels (three component +) with a carrier phrase',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 45,
-        name: 'Labels social interaction behaviour',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 46,
-        name: 'Spontaneous labeling',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const interverbal_tasks = [
-  {
-        number: 1,
-        name: 'Fill in words from songs',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Fill in blanks regarding fun items and activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Sign English words (students who use ASL)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Animal sounds',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Answers questions regarding personal information',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Fill in words describing common activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Intraverbal associations',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Fill in item given function',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Fill in action given item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Answers "What" questions regarding items found in home',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Answers "What" questions regarding functions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Answers "Where" questions regarding items found in home or classroom',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Answers "Where" questions regarding activities done at home or school',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Fill in item given the class',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Multiple responses given specific categories',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Fill in features given the item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Fill in item given its feature',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Fill in class given the item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Name items previous observed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Name previously observed activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Name people previously observed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'With visual display, makes related statements (not naming)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Answers "What" questions relevant to items found in the community',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Answers "What" questions relevant to the activities that he can do in the community',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Answers "Where" questions regarding activities and items found in the community',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Answers question with multiple reponses concerning his immediate community',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'States class givenmultiple class members (examples)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Answers "Who/Whose" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: 'Answers "When" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Discrimination of questions asked about items and activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 31,
-        name: 'Answers "Which" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 32,
-        name: 'Answers "How" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 33,
-        name: 'Answers "Why" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 34,
-        name: 'Describes steps in sequence of a daily activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 35,
-        name: 'States activity when tld sequence of actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 36,
-        name: 'States item when told its functions, features, or class (multiple features)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 37,
-        name: 'Interverbal Yes/No with "Can", "Do", "Does", or "Will" answers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 38,
-        name: 'Answers questions contianing three critial stimuli (multiple component questions with multiple responses)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 39,
-        name: 'Describes items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 40,
-        name: 'Describes steps before and after in sequence of daily activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 41,
-        name: 'Answers questions concerining past and upcoming events',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 42,
-        name: 'Maintains a conversation with an adult or peer',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 43,
-        name: 'Answers novel questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 44,
-        name: 'Answers questions relevant to current events',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 45,
-        name: 'Answers questions with multiple responses concerning current events',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 46,
-        name: 'Answers questions with multiple responses in group discussions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 47,
-        name: 'Tells about stories/ Tells stories',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 48,
-        name: 'Spontaneous conversation',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 49,
-        name: 'Provides opposites when given comparison',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 50,
-        name: 'Answers "What" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 51,
-        name: 'Answers "Where" questions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 52,
-        name: 'Name items previously observed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 53,
-        name: 'Answers questions relevant to events in their immediate community single responses',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 54,
-        name: 'Answers questions re: academic material',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 55,
-        name: 'Multiple responses to questions relevant to academic material',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const spontaneous_vocalization_tasks = [
-  {
-        number: 1,
-        name: 'Vocalize identifiable speech sounds',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Spontaneously says words or approximations to',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Spontaneously says phrases',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Sings songs with models',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Sing songs',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Spontaneous vocal imitation',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Spontaneous requests',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Spontaneous labeling',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Spontaneous conversation',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const syntax_tasks = [
-  {
-        number: 1,
-        name: 'Mean length response',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Syntax (word order)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Articles',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Verbs-preset progressive',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Regular plulrals',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Verbs-irregular past tense',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Contractions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Is/am with "ing" verb',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Vebs-regular past tense',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Possessive "S"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Negatives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Locatives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Future tense',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Conjunctions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Irregular Plurals',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Comparatives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Demonstratives',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Label strength of a verbal response',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Quantification of a verbal response',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Label emotional state associated with verbal response',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const play_skills_tasks = [
-  {
-        number: 1,
-        name: 'Explores toys in the environment',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Allows others to manipulate/touch toys',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Independent outdoor activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Indipendent indoor leisure activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Plays with toys/manipulates toys as designed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Independently plays with toys and engages in verbal behaviour',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Multiple responses with toys related to a theme',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Plays interactivly with other students',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Plays interactively with a variety of peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Sociodramatic play',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Plays with toys and talks with peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Plays simple ball games',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Coordinated play woth peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Interactive motor games',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Board games',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Outdoor games and activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Plays interactively with other students',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Appropriate interactive leisure activities',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const social_interaction_skills_tasks = [
-  {
-        number: 1,
-        name: 'Appropriate when near peers or siblings',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Takes offered items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Tolerates/ responds appropriately to positive touches by peers or siblings',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Shows interest in the behavious of others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Looks at others to start a social interaction',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Physically approaches and engages others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Looks at others in anticipation of completing a reinforcing action',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Listener-receptive',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Imitates peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Returns greetings',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Physically prompts others to do activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Respondes to approaches and attempts to interact from peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Sharing-gives-up items to otherse',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Searches for missing person',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Active attention seeking',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Labels items for others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Eye contact',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Asks peers for items (single)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Sharing -asks for items to be shared',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Sharing- offers items to others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Initiates greetings',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Joins peers in an activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Observation of peers\' attention to activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Feedback from peers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Adjusts behaviour based on changes in peers\' actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Assists other to participate',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'States what otherse like/dislike',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Direct others attentions to something of interest',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: 'Attends to interests of others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Delivers a message',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 31,
-        name: 'Waits for break into conversation',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 32,
-        name: 'Converses with others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 33,
-        name: 'Asks for information',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 34,
-        name: 'Obtains and maintains attention of others',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 35,
-        name: 'Sharing -accepts offers/invitation to join',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const group_inst_tasks = [
-  {
-        number: 1,
-        name: 'Sits appropriately in small group',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Sits appropriately in large group',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Attends to teacher in group',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Attends to other student in group',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Follows group instructions- all do the same receptive response',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Follows group instructions with a discrimination',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Raises hand to get teacher attention to do an activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Raises hand to answer a question',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Raises hand AND names item',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Raises hand AND answers a question',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Takes turns during instruction',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Learns new skills in group teaching format',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const follow_class_routines_tasks = [
-  {
-        number: 1,
-        name: 'Follows daily routines (backpacks, etc)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Works independently on non-academic activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Sits and waits appropriately during transitions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Physically transitions to next area or activity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Waits turn to do activities (wash hands, etc)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Gets in the line on request',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Works independently on academic activities',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Gets and returns own materials',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Completes a task and brings work to teacher or puts away materials',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Stands and waits appropriately during transitions',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const general_responding_tasks = [
-  {
-        number: 1,
-        name: 'Generalizes across stimuli',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Generalize across instructors',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Generalize across environments',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Use of skillls in groups',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Generalized response forms',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Generalization of language skills',
-        area_id: null,
-        added_time: moment.now()
-    },
-];
-
-const reading_skills_tasks = [
-  {
-        number: 1,
-        name: 'Receptive letters',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Labels letters',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Receptive sounds of letters',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Labels sounds of letters',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Match words with pictures',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Match words to words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Names letters in words reading left to right',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Match individual letters to letter on word card',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Fill in missing letter of words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'read simple words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Decode words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Read small groups of words from left to right',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Read simple sentences (3-6 words)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Fills-in missing words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Reads and follows simple instructions to do actions',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Reads and follows simple instructions on worksheets',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Read passages and answer comprehension questions',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-
-const math_skills_tasks = [
-  {
-        number: 1,
-        name: 'Rote counts with prompts',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Rote counting',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Count objects with prompts',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Count given objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Count out objects from a larger set',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Names numerals in sequence',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Names numbers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Match number with same amount of objects',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: '"more" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: '"less" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: '"some" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: '"all" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: '"zero/none" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Add items to specified quantity',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: '"same" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: '"different" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: '"greater" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: '"add" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Gets specified number of identical items',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Add numbers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Time telling',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Identify coins by value',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Identify all coins by value',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Interchange coins to arrive at equal values',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: '"equal" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: '"unequal" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: '"minus" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: '"plus" receptive and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: '"subtract/take away" receptie and labels',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Labels "same"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 31,
-        name: 'Labels "different"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 32,
-        name: 'Labels "equal"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 33,
-        name: 'Labels "unequal"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 34,
-        name: 'Labels "more"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 35,
-        name: 'Labels "less"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 36,
-        name: 'Labels "greater"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 37,
-        name: 'Labels "some"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 38,
-        name: 'Labels "all"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 39,
-        name: 'Labels "add"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 40,
-        name: 'Labels "minus"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 41,
-        name: 'Labels "plus"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 42,
-        name: 'Labels "subtract/take away"',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 43,
-        name: 'Labels "zero/none"',
-        area_id: null,
-        added_time: moment.now()
-    },
-];
-
-
-const writing_tasks = [
-  {
-        number: 1,
-        name: 'Mark on paper',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Color between lines',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Trace lines and shapes',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Trace letter and numbers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Copy straight lines',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Copy curved lines',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Copy letters (with sample)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Copy numbers (with sample)',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Print letters',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Print numbers',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const spelling_tasks = [
-  {
-        number: 1,
-        name: 'Match individual letters to letters on word card',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Fill in missing letter words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Copy words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Writes in missing letter of words',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Spell words vocally',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Spell words in written form',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Spell own name',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const dressing_tasks = [
-  {
-        number: 1,
-        name: 'Pants up and down',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Shoes on and off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Pullover shirts on and take off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Buttoning shirts on and off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Pants on and off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Socks on and off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Coat on and off',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Unzip zipper',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Fasten zipper',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Use zipper on clothes',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Use buckles',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Adjust clothing when needed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Tie shoes',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const eating_tasks = [
-  {
-        number: 1,
-        name: 'Eat finger foods',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Drink from a straw',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Drink from a cup',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Feed self with a spoon and fork',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Spread with a knife',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Pour liquid into a cup',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Cut food with a knife',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Take prepared lunch to table',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Clean-up table after meals',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Keep eating areas clean',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const grooming_tasks = [
-  {
-        number: 1,
-        name: 'Wash hands',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Dry hands',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Wash face',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Dry face',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Comb or brush hair',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Brush teeth',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Blow nose when needed',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const toileting_tasks = [
-  {
-        number: 1,
-        name: 'Urinate in toilet',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Remain dry (urine) on a toileting schedule',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Independently use familiar restroom for urination',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Requests to use toilet when needed',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Wipe self after urinating',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Defecate in toilet',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Remain clean (bowel movement) on a toileting schedule',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Wipe self after bowel movement',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Independently use familiar restroom for bowel movements',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Use restroom without assistance',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const gross_motor_tasks = [
-  {
-        number: 1,
-        name: 'Walk forward with appropriate gait',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Kneel',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Run smoothly',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Roll sideways',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Jump forward',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Jump down',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Walk backward',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Hop on two feet',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Throw ball from chest or overhand',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Roll a ball',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Climb a ladder using reciprocal motion',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Creep on stomach',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Squat',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Walk across a balance',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Catch a ball any method',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Ride a tricycle',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Walk sideways',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Gallop',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Balance on one foot',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Kick ball at target',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Hang from bar',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Catch a ball in hands',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Throw ball underhand',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Toss and catch a ball',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Bounce a ball',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Kick a moving ball',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Pump while swinging',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Skip',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 29,
-        name: 'Jumping jacks',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 30,
-        name: 'Ride a bicycle',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-const fine_motor_tasks = [
-  {
-        number: 1,
-        name: 'Mark on paper with a crayon',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 2,
-        name: 'Places objects in a form box',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 3,
-        name: 'Single-piece inset puzzle',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 4,
-        name: 'Multiple puzzle pieces into a frame',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 5,
-        name: 'Blocks on block design cards',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 6,
-        name: 'Transfer objects to the opposite hand',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 7,
-        name: 'Places pegs in a peg board',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 8,
-        name: 'Turns pages of a book',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 9,
-        name: 'Clothespins on a line',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 10,
-        name: 'Color with boundaries',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 11,
-        name: 'Open "Ziplock" type bags',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 12,
-        name: 'Snips with scissors',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 13,
-        name: 'Stacks blocks',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 14,
-        name: 'Strings beads',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 15,
-        name: 'Remove lids of jars',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 16,
-        name: 'Cuts across paper with scissors',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 17,
-        name: 'Trace lines with a finger',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 18,
-        name: 'Squeezes glue from a bottle',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 19,
-        name: 'Remove wrappers',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 20,
-        name: 'Roughly copy shapes and patterns',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 21,
-        name: 'Paste shapes on outlined picture',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 22,
-        name: 'Paste shapes on plain paper picture',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 23,
-        name: 'Objects (rings) on pegs',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 24,
-        name: 'Replace lids of jars',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 25,
-        name: 'Uses pincer grip',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 26,
-        name: 'Fold apiece of paper',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 27,
-        name: 'Cuts out shapes',
-        area_id: null,
-        added_time: moment.now()
-    },
-    {
-        number: 28,
-        name: 'Accurately copy shapes and patterns',
-        area_id: null,
-        added_time: moment.now()
-    }
-];
-
-
-
-// Check if collection is empty and insert above data if empty
-Area.countDocuments((err, count) => {
-    if (!err && count === 0) {
-        // Insert
-        Area.insertMany(areas_array, (err, docs) => {
-            if (!err && docs) {
-                docs.forEach(area => {
-
-                    switch (area.name) {
-
-                        case "Visual Performance":
-                            var count = 0;
-                            vp_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === vp_tasks.length) {
-                                    Task.insertMany(vp_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Receptive Language":
-                            var count = 0;
-                            rl_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === rl_tasks.length) {
-                                    Task.insertMany(rl_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Imitation":
-                            var count = 0;
-                            imitation_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === imitation_tasks.length) {
-                                    Task.insertMany(imitation_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Vocal Imitation":
-                            var count = 0;
-                            vocal_imitation_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === vocal_imitation_tasks.length) {
-                                    Task.insertMany(vocal_imitation_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Requests":
-                            var count = 0;
-                            request_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === request_tasks.length) {
-                                    Task.insertMany(request_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Labeling":
-                            var count = 0;
-                            labeling_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === labeling_tasks.length) {
-                                    Task.insertMany(labeling_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Interverbal":
-                            var count = 0;
-                            interverbal_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === interverbal_tasks.length) {
-                                    Task.insertMany(interverbal_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Spontaneous Vocalizations":
-                            var count = 0;
-                            spontaneous_vocalization_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === spontaneous_vocalization_tasks.length) {
-                                    Task.insertMany(spontaneous_vocalization_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Syntax and Grammer":
-                            var count = 0;
-                            syntax_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === syntax_tasks.length) {
-                                    Task.insertMany(syntax_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Play and Leisure Skills":
-                            var count = 0;
-                            play_skills_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === play_skills_tasks.length) {
-                                    Task.insertMany(play_skills_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Social Interaction Skills":
-                            var count = 0;
-                            social_interaction_skills_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === social_interaction_skills_tasks.length) {
-                                    Task.insertMany(social_interaction_skills_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Group Instruction":
-                            var count = 0;
-                            group_inst_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === group_inst_tasks.length) {
-                                    Task.insertMany(group_inst_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Fellow Classroom Routines":
-                            var count = 0;
-                            follow_class_routines_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === follow_class_routines_tasks.length) {
-                                    Task.insertMany(follow_class_routines_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Generalized Responding":
-                            var count = 0;
-                            general_responding_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === general_responding_tasks.length) {
-                                    Task.insertMany(general_responding_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Reading Skills":
-                            var count = 0;
-                            reading_skills_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === reading_skills_tasks.length) {
-                                    Task.insertMany(reading_skills_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Math Skills":
-                            var count = 0;
-                            math_skills_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === math_skills_tasks.length) {
-                                    Task.insertMany(math_skills_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Writing Skills":
-                            var count = 0;
-                            writing_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === writing_tasks.length) {
-                                    Task.insertMany(writing_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Spelling":
-                            var count = 0;
-                            spelling_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === spelling_tasks.length) {
-                                    Task.insertMany(spelling_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Dressing Skills":
-                            var count = 0;
-                            dressing_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === dressing_tasks.length) {
-                                    Task.insertMany(dressing_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Eating Skills":
-                            var count = 0;
-                            eating_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === eating_tasks.length) {
-                                    Task.insertMany(eating_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Grooming Skills":
-                            var count = 0;
-                            grooming_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === grooming_tasks.length) {
-                                    Task.insertMany(grooming_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Toileting Skills":
-                            var count = 0;
-                            toileting_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === toileting_tasks.length) {
-                                    Task.insertMany(toileting_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Gross Motor Skills":
-                            var count = 0;
-                            gross_motor_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === gross_motor_tasks.length) {
-                                    Task.insertMany(gross_motor_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        case "Fine Motor Skills":
-                            var count = 0;
-                            fine_motor_tasks.forEach(el => {
-                                el.area_id = area._id;
-                                count++;
-                                if (count === fine_motor_tasks.length) {
-                                    Task.insertMany(fine_motor_tasks, (err, doc) => {});
-                                }
-                            });
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                });
-            }
-        });
-    } else {
-        Area.find({}).sort({
-            added_time: -1
-        }).exec((err, docs) => {
-        });
-    }
-});
-
-// Check if admins are empty and if not add admin
-admin.countDocuments((err, count) => {
-    if (!err && count === 0) {
-        const ad = new admin({
-            email: 'admin@cgc.com',
-            password: 'cgc_admin',
-            branchCode: 'ALL'
-					
-        });
-        ad.save((err, saved) => {
-            if (!err && saved) {}
-        });
-    }
-});
-
-// Add admin
-
-
 
 // authenticate admin
 router.post("/auth_admin", (req, res, next) => {
@@ -3933,33 +144,43 @@ router.post('/add-emp', (req, res, next) => {
     mobile = req.body.mobile;
     email = req.body.email;
     password = req.body.password;
-    number = req.body.number;
-						   
     branchCode= req.headers.branchcode;
+    imageData= req.body.image;
     const emp = new Staff({
         email: email,
         mobile: mobile,
         password: password,
         name: name,
-        number: number,
-					
+        image:imageData,
         branchCode:branchCode
     });
-    emp.save((err, saved) => {
-        if (saved) {
-            res.json({
-                success: true,
-                msg: saved
+    Counter.findByIdAndUpdate(
+        {_id: 'STAFF'},
+        {$inc:{sequence_value:1}},
+        function (er, data) {
+          if(data){
+            emp.number=data.sequence_value;
+            emp.save((err, saved) => {
+                if (saved) {
+                    res.json({
+                        success: true,
+                        msg: saved
+                    });
+                } else {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                }
             });
-        } else {
+          }else{
             res.json({
                 success: false,
-                msg: err
+                msg: er
             });
-        }
+          }
+        });
     });
-
-});
 
 // Edit staff
 router.post('/edit-emp', (req, res, next) => {
@@ -3968,63 +189,197 @@ router.post('/edit-emp', (req, res, next) => {
     mobile = req.body.mobile;
     email = req.body.email;
     password = req.body.password;
-    number = req.body.number;
-						  
     branchCode = req.headers.branchcode;
-    Staff.findByIdAndUpdate({
-        _id: id,
-        branchcode:branchCode
-    }, {
-        name: name,
-        mobile: mobile,
-        email: email,
-        password: password,
-        number: number,
-					
-        branchCode:branchCode
-    }, (err, saved) => {
-        if (saved) {
-            res.json({
-                success: true,
-                msg: saved
-            });
-        } else {
-            res.json({
-                success: false,
-                msg: err
-            });
+    Staff.findById({
+        _id: req.body.id,
+        branchCode: req.headers.branchcode
+      }, (er, found) => {
+        if(found){
+          found.name=name;
+          found.mobile=mobile;
+          found.email=email;
+          found.password=password;
+          found.branchCode=branchCode;
+          updateEmployee(id,branchCode,found,res,next);
+        }else{
+          res.json({
+              success: false,
+              msg: er
+          });
         }
-    });
+      });
 });
 
-// Get employees
+async function convertImage(image){
+  try {
+    let options = { percentage: 25, responseType: 'base64',width :100,height:100 }
+    const thumbnail = await ImageThumbnail(image,options);
+    return thumbnail;
+} catch (err) {
+    console.error(err);
+}
+}
 
+async function processArrayforImages(array,res) {
+  for (const st of array) {
+    let result="";
+      if(st.image!= undefined && st.image != ""){
+        st.image=st.image.replace("data:image/jpeg;base64,", "");
+        result = await convertImage(st.image);
+     }else{
+       result = await convertImage(defaultImage.replace("data:image/jpeg;base64,", ""))
+     }
+     st.image = "data:image/jpeg;base64," + result;
+  }
+  res.json({
+      success: true,
+      msg: array.sort(function(a,b){
+        return a.name.trim().toUpperCase().localeCompare(b.name.trim().toUpperCase())
+      })
+  });
+
+}
+
+// Get employee
 router.get('/get-emps', (req, res, next) => {
+  Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
+    if (staff) {
+      processArrayforImages(staff,res)
+    } else {
+      res.json({
+        success: false,
+        msg: err
+      });
+    }
+  });
+});
 
-        Staff.find({branchCode:req.headers.branchcode},null,{sort:{name:1}}, (err , staff) => {
-                if (staff) {
-                    res.json({
-                        success: true,
-                        msg: staff.sort(function(a,b){
-                          return a.name.trim().toUpperCase().localeCompare(b.name.trim().toUpperCase())
-                        })
-                    });
+//get childrena and staff count
+router.get('/get-counts', (req, res, next) => {
+        Staff.countDocuments({branchCode:req.headers.branchcode}, (err , staff) => {
+                if (staff!= undefined) {
+                  Child.countDocuments({branchCode:req.headers.branchcode},(error,child)=>{
+                    if(child!=undefined){
+                      res.json({
+                        success:true,
+                        staffcount:staff,
+                        childcount:child
+                      });
+                    }else{
+                      res.json({
+                        success: false,
+                        msg: error
+                      });
+                    }
+                  });
                 } else {
                     res.json({
                         success: false,
                         msg: err
                     });
                 }
-            }
-        )
+      });
 });
 
+//get employee Thumbnail Images
+router.get('/get-emp-image/:id', (req, res, next) => {
+  Staff.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) =>{
+      if(found){
+        if(found.image!= undefined && found.image!= ''){
+          res.json({
+            success:true,
+            msg:found.image
+          })
+        }else{
+          res.json({
+            success:true,
+            msg:defaultImage
+          })
+        }
+      }else if(er){
+        res.json({
+          success:false,
+          msg:er
+        })
+      }
+    })
+});
+
+//get child Thumbnail Images
+router.get('/get-child-image/:id', (req, res, next) => {
+  Child.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) =>{
+      if(found){
+        if(found.image!= undefined && found.image!= ''){
+          res.json({
+            success:true,
+            msg:found.image
+          })
+        }else{
+          res.json({
+            success:true,
+            msg:defaultImage
+          })
+        }
+      }else if(er){
+        res.json({
+          success:false,
+          msg:er
+        })
+      }
+    })
+});
+
+//get childrena and staff count
+router.post('/update-emp-image/:id', (req, res, next) => {
+  id = req.params.id;
+  branchCode = req.headers.branchcode;
+  Staff.findById({
+      _id: req.params.id,
+      branchCode: req.headers.branchcode
+    }, (er, found) => {
+      if(found){
+          found.image=req.body.image;
+          updateEmployee(id,branchCode,found ,res,next);
+      }else{
+        res.json({
+          success:false,
+          msg: er
+        });
+      }
+    });
+});
+
+function updateEmployee(id,branchCode,found,res,next){
+  Staff.findOneAndUpdate({
+      _id: id,
+      branchCode:branchCode
+  },found,(err,result)=>{
+    if(result){
+      result.image="";
+      res.json({
+        success:true,
+        msg:result
+      })
+    }else{
+      res.json({
+        success:false,
+        msg:err
+      })
+    }
+  })
+}
 
 // deregister staff
 router.get('/deregister-emp/:id', (req, res, next) => {
     Staff.findById({
         _id: req.params.id,
-		branchCode: req.headers.branchcode							  
+		branchCode: req.headers.branchcode
     }, (er, found) => {
         if (found) {
             const c = new DeStaff({
@@ -4034,8 +389,8 @@ router.get('/deregister-emp/:id', (req, res, next) => {
                 password: found.password,
                 number: found.number,
                 de_time: moment.now(),
-				branchCode:found.branchCode				  
-										   
+				        branchCode:found.branchCode,
+                image:found.image
             });
             found.remove();
             c.save((err, saved) => {
@@ -4075,16 +430,12 @@ router.get('/deregister-emp/:id', (req, res, next) => {
 
 
 router.get('/get-un-emp-children', (req, res, next) => {
-
     Child.find({
         staff: null,
-		branchCode:req.headers.branchcode								 
+		branchCode:req.headers.branchcode
     },{},{sort:{first_name:1,last_name:1}}, (er, children) => {
         if (children) {
-            res.json({
-                success: true,
-                msg: children
-            });
+          processChildrenArrayforImages(children,res);
         } else {
             res.json({
                 success: false,
@@ -4099,11 +450,12 @@ router.post('/assign-staff-to-child', (req, res, next) => {
     emp_id = req.body.e_id;
     Child.findByIdAndUpdate({
         _id: child_id,
-		branchCode:req.headers.branchcode								  
+		branchCode:req.headers.branchcode
     }, {
         staff: emp_id
     }, (err, saved) => {
         if (saved) {
+            saved.image="";
             res.json({
                 success: true,
                 msg: saved
@@ -4121,11 +473,12 @@ router.post('/deassgin-staff-for-child',(req,res,next) =>{
   child_id=req.body.c_id;
   Child.findByIdAndUpdate({
       _id: child_id,
-	branchCode:req.headers.branchcode							   
+	branchCode:req.headers.branchcode
   }, {
       staff: null
   }, (err, saved) => {
       if (saved) {
+          saved.image="";
           res.json({
               success: true,
               msg: saved
@@ -4144,13 +497,10 @@ router.get('/get-emp-children/:emp_id', (req, res, next) => {
     id = req.params.emp_id;
     Child.find({
         staff: id,
-		branchCode:req.headers.branchcode								 
+		branchCode:req.headers.branchcode
     },{},{sort:{first_name:1,last_name:1}}, (err, child) => {
         if (child) {
-            res.json({
-                success: true,
-                msg: child
-            });
+            processChildrenArrayforImages(child,res);
         } else {
             res.json({
                 success: false,
@@ -4164,7 +514,7 @@ router.get('/get-emp-children/:emp_id', (req, res, next) => {
 router.get('/deregister-child/:id', (req, res, next) => {
     Child.findById({
         _id: req.params.id,
-		branchCode:req.headers.branchcode								 
+		branchCode:req.headers.branchcode
     }, (er, found) => {
         if (found) {
             const c = new deChild({
@@ -4175,12 +525,14 @@ router.get('/deregister-child/:id', (req, res, next) => {
                 parent_mobile: found.parent_mobile,
                 added_time: found.added_time,
                 staff: found.staff,
-				branchCode:req.headers.branchcode,				  
-                de_time: moment.now()
+				        branchCode:req.headers.branchcode,
+                de_time: moment.now(),
+                image:found.image
             });
             found.remove();
             c.save((err, saved) => {
                 if (saved) {
+                    saved.image="";
                     res.json({
                         success: true,
                         msg: saved
@@ -4407,54 +759,80 @@ router.post('/add-child', (req, res, next) => {
     const parent_name = req.body.parent_name;
     const parent_mobile = req.body.parent_mobile;
     const age = req.body.age;
-    const number = req.body.number;
-								 
     const time_slot = req.body.time_slot;
     const child = new Child({
-        number: number,
         first_name: first_name,
         last_name: last_name,
         age: age,
         parent_name: parent_name,
         parent_mobile: parent_mobile,
         time_slot: time_slot,
-		branchCode:req.headers.branchcode								  
-				   
+		    branchCode:req.headers.branchcode,
+        image:""
     });
-    child.save((err, saved) => {
-        if (saved) {
-            res.json({
-                success: true,
-                msg: saved
+    Counter.findByIdAndUpdate(
+        {_id: 'CHILD'},
+        {$inc:{sequence_value:1}}, (error,data)=>{
+          if(data){
+            child.number=data.sequence_value;
+            child.save((err, saved) => {
+                if (saved) {
+                    res.json({
+                        success: true,
+                        msg: saved
+                    });
+                } else {
+                    res.json({
+                        success: false,
+                        msg: 'Something went wrong'
+                    });
+                }
             });
-        } else {
+          }else{
             res.json({
                 success: false,
-                msg: 'Something went wrong'
+                msg: error
             });
-        }
-    });
+          }
+        });
 });
+
+async function processChildrenArrayforImages(array,res) {
+  for (const st of array) {
+    let result="";
+      if(st.staff!= undefined && st.staff!=null && st.staff!=""){
+        let staff= await Staff.findById({_id: st.staff})
+        {
+          if(staff){
+            staff.image="";
+            st.staff=JSON.stringify(staff);
+          }else{
+            st.staff="";
+          }
+        }
+      }
+      if(st.image!= undefined && st.image != ""){
+        st.image=st.image.replace("data:image/jpeg;base64,", "");
+        result = await convertImage(st.image);
+     }else{
+       result = await convertImage(defaultImage.replace("data:image/jpeg;base64,", ""))
+     }
+     st.image = "data:image/jpeg;base64," + result;
+  }
+  res.json({
+      success: true,
+      msg: array.sort(function(a,b){
+        return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
+      })
+  });
+
+}
 
 // Get all children
 router.get('/get-children', (req, res, next) => {
      Child.find({branchCode:req.headers.branchcode},null,{sort:{first_name:1,last_name:1}},(err, children) => {
         if (children) {
-            res.json({
-                success: true,
-                msg: children.sort(function(a,b){
-                   return a.first_name.trim().toUpperCase().localeCompare(b.first_name.trim().toUpperCase())
-                })
-											  
-			   
-            });
-		   
-					
-							
-											   
-																																															
-				
-			   
+          processChildrenArrayforImages(children,res);
         } else {
             res.json({
                 success: false,
@@ -4469,12 +847,13 @@ router.get('/get-child/:id', (req, res, next) => {
     child_id = req.params.id;
     Child.findById({
         _id: child_id,
-		branchCode:req.headers.branchcode								 
+		branchCode:req.headers.branchcode
     }, (er, child) => {
         if (child) {
           if(child.staff!=null){
             Staff.findById({_id:child.staff},(err,staff)=>{
               if(staff){
+                staff.image="";
                 const obj={
                   _id:child._id,
                   first_name:child.first_name,
@@ -4484,7 +863,8 @@ router.get('/get-child/:id', (req, res, next) => {
                   parent_mobile:child.parent_mobile,
                   time_slot:child.time_slot,
                   staff:staff,
-				  branchCode:req.headers.branchcode						 
+                  image:child.image,
+				          branchCode:req.headers.branchcode
                 }
                 res.json({
                     success: true,
@@ -4521,37 +901,66 @@ router.post('/update-child', (req, res, next) => {
     const parent_name = req.body.parent_name;
     const parent_mobile = req.body.parent_mobile;
     const time_slot = req.body.time_slot;
-
-											 
-    Child.findByIdAndUpdate({
+    Child.findById({
         _id: id,
-		branchCode:req.headers.branchcode					 
-    }, {
-        first_name: first_name,
-        last_name: last_name,
-        age: age,
-        parent_name: parent_name,
-        parent_mobile: parent_mobile,
-        time_slot: time_slot,
-		branchCode:req.headers.branchcode					  
-				   
-    }, {
-        new: true
-    }, (err, child) => {
-        if (child) {
-            res.json({
-                success: true,
-                msg: child
-            });
-        } else {
-            res.json({
-                success: false,
-                msg: 'Something went wrong'
-            });
-        }
+		    branchCode:req.headers.branchcode
+    },(err,data) => {
+      if(data){
+        data.first_name=first_name;
+        data.last_name=last_name;
+        data.age=age;
+        data.parent_name=parent_name;
+        data.parent_mobile=parent_mobile;
+        data.time_slot=time_slot;
+        data.branchCode=req.headers.branchcode
+        updateChild(id,data,res,next);
+      }else{
+        res.json({
+            success: false,
+            msg: 'Something went wrong'
+        });
+      }
     });
 });
 
+function updateChild(id,data,res,next){
+  Child.findByIdAndUpdate({
+      _id: id,
+      branchCode:data.branchCode
+  }, data, {
+      new: true
+  }, (err, child) => {
+      if (child) {
+          res.json({
+              success: true,
+              msg: child
+          });
+      } else {
+          res.json({
+              success: false,
+              msg: 'Something went wrong'
+          });
+      }
+  });
+}
+
+router.post('/update-child-image/:id',(req,res,next) =>{
+  Child.findById({
+      _id: req.params.id,
+      branchCode:req.headers.branchcode
+  },(err,found) => {
+    if(found){
+        found.image=req.body.image;
+        updateChild(req.params.id,found ,res,next);
+    }else{
+      res.json({
+        success:false,
+        msg: err
+      });
+    }
+  });
+
+});
 // Add task to child
 router.post('/add-task-to-child', (req, res, next) => {
     task_id = req.body.task_id;
@@ -4928,5 +1337,8 @@ router.post('/change-admin-pwd', (req, res) => {
         }
     })
 })
+
+const defaultImage='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/4Sg0RXhpZgAATU0AKgAAAAgADgALAAIAAAAmAAAIwgEOAAIAAAAuAAAI6AESAAMAAAABAAEAAAEaAAUAAAABAAAJFgEbAAUAAAABAAAJHgEoAAMAAAABAAIAAAExAAIAAAAmAAAJJgEyAAIAAAAUAAAJTAITAAMAAAABAAEAAIdpAAQAAAABAAAJYJybAAEAAABCAAAU1JyeAAEAAAGQAAAVFpyfAAEAAABaAAAWpuocAAcAAAgMAAAAtgAAFwAc6gAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFdpbmRvd3MgUGhvdG8gRWRpdG9yIDEwLjAuMTAwMTEuMTYzODQAVmVjdG9yIEZsYXQgU3R5bGUgQ2hhcmFjdGVyIEF2YXRhciBJY29uIE1hbGUAAAAAAEgAAAABAAAASAAAAAFXaW5kb3dzIFBob3RvIEVkaXRvciAxMC4wLjEwMDExLjE2Mzg0ADIwMTk6MDg6MjMgMTI6NTE6MTkAAAqQAwACAAAAFAAAEeqQBAACAAAAFAAAEf6ShgAHAAACwAAAEhKSkAACAAAABDc1NgCSkQACAAAAAzAwAACSkgACAAAAAzAwAACgAQADAAAAAQABAACgAgAEAAAAAQAAE4igAwAEAAAAAQAAE4jqHAAHAAAIDAAACd4AAAAAHOoAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAyMDE5OjA4OjIzIDEyOjUwOjQ4ADIwMTk6MDg6MjMgMTI6NTA6NDgAQVNDSUkAAABTU1VDdjNINHNJQUFBQUFBQUVBSDJVeTY2Yk1CQ0c5NVg2RGhIcjBIQXo0QzY3Nks1cUY5MGRuY1ZnVDhDTndjZzJxYUtqdkh2TkpZbEJxQnZFelBCL25ndmpqOCtmRG9lZ0FpTlk4UFh3TVZyT0ZsSU94bXF3UW5YT0hSOFhQM0pobFJZZ25UTWFmZmNwRWhnTGRqQm9Sc1RpWW1DeGR0L096a1gvT09kdHRnK1B3QlIwQ2hjS2ZpTnJPaVZWZlF1T1h0UU0xUmo5SVF4REthRkROWmpnRWI4Zi93UDhOaGpSb1RHbjc2S0RqdUVlOWhlcVh1S0xONys4UCtxR0dqdDJleFV5Q3B2Qld0VEdLbmJ4SzNLaHVIaUMzcDluQldkbGxSU3cvVGJLMHVTTGUyYmwrTXpKbnBScmhOWlkwZUpXVGN0Vk5Tc2p6dE05V0NYcUtlbStjUWx0ZUVzYmZNclA2Zzh5YTNiVHdsNFpZU2VRMlpBU3VxS2syUjdnNnNocXQ0VWtXOG16Y2s5ZWErZ2J3YlM0b3Q3b0YvS0pOYUNCalhNNjllc1JleHlRME40MkFFNHFYaVNBSWFOUkZHWUZwMkdWMERUa0dKOHA0MldVeGVzS2N4Y21LUy9DcEN5VE1JdUlFMFFwRFhsU1VGNm1jWnhXZk85dzVtWnJYUVV0NkF2YWJSZnpsMlIrdVh0YnAxRWl6RnYzTmhPRHkxOVhhK3Z2NFZWd1ZKNE5BeGZLVzhtcllpQkhRZXFSZXkyWTZHcFBwbXd6TmZtNTN1NStVSzNuNkpTZE1sbit3WUM3L1IvTk9JMEp6VWxTRkhsQktDVkpGRHp1RERkMndmMWNCUjhWQlQwVFpLNTFycDk1bUVHSklZM2NKRGlXUUVtYzVHYytMdGo5SHliSW5nRzdCQUFBAAAAAEYAbABhAHQAIABTAHQAeQBsAGUAIABDAGgAYQByAGEAYwB0AGUAcgAgAEEAdgBhAHQAYQByACAASQBjAG8AbgAAAGkAYwBvAG4AOwAgAGEAdgBhAHQAYQByADsAIABhAHYAYQA7ACAAcwB5AG0AYgBvAGwAOwAgAGYAbABhAHQAOwAgAGMAaABhAHIAYQBjAHQAZQByADsAIABwAHIAbwBmAGkAbABlACAAaQBjAG8AbgA7ACAAZgBsAGEAdAAgAGQAZQBzAGkAZwBuADsAIABiAHUAcwBpAG4AZQBzAHMAIABwAGUAbwBwAGwAZQA7ACAAcABlAG8AcABsAGUAOwAgAHMAaQBnAG4AOwAgAGkAcwBvAGwAYQB0AGUAZAA7ACAAdgBlAGMAdABvAHIAOwAgAGYAYQBjAGUAOwAgAGMAYQBzAHUAYQBsADsAIABoAHUAbQBhAG4AOwAgAGEAZAB1AGwAdAA7ACAAcABvAHIAdAByAGEAaQB0ADsAIABwAGUAcgBzAG8AbgA7ACAAbQBvAGQAZQBsADsAIABzAGkAbQBwAGwAZQA7ACAAbQBhAG4AOwAgAG0AYQBsAGUAOwAgAHQALQBzAGgAaQByAHQAAABWAGUAYwB0AG8AcgAgAEYAbABhAHQAIABTAHQAeQBsAGUAIABDAGgAYQByAGEAYwB0AGUAcgAgAEEAdgBhAHQAYQByACAASQBjAG8AbgAgAE0AYQBsAGUAAAAABgEDAAMAAAABAAYAAAEaAAUAAAABAAAXTgEbAAUAAAABAAAXVgEoAAMAAAABAAIAAAIBAAQAAAABAAAXXgICAAQAAAABAAAQzQAAAAAAAABgAAAAAQAAAGAAAAAB/9j/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAEAAP8DASEAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD3+igAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACk3D1FABuHqKWgAooAKKACigAooAKKACigAooAKKACigAooAKKACigApCQOtADDJ6Cm7ie9UkQ2JRVCCigBQxHenCQ9xUtDTHhgelLUlhRQAUUAFFABRQAUUAFFABRQAUUAFFABRQBGz+n50yrSIbuFFMQUjMqgliAB1JNIBsc0UwJikR8ddrA0+hNNXQNNOzCimAU5XI680mrgnYkBBGRS1BoFFABRQAUUAFFABRQAUUAFFABRQAhIAyaiZi1UkTJiUVRIVTutVsLLcLi7hRlGSpcbvy61nUqQprmm7IqEJTdoq5xeq+M7u5Zo7AfZ4em8jLt/h+H51zk081xIZJ5Xlc9WdiT+Zr5jF4ueIl5dj6HDYWNGPn3JotSv4IxHDe3EaDoqSsAPwBq3aeIdStpdzXty69wZM/+hAj9Kzp4qtBq0nZeZc8NSmneK1Oq0nxbbXDiK7m8pjwDKoHPuw4/QV04IYAggg8givpM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RX/xo+s1e4fVaXb8w/4RfRv+fP8A8iv/AI0f8Ivo3/Pn/wCRX/xo+s1e4fVaXb8w/wCEX0b/AJ8//Ir/AONH/CL6N/z5/wDkV/8AGj6zV7h9VpdvzD/hF9G/58//ACK/+NQw+DtBgeR47Da0hyx85zk/99e9H1mr3H9Wpdib/hF9G/58/wDyK/8AjR/wi+jf8+f/AJFf/Gj6zV7i+q0u35h/wi+jf8+f/kV/8au2WnWunRtHaReWrHJG4nn8TUyr1Jq0mXChTg7xRaorI1CigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigAooAKKACigD/9kA/+E7LWh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8APD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4NCjx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDQuNC4wLUV4aXYyIj4NCgk8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPg0KCQk8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1sbnM6TWljcm9zb2Z0UGhvdG89Imh0dHA6Ly9ucy5taWNyb3NvZnQuY29tL3Bob3RvLzEuMC8iPg0KCQkJPGRjOmRlc2NyaXB0aW9uPg0KCQkJCTxyZGY6QWx0Pg0KCQkJCQk8cmRmOmxpIHhtbDpsYW5nPSJ4LXJlcGFpciI+VmVjdG9yIEZsYXQgU3R5bGUgQ2hhcmFjdGVyIEF2YXRhciBJY29uIE1hbGU8L3JkZjpsaT4NCgkJCQk8L3JkZjpBbHQ+DQoJCQk8L2RjOmRlc2NyaXB0aW9uPg0KCQkJPGRjOnRpdGxlPg0KCQkJCTxyZGY6QWx0Pg0KCQkJCQk8cmRmOmxpIHhtbDpsYW5nPSJ4LXJlcGFpciI+RmxhdCBTdHlsZSBDaGFyYWN0ZXIgQXZhdGFyIEljb248L3JkZjpsaT4NCgkJCQk8L3JkZjpBbHQ+DQoJCQk8L2RjOnRpdGxlPg0KCQkJPGRjOnN1YmplY3Q+DQoJCQkJPHJkZjpCYWc+DQoJCQkJCTxyZGY6bGk+aWNvbjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmF2YXRhcjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmF2YTwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnN5bWJvbDwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmZsYXQ8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5jaGFyYWN0ZXI8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5wcm9maWxlIGljb248L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5mbGF0IGRlc2lnbjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmJ1c2luZXNzIHBlb3BsZTwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnBlb3BsZTwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnNpZ248L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5pc29sYXRlZDwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnZlY3RvcjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmZhY2U8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5jYXN1YWw8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5odW1hbjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPmFkdWx0PC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+cG9ydHJhaXQ8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5wZXJzb248L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5tb2RlbDwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnNpbXBsZTwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPm1hbjwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPm1hbGU8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT50LXNoaXJ0PC9yZGY6bGk+DQoJCQkJPC9yZGY6QmFnPg0KCQkJPC9kYzpzdWJqZWN0Pg0KCQkJPGRjOmNyZWF0b3I+DQoJCQkJPHJkZjpTZXE+DQoJCQkJCTxyZGY6bGk+VmVjdG9yU3RvY2suY29tLzE5MzY3NTExPC9yZGY6bGk+DQoJCQkJPC9yZGY6U2VxPg0KCQkJPC9kYzpjcmVhdG9yPg0KCQkJPHBob3Rvc2hvcDpIZWFkbGluZT4NCgkJCQk8cmRmOkFsdD4NCgkJCQkJPHJkZjpsaT5GbGF0IFN0eWxlIENoYXJhY3RlciBBdmF0YXIgSWNvbjwvcmRmOmxpPg0KCQkJCTwvcmRmOkFsdD4NCgkJCTwvcGhvdG9zaG9wOkhlYWRsaW5lPg0KCQkJPE1pY3Jvc29mdFBob3RvOkxhc3RLZXl3b3JkWE1QPg0KCQkJCTxyZGY6QmFnPg0KCQkJCQk8cmRmOmxpPmljb248L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5hdmF0YXI8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5hdmE8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5zeW1ib2w8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5mbGF0PC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+Y2hhcmFjdGVyPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+cHJvZmlsZSBpY29uPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+ZmxhdCBkZXNpZ248L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5idXNpbmVzcyBwZW9wbGU8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5wZW9wbGU8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5zaWduPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+aXNvbGF0ZWQ8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT52ZWN0b3I8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5mYWNlPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+Y2FzdWFsPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+aHVtYW48L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5hZHVsdDwvcmRmOmxpPg0KCQkJCQk8cmRmOmxpPnBvcnRyYWl0PC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+cGVyc29uPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+bW9kZWw8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5zaW1wbGU8L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5tYW48L3JkZjpsaT4NCgkJCQkJPHJkZjpsaT5tYWxlPC9yZGY6bGk+DQoJCQkJCTxyZGY6bGk+dC1zaGlydDwvcmRmOmxpPg0KCQkJCTwvcmRmOkJhZz4NCgkJCTwvTWljcm9zb2Z0UGhvdG86TGFzdEtleXdvcmRYTVA+DQoJCTwvcmRmOkRlc2NyaXB0aW9uPg0KCQk8cmRmOkRlc2NyaXB0aW9uIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+PHhtcDpDcmVhdG9yVG9vbD5XaW5kb3dzIFBob3RvIEVkaXRvciAxMC4wLjEwMDExLjE2Mzg0PC94bXA6Q3JlYXRvclRvb2w+PHhtcDpDcmVhdGVEYXRlPjIwMTktMDgtMjNUMTI6NTA6NDg8L3htcDpDcmVhdGVEYXRlPjwvcmRmOkRlc2NyaXB0aW9uPjwvcmRmOlJERj4NCjwveDp4bXBtZXRhPg0KICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgPD94cGFja2V0IGVuZD0ndyc/Pv/tAfBQaG90b3Nob3AgMy4wADhCSU0EBAAAAAABuBwBAAACAAQcAVoAAxslRxwCBQAgRmxhdCBTdHlsZSBDaGFyYWN0ZXIgQXZhdGFyIEljb24cAmkAIEZsYXQgU3R5bGUgQ2hhcmFjdGVyIEF2YXRhciBJY29uHAJ4ACxWZWN0b3IgRmxhdCBTdHlsZSBDaGFyYWN0ZXIgQXZhdGFyIEljb24gTWFsZRwCGQAEaWNvbhwCGQAGYXZhdGFyHAIZAANhdmEcAhkABnN5bWJvbBwCGQAEZmxhdBwCGQAJY2hhcmFjdGVyHAIZAAxwcm9maWxlIGljb24cAhkAC2ZsYXQgZGVzaWduHAIZAA9idXNpbmVzcyBwZW9wbGUcAhkABnBlb3BsZRwCGQAEc2lnbhwCGQAIaXNvbGF0ZWQcAhkABnZlY3RvchwCGQAEZmFjZRwCGQAGY2FzdWFsHAIZAAVodW1hbhwCGQAFYWR1bHQcAhkACHBvcnRyYWl0HAIZAAZwZXJzb24cAhkABW1vZGVsHAIZAAZzaW1wbGUcAhkAA21hbhwCGQAEbWFsZRwCGQAHdC1zaGlydBwCNwAIMjAxOTA4MjMcAjwACzEyNTA0OCswMDAwOEJJTQQlAAAAAAAQv6fXtD7bKEcQnqrgQJGBcv/bAEMAAwICAwICAwMDAwQDAwQFCAUFBAQFCgcHBggMCgwMCwoLCw0OEhANDhEOCwsQFhARExQVFRUMDxcYFhQYEhQVFP/bAEMBAwQEBQQFCQUFCRQNCw0UFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFP/AABEIA+QD4AMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AP1TooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAopMio2lRerAfjQBLRVdrtB0yfoKY14ey/marlZHPEt0mRVI3Mh7gfQU0zSH+M1XIyfaIv5FIWC1nnJ6sT+NJT9n5i9p5GgZFHcfnR5yf3l/Os+in7MXtPIv+Yn95fzpfOT+8v51n0UezD2j7Gh5i+o/OlDBqzqKPZ+Ye08jSyKMis4M394j8aUSuOjml7Nj9ojRoqiLmT1B+opwvD3X8jU8jK9pEuUVXW8RhzkfUVIsyN0YfnU2aKUk9iSikyKWkUFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUU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rxD4H2xuPiZpZ7RLNL+UZH9a91+LwJ+GviDj/lgD/wCPrXkn7Odn5/jS+uSOLeyYZ93dR/IGvjcxhz5th16fg2z6DBy5cBV+f4pI+odH1N/MWCViytwrHqD6Vug5FcdkoQw6jkV10MnmRq394A1+oYGq5xcJdD86zGiqclOPUfRRRXqnjhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABV21fdEPUcVSqa0ba5X1rOexcHZl2iiisDqCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAEbpWc7bmZvU1cmbbGx9sVRArWmuphUfQWiiitjEKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK4rXBjVrnP94fyFdrXJeJofL1IP2kQH8RxXm49XpJ+Z6uWySrNPqjJr5+/aFsjD4qsrkDi4stpPurMP5EV9A15D+0Vp3naTo98B/qp3gY+gdcj9VNfB55T9pgZ+Vn+P8AkfdZZPkxUfO6PTtPTy7G1TpthQfkoqxUduNsEQByAij9BUle5HSKPOe7CiiiqEFFFFABRRRQAUUUUAFFFFABRRRQBe0/7r/UVdqlp/3X+oq7UsAooopAFFFFABRRRQAUUUUAFFFFABRRRQBxvxdbHw18Qf8AXuB/4+tcR+zZppj03W78j/XTxwKfZVLH9XFdp8ZG2fDTXugzEg595FqP4M6OdJ+HelBhtkuQ103/AANsj/x0LXgVKXtM2hJ/Zhf8Wj04VOXAyj3l+iZ3DV1dmMWsI/2F/lXKqpeRVH8RxXXIuxQo6AYr7bL1rJnx+aSVoRHUUUV7h8+FFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFKrbJFPoaSikBpL0pahhbdGp9qmrlOxO4UUUUDCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoopG6UAVrxsKo9TVapbr5pMegqKuiKsjlm7yCiiirICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACsbxNaGayEqjLQnJ/3T1/pWzTXQOpDAMpGCD3FZVYKpBwfU1o1HSmproefVxvxf0r+1fh7qyqu57dBdKP8AcOT/AOO7q73VNPbTrpozkxnlG9RWdeWsd9Zz20o3RzRtGw9QwIP86+OxVF1Kc6MuqaPuMPWSlGrHyZDbkNbQEdDEh/8AHRUlMt7c2tlbRMdxiiWMkd8KB/Sn1pHZXDqFFFFUAUUUUAFFFFABRRRQAUUUUAFFFFAF7T/uv9RV2qWn/df6irtSwCiiikAUUUUAFFFFABRRRQAUUUUAFFFFAHG/Fixk1TwLeWEIJlu5re3XHq0yCurs7WOwtYLaIYigjWJB/sqMD9BRcWsd15fmKGEciyrnsw6H8KmVSxCqMsTgAd6xjSSqur1aS+67/Utz9xQ6Jt/fb/Iu6Lb/AGi8DkfLH8349q6SqunWYs7cIfvnlj71ar63C0vZU7PdnxmMre2qtrZbBRRRXYcQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAWrNvlK+hqzVG0bEuPUVdXpXPJanVD4RaKKKgsKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkbpS01jgZ9KAKErbpmPvTaOpzRXUcQUUUUwCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCtf2MV/AYpRx1DDqp9RXJ32j3Nixyhkj7SIMj8fSu1orjrYaFbV6M7cPi54fRarseeNC8ittRm2jJwDxiq9ekyIHQq3KsMEe1edXEBtriWFuqMV/I14+Iw/sEne9z38Ji/rLaatYjooorjPRCiiigAooooAKKKKACiiigAooooAvaf8Adf6irtUtP+6/1FXalgFFFFIAooooAKKKKACiiigAooooAKKKRqAHwwy3DbY42b6dK3NN0oWn7yTDze3RfpVjTYfs9nFGeuMn6nmrVfQYfCRglOWrPl8VjZ1G6cdF+YUUUV6Z5QUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADovlkU+9aC9KzehBrSVtwzWNQ3p9RaKKKyNgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKjnOI2+lSVXujiFvwprcT2KlFItLXUcYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVxviq18nUhKB8sy5/EcH+ldlWL4otftGmmQDLQtv/Dof8+1ceLhz0nbod+BqezrLs9DjqKKK+bPrgooooAKKKKACiiigAooooAKKKKAL2nj5X+oq7VPT/8AVv8AX+lXKlgFFFFIAooooAKKKKACiiigAooooAKksbf7VeRx9icn6DrUda2g2+WkmP8AuD+v9K6MPT9pUUTlxVT2VKUjZWloHFFfVnxgUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAjVoQn9yp9qoVbtT+6X2zWc9jWnuWKKKKwOgKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACq95/qx9asVVvD8qj3qo7oiXwsrUUUV0nKFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFMljWWNkcZVwVI9jT6DzS3BO2x5zc27WlzJC33kYqairf8W2fl3Mdyo4kG1vqP/rfyrAr5WrT9lNxPtaFT21OMwooorI6AooooAKKKKACiiigAooooAv6f/q3+v9KuVT0//Vv9f6VcqWAUUUUgCiiigAooooAKKKKACiiigBG54rqbG3+zW0cfcDn696wdJt/tF4pIysfzH+ldKte3l9PR1GfP5nV1jSXqLRRRXsHhBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABVuz/wBWfrVSrFn91h71nPY0p/EW6KKKwOkKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACql5/B+NWm6VWvOqfjVR+Iifwlaiiiuk5QooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooApavY/btPlhA+fG5P94dP8+9cD3weD6V6U1cV4ksPsOoF1GI5vnHse4/z615GPp6Koj3MsrWbpPrqjKooorxj6EKKKKACiiigAooooAKKKKAL+n/6t/r/SrlUtO+6/+9V2pYBRRRSAKKKKACiiigAooooAKQ9KWpbG2+2XaJ/B1b6VUYuclFdSJyUIuUtkbejWvkWgYjDyfMfp2rQpAMdOPalr6ynBU4qC6HxVWo6k3N9QooorUyCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACrFn0f8Kr1PZ/x/hUT2Lh8RcooornOoKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAEbpVa86p+NWqq3nRPqaqPxET+ErUUUV0nKFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABWdrmm/2hYuijMqfOn19PxrRoIqJxU4uL6lwm6clOO6PNOnHSiuh8S6IY2a8gX5DzIo7H+99K54Gvl6lOVKTjI+zo1o14KcQooorI3CiiigAooooAKKKKALun/cf/eFXqo6f9x/94VeqWAUUUUgCiiigAooooAKKKKAEJxXQaPZm3t97DEknJ9h2rP0nTjdMJZBiIHjP8R/wroAK9rA4d/xZfI8DMMSn+5j8/8AIWiiivZPBCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqez/j/CoKns+jfWonsXD4i5RRRXOdQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFVrwfKp96s1XvBmP6EVUdyJfCypRSLS10nKFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAhGa5XXPDhiLXFmuY+rRDqvuPb2rq6KwrUY1o2kdFCvPDy5onmgNFdP4m0eBLWa+QeU8Y3Oqjhuf0Ncujq4ypBHqK+crUnRlys+sw9eOIhzxFooorE6QooooAKKKKALun/cf/AHhV6qOn/cf/AHhV6pYBRRRSAKKKKACiimvIqqSxAHqaAFJxWjpuktcYlmBWPqF7t/8AWqbR9NikhiuX/ebxuVSOBW0BXsYbB81p1PuPBxeOtenS+8RVCqABgDgAdqWiivaPACiiimAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFWbNfkb61Wq3a/6v6k1nPY0p/EWKKKKwOkKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACoLgZhb86nqKXmNh7GmtxPYo0UUV1HGFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAZXin/kX7//AK5/1FeYxyvC2VOPbsa9O8U/8i/f/wDXP+ory+vnsw/iL0Ppsr/hS9f0RowXqScN8je/SrNYtSxXUkPAO5fQ15qkexY1aKrxX0cnBOw+jf41YBBqhBRRRTAv6d/q3/3quVT07/Vv/vVcqWAUUUhYKMk4HvSAWkJxVWbUEThPnPt0qjLcST/eOF9B0pXHZl6a+SPhfnb26Cs+WV5my5z6DsKZtFLSLSsd9oP/ACB7P/rn/Wr9UNB/5A9n/wBc/wCtX6+uo/w4+iPhK38WXqwooorcxCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKuW4/cr+dUmrQiG2NR7CsqmxrT3JKKKKxOgKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACkIzS0jdKAM3oxFFPmXbM31zTK6kcb0YUUUUxBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAZXin/kX7/wD65/1FeX16h4p/5F+//wCuf9RXl9fPZh/EXofTZX/Cl6/ogoooryj2gp0crxfdYj27U2imBaTUHH3lDfTipV1GM9Qw/DNUKKfMxHQaffxCJuT970qw2poOisf0rE0//Un6/wBKt0rj5UWn1GRvugL+pqs8jSHLsW+tJRQVYKKKKQBRRRQB32g/8gez/wCuf9av1Q0H/kD2f/XP+tX6+vo/w4+iPg638WXqwooorcxCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAMbiBWkvSqEPzSqPQ5q+vSsJ7m9PYWiiiszYKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCleLh1PqKhq3eLujz6GqldENjlmrSCiiirICiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACijOKz9Y17TvD9qbjU72Cxg/vzuFz9B1P4UJNuyE2oq7NCqOsa1p/h7TZtQ1S+t9OsYRmS5upRHGv1J4/CvFviT+0g1jpN3H4LsV1HUlX93cX6lYffamQzH0zgV8Q+OPiJ4l+I2pG88S6tc6lMhOyOU7YofZIxhU/AZr0YYCrKzqLlX4nnSx9LVU3zM+zNa/ax8OeKPF2n+EPDNrNqseoT/Z5tVkzFCgwTmNSNzn5epCj610Y6V+fmg65eeGdastVsHEd5ZyiWJmXcMjsR3BGQfrX2r8M/iVp3xK0EXtpiC8iwt3ZE5aB/6qezfh1FeDnWDdJxqQXu2s/W59HkWNjUUqM3717peVuh19FFFfLH14UUUUAFFFFAF3T/APUn6/0q3VTT/wDUn6/0q3QUgooooAKKKKACkJwM0tcb8UviZpvwx8OPqF4RPdyZSzsg2GuJP6KOCzdh7kVpTpyqzUIK7ZnVqwowdSo7JEOl/taeHPDvjPU/CXiW2m0hdPuDbQ6pHmWB1wCDIANyHnqAw+le8aTrFjr2nw32m3kF/ZTDMdzayCSNx7MOK/KPX9dvPFGuX2r37rJe3szTSsi7RuPoOwHAH0rf+Gvjjxd4O16L/hEtVubC5mcboEO6CX1MkZyrD1JGfev0dZf7kVF+9Zemx+WSzC9SUpL3W3+Z+pVFeK+Df2jLW4ggt/EtqbS6CgSXtmpaF2xydn3lGfTdXrek65p+v2YutNvIL63P/LSBwwH19PxrirYerh/4kbfkdlHE0sQv3cr/AJl+iiiuc6QooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooozigCa0XMjH0FXar2a7Y8+pqxXNLc6oK0QoooqSwooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAI5V3Iw9RWetabdKz5l2SMPetafYxqLqNooorYwCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiigc8Dn6UAFFcv4i+JXhvwtuW/1WETr/y7wHzZf++Vzj8cV5f4j/aUkffHoWlBB0Fzftk/URqf5muyjg69fWEdO/Q4q2MoUPjlr957uzhVLEgKBkk8AfWuG8TfGbwv4bLxtf8A9o3S8fZ7AeYc+hb7o/Ovm7xF461/xYx/tTVJ7iM8iAHZEP8AgC4FYIGAK9yjk0d60vkv8zw62cN6UY282er+Jv2htd1TfFpMEWjQHjzP9bNj/eIwPwH415jqGo3erXTXN9czXlw3WWdy7fmar0V7lHD0qCtTjb+u+54VbEVa7vUlf+uwV578QvApu/M1XTo8zj5p4EH3/wDbUevqO/1r0KitZwVRWZnCbpy5kfNwNbHhTxXqfgnW4NV0m4MF1FwQeUkXujjup9PxHNdv46+H32syajpceJ+WmtlH3/Vl9/bv9a8w6EgjBHGDXi1qNrwmrp/ie1RrXtUpuzX4H2/8MvinpfxM0nzrUi21GFR9qsHbLxH+8v8AeQ9m/A4NdrX586Jrl/4a1W31LTLqSzvYG3JLGeR6gjuD3B4NfW/wj+N2n/ESFLC88vT/ABCq/NbZwlxjq0Wf1XqPcV+e5llMsNerR1h+X/AP0nK84jikqVd2n+D/AOCen0UnWlr5w+nCiiigC7p/+pP1/pVuqmn/AOpP1/pVugpBRRRQAUUV598WPjHpPwt0398Re6zMubbTkbDN/tuf4U9+p6D22pUp1pqFNXbMa1anQg6lV2SNP4kfEvSfhnoLahqL+ZO+VtbJGxJcOOw9AO7dB9cCvh/xv421X4g6/Pq2rz+ZO/yxxJxHAnZEHYD8yeTzUXi7xfqvjrXJ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8EtO3Q+uvDPxS8M+KiiWepxx3Lf8u13+5kz7A8H8Ca67p14+tfCxAIwRmuu8L/FTxL4T2Ja6g1xaL/y6Xn72PHoM8r+BFeFWyfrRl8n/AJnuUc46Vo/NH13RXlXhH9oLRNaZINXjbRLo8eYx327H/e6r/wACH416jBcR3EKSxSJLE4yskbBlYeoI4NeBWo1KD5akbH0FGvTrrmpyuSUUUVibhRRRQAUUUUAFFFFABRRRQA6FPMkA7dTWgvSq1mnylvXpVqueTuzppqyCiiioNAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAayhlIPQis4qUYqeorTqndx4If8DWkHZ2Mqi0uQUUUVuc4UUUUAFFFFABRVe+vrfTbSa6upkt7aFS8ksrbVQDuTXzt8S/jjd+IGm03QHksdMOVe5HyzXA9u6L7dT3x0rrw2FqYqVoLTqzixOKp4WPNN69EejfED42aV4RaSzsduraqvBjRv3UJ/wBth1P+yOfUivnzxR4y1jxlefaNWvHnCnMcI+WKP/dToPr196xRxRX2WFwNLCq8VeXf+tj47FY6rin7zsu39bhRRRXoHnhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAcj4t+H1rr++5tdtpfnksB8kp/2h6+4/HNeTalpl1o921teQtBMv8LdCPUHuPcV9D1n61oVlr9obe9hEq/wsOGQ+qntXJVoKesdGddKu4aS1R8/1r+HfC194muNlqmyFTiS4cfIn+J9hXZ6f8I44tTdry786xU5REG139mPb8OvtXoFraQ2VukEESQwoMLGgwBXPTwzbvPRHRUxKStDVmX4b8J2PhmDbbp5k7DElw4+dvb2HsP1raoor0YxUVZHnOTk7sKKKKokKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACuj8I/EDW/A84bTbs/ZicvZzfNC//Aex9xg1zlFROEakeWaui4TlTlzQdmfU/gH4yaR42MdrIRpurNx9lmb5ZD/0zbv9Dg/WvQa+F+hyOCOQR2r1/wCG/wAeLrRzFp3iN5L2xGFS9+9NCP8Aa/vr/wCPD3r5fF5U43nh9V2/yPp8JmqlaGI08/8AM+iaKr2N9b6laQ3VpPHc20yh45Ym3Kw9QasV876n0fmgooooGFFFFABQFLsFHc0VPaR5Jc/QVMnZFRV3YtKoVQB0FOoormOsKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApkiB1KnoafRQBmEFWKnqKKsXcXIcfQ1Xrpi7o5JLldgoooqiQqOaZLeJ5JHWONFLM7HAUDkkn0qSvD/2gviEYU/4Rewlw8gD37qeinlYvx6n2wO5row+HliaqpxObEYiOGpupI4n4tfFCbxxqJs7KRo9Ct3/dp089h/y0b/2Udhz1rz2iivv6NGFCCpwWiPgK1WdabnN6sKKKK2MQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA7z4V/FC48B6iLe4ZptDuH/fw9TET/y0T39R3Hvivqe1uory3ingkWaCVQ6SIcqykZBB9K+HK9x/Z7+IBDnwvfSZU5ksGY9O7RfzYfiPSvnM0wSkniKa1W/+Z9FleMcZewqPR7f5Hu9FFFfKn1gUUUUAAUswA6mtCNAigDoKr2sfO8/QVbrCbu7HRTVlcKKKKzNQooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigBrKGUg8g1nupjcqe1aVV7qLcu4feFXF2ZnON1cqUUUV0HMYPjbxVB4N8NXmqzgMYVxFGf+Wkh4RfxP6A18eX19capfXF5dSGa5uJDLJIf4mJyTXqX7Q3jA6r4ii0O3fNtpw3TAHhp2HP/AHyuB9Sa8mr7LKsN7Gj7SW8vy6f5nxeaYj21X2a2j+fUKKKK9s8UKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAqazvJ9PvILu2kMNxA6yRyL1Vgcg/nUNFLfRj21R9leCfFMPjLwzY6rDhWmTEsY/5Zyjh1/P8AQit6vnT9nfxcdO1640Gd8W9+PMgBPSZR0/4Eo/NRX0XX5/jMP9WrOHTdeh9/g8R9Zoqb32fqFKimRwo701qt2sW1dx6n+VcEnZHoRjzMnVQqgDoKdRRXOdYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFI3SlooAoXEXltkfdNYnizxDF4V8O6hq02CtrEXVT/G/RV/FiBXTyRiRSDXz9+0r4lMS6d4eiblj9ruAD2GVjH57j+Ar0cHS+s1Y0vv9Dy8dV+rUZVPu9Tw27upr67murhzJPM7SSOf4mJyT+ZqKiiv0fbRH5zvuFFFFAgooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigCfT7+fSr+2vbVtlzbyLLGw7MpyP5V9n+Hdbg8RaJY6pb/6m7hWUD+7nqPwOR+FfFNfQn7NviM32kX+gyPmS0f7RCCf+Wbn5h+Dc/wDAq8DOKPPSVVbx/JnvZRX5KrpPaX5r/gHtFvH5jZP3RV5elNjjEagDtT6+Ik7s+7jHlQUUUVJQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADGYKpJOAOST2r4o+IHiQ+LfGWq6puJilmKw57RL8qfoM/jX1B8ZPEh8M/D3VJ0fbPcJ9khP+1JxkfRdx/Cvj0AAYHSvrcjo6SrP0X6/ofIZ7X1hRXq/wAl+otFFFfVnyYUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFdf8JPEn/CK/EDSrp32W80n2WfJ42ScZP0O0/hXIUhz2JB9R2rKrTVWEqctmrGtOo6U41I7o++16Utcv8OfEX/CVeC9J1IsGllgCzf8AXRflf/x4Guor8vnF05OEt0fqdOaqRU47MKKKKgsKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiikbpQB87ftPeIBNqOj6JG3ywo13KAf4m+VM/gG/OvDq6j4na9/wk3j7Wr5W3xeeYYj/sJ8g/ln8a5ev0rA0fYYaEPL8z8yx1b2+JnPz/BBRRRXccIUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAH0J+y/4h87TdX0WRuYJVuogf7r/ACt+qj/vqvd6+QPgfr39hfEjTNzbYb3dZyc9d4+X/wAeC19fL0r4HN6Ps8U5LaWv+Z+gZPW9phVF7x0FooorxT2wooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK5/x1rn/CM+D9Y1PO1re2dk/wB8jC/+PEV0FeP/ALS2tCx8F2uno2Hv7pQR6og3H9dldWFpe2rwp93/AMP+ByYur7GhOp2X/DHzGM9zk9z60tFFfpx+XhRRRQAUUUUAFFFFABRRRQAUUUUAFFFFADRIpdlB+YAEj65/wNOrK0+58/XNYTPEPkR/jsLH+datJO43oFFFFMQUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQA0yAOFzyQSB9P/ANYp1Zd/c+Rrmkx54mE6fiFDf0rUpJ3uO2wUUUUxBRRRQAUUUUAFFFFABRRRQAUUUUASW11JY3MNzCSssLrKhHZlOR+or7n0XVI9Y0mzvosGK6hSZcejKD/WvhSvq/8AZ91r+1vhvZwscyWEr2rc84B3L/46wH4V8znlLmpQqLo/zPpsjq8tWVLur/cemUUUV8afahRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAjdK+Y/wBpjWftnjGw05Wytla7mHo8jZP6KtfTjdK+Lfifq39ufEHXrsNvQ3TRIf8AZT5B/wCg17+S0+fEOfZfnp/mfPZ3U5cOoLq/y1/yOXooor7k+FCiiigAooooAKKKKACiiigAooooAKKKa7iNS56KNx/CgDlPB139s17xTJnI+1qB9ACv9K62vOvhLcG4n1pycmR0kP4l69FrGi+aCZvWXLNoKKKK2MAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDlPFt19k8Q+FnzgG7dSfYqF/rXV1578Vbk2t1oUoODHK8n5FK9BBDfMOh5FYwfvyRtNe5Fi0UUVsYhRRRQAUUUUAFFFFABRRRQAUUUUAFe4/su615epa3pLHiWNLpB7qdrfoy/lXh1dz8E9Y/sf4maOxOI7lmtX/4GpA/8eC15+YU/a4WcfK/3anoZfV9jiqcvO33n2FRSL0pa/Nz9LCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDP1zUl0nR76+bG22gkmOf9lSf6V8KtI0zNI5y7ksx9SeTX118c9U/sv4ZayQ217hUtl/4GwB/TNfIlfY5FTtTnU7u33f8ADnxee1OarCn2V/v/AOGCiiivpz5gKKKKACiiigAooooAKKKKACiiigArO8R3X2PQNSmzjZbyEfXaQP51o1zXxEn+z+EL/nBk2R/mwqJu0Wy4K8kjlfg62271RP8AplGfyY/416fXlPwifGs36f3rcH8nH+NerVjh/wCGjbEfxGFFFFdJzBRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHmPxibM+lp38uU/qtegaHc/bNHsJ+vmW8bf+OivOfi8+dV05PS3Y/m3/wBauz+H9x9o8Iaac8ohjP8AwFiK44P99JHZNfuYs6Giiiuw4wooooAKKKKACiiigAooooAKKKKACp9Pvn0vULW9jOJLaVJlPurBv6VBQeeO1JpNWY02ndH3na3Ud3bRTxndHKgdT6gjIqxXGfCHVf7Y+G+gTs251thAx94yU/8AZa7OvyypB05yg+jaP1WlP2lOM11SYUUUVmahRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHif7UGpeT4Z0ixB/4+LsykeoRD/VxXzhXsv7T2o+d4o0iyDZEFm0pHoXfH8krxqv0LKocmEh56n53ms+fFz8rL8P8wooor1jyAooooAKKKKACiiigAooooAKKKKACuI+LNx5fh2CLP+tuV/RSa7evOPjDP+70qDPVpJMf98isK7tTZvQV6iMf4TybfE0i/wB+2cfkVNev14v8NJPL8YWw/vxyL/47n+le0VnhvgNMV8YUUUV1nIFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAeR/FmTd4jt0/uWq/qzGup+FM/m+GGj/wCeVw4/MA/1rjfifJ5ni6UZ+5DGv6Z/rXQ/B6fNpqcOfuyRuB9QR/SvOg/37PSmv9nR6JRRRXonmhRRRQAUUUUAFFFFABRRRQAUUUUAFB5oooA+mP2ZdU+1eCr2yJy1petgeiuoYfrur2OvnD9l3UvL1zXNPzxNbxzge6MVP6OK+j6/O8zh7PFz89fvP0bK6ntMJDy0+4KKKK8s9UKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigApG6UtI3SgD5F+PV+L74oaqAcrbpFAPwQE/qxrz+t3x9fjUvHOv3QYESX02PoGKj9BWDx6iv0/DR9nQhHsl+R+W4mftK85d2xaKTj1FHHqK6TmFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBa8o+Ls+7W7GL+5b5/Nj/hXq24eteN/FGcSeLZFyP3cMa9fYn+tcuJ/hnXhv4hR8CS+T4w0s+spX81Ir3Ovn/wAN3Ag8Q6ZJuHy3Mff/AGgK9/yASMiowvwsvFL3kxaKTj1FHHqK7ThFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaRulHHqKDg8ZoA8Q+IEvm+MdS/2XVPyQCtz4QT7dW1CL+/bq35N/8AXrlPFFyLjxLqkm4c3Mnf0OP6Vt/C24EfixVyP3kEi9fYH+leRB/vr+Z684/ubeR7JRSAj1FHHqK9c8gWik49RRx6igBaKTj1FHHqKAFopOPUUceooAWik49RRx6igBaKTj1FHHqKAFopOPUUceooA9F+AOofYfidp6Ftq3MU0B98puH6oK+tl6V8SfD/AFAaX468P3RbAS+iDHPYsFP6E19tr0r4rPIWrxl3X6n2+RTvQlHs/wBBaKKK+cPpAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDnn8A+GpHZ28P6WzMSxZrOMkk9T0o/4V94Z/6F3S/wDwDj/wroaK19rU/mf3mPsaf8q+457/AIV94Z/6F3S//AOP/Cj/AIV94Z/6F3S//AOP/Cuhoo9tU/mf3h7Gn/KvuRz3/CvvDP8A0Lul/wDg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AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQB/9k='
+
 
 module.exports = router;

@@ -9,15 +9,11 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12>
-        <form #f="ngForm" (ngSubmit)="onAddEmp(f)">
+        <form #f="ngForm" >
           <ion-list>
             <ion-item>
               <ion-label floating>Employee Name</ion-label>
               <ion-input type="text" ngModel name="name" required [minlength]="2"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label floating>Employee Number</ion-label>
-              <ion-input type="text" ngModel name="number" required [minlength]="1"></ion-input>
             </ion-item>
             <ion-item>
               <ion-label floating>Email</ion-label>
@@ -32,7 +28,7 @@
               <ion-input type="password" ngModel name="password" required [minlength]="5"></ion-input>
             </ion-item>
           </ion-list>
-          <button ion-button block color="primary" type="submit" [disabled]="!f.valid">REGISTER</button>
+          <button ion-button block color="primary" (click)="onAddEmp(f)"  [disabled]="!f.valid">REGISTER</button>
         </form>
       </ion-col>
     </ion-row>
