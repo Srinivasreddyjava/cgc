@@ -11,7 +11,7 @@ require('./config/passport')(passport);
 const users = require('./routes/users');
 const masterData= require('./routes/masterData');
 // port
-const port = 3030;
+const port = 3000;
 
 // cors
 app.use(cors());
